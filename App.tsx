@@ -1,14 +1,9 @@
-import React from 'react';
-import {View, Text, Image, Platform} from 'react-native';
+import React from "react";
+import { View } from "react-native";
+import RootNavigator from "./src/routes/RootNavigator";
 
-const App = ({children, edges}: any) => {
-  return (
-    <View>
-      <Text>testReading</Text>
-
-    </View>
-
-  );
+const App = () => {
+  return <RootNavigator />;
 };
 
 export default App;
