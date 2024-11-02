@@ -19,6 +19,8 @@ import CustomTextInput from "../../../components/CustomTextInput";
 import CustomButton from "../../../components/CustomButton";
 import SocialLogin from "../../../components/SocialLogin";
 import CustomText from "../../../components/CustomText";
+import icons from "../../../assets/icons";
+import { emailReges } from "../../../utils/Reges";
 //.....................types.....................
 interface LoginScreenProps {
   navigation: StackNavigationProp<RootStackParamsList, "LoginScreen">;
@@ -72,7 +74,10 @@ const LoginScreen = ({ navigation }: LoginScreenProps) => {
     if (!inputs.email) {
       handleError("Enter the Email", "email");
       valid = false;
-    } else if (!inputs.email.match(/\S+@\S+\.\S+/)) {
+    } else if (
+      //(!inputs.email.match(/\S+@\S+\.\S+/))
+      !emailReges.test(inputs.email)
+    ) {
       handleError("Enter a valid Email", "email");
       valid = false;
     }
@@ -97,7 +102,7 @@ const LoginScreen = ({ navigation }: LoginScreenProps) => {
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
       <View style={styles.screenContainer}>
-        <Header />
+        <Header icon={icons.ArrowLeft} title="Sign Up" />
         <CustomText
           text={"Enter the following details to create an account"}
           color={Colors.black}
@@ -114,23 +119,22 @@ const LoginScreen = ({ navigation }: LoginScreenProps) => {
           onFocus={() => handleError(null, "email")}
           placeholderTextColor={Colors.gray}
         />
-        {/* ...................Password............................................ */}
+        {/* ...................Password....................... */}
         <CustomTextInput
           placeholder={"Password"}
           secureTextEntry={true}
           onChangeText={(text) => handleOnChange(text, "password")}
-          rightIcon={require("../../../assets/icons/Eye.png")}
+          rightIcon={icons.Eye}
           rightIconStyle={styles.rightIconStyle}
           errorMessage={errors.password}
           onFocus={() => handleError(null, "password")}
           placeholderTextColor={Colors.gray}
         />
-        {/* ...................Confirm Password............................................ */}
+        {/* ...................Confirm Password..................... */}
         <CustomTextInput
           placeholder={"Confirm Password"}
-          secureTextEntry={true}
           onChangeText={(text) => handleOnChange(text, "confirm")}
-          rightIcon={require("../../../assets/icons/Eye.png")}
+          rightIcon={icons.Eye}
           rightIconStyle={styles.rightIconStyle}
           errorMessage={errors.confirm}
           onFocus={() => handleError(null, "confirm")}
@@ -139,36 +143,31 @@ const LoginScreen = ({ navigation }: LoginScreenProps) => {
         {/* ..................policy.......................... */}
         <View style={styles.policyVw}>
           <TouchableOpacity style={styles.checkboxVw} onPress={checkHandler}>
-            <Image
-              source={require("../../../assets/icons/box.png")}
-              style={styles.box}
-            />
-            {check && (
-              <Image
-                source={require("../../../assets/icons/check.png")}
-                style={styles.check}
-              />
-            )}
+            <Image source={icons.box} style={styles.box} />
+            {check && <Image source={icons.check} style={styles.check} />}
           </TouchableOpacity>
-          <CustomText
-            text={" By selecting this, you agree to the Readings\n"}
-            style={{ marginLeft: moderateScale(5) }}
-            label={
+          <View>
+            <CustomText
+              text={" By selecting this, you agree to the Readings"}
+              marginLeft={moderateScale(5)}
+            />
+            <View style={styles.policyvw2}>
               <CustomText
                 text={"Terms of service"}
-                style={styles.link}
-                label={
-                  <CustomText
-                    text={" and "}
-                    label={
-                      <CustomText text={"privacy policy"} style={styles.link} />
-                    }
-                  />
-                }
+                color={Colors.blue}
+                textDecorationLine="underline"
+                marginLeft={moderateScale(5)}
               />
-            }
-          />
+              <CustomText text={" and "} />
+              <CustomText
+                text={"privacy policy"}
+                color={Colors.blue}
+                textDecorationLine="underline"
+              />
+            </View>
+          </View>
         </View>
+
         {/* ........................CustomButton.................. */}
         <CustomButton
           title="Sign Up"
@@ -188,20 +187,11 @@ const LoginScreen = ({ navigation }: LoginScreenProps) => {
           <View style={styles.line} />
         </View>
         {/* ..................google................... */}
-        <SocialLogin
-          title="Continue with Google"
-          icon={require("../../../assets/icons/google.png")}
-        />
+        <SocialLogin title="Continue with Google" icon={icons.google} />
         {/* ..................facebook................... */}
-        <SocialLogin
-          title="Continue with facebook"
-          icon={require("../../../assets/icons/facebook.png")}
-        />
+        <SocialLogin title="Continue with facebook" icon={icons.fb} />
         {/* ..................apple................... */}
-        <SocialLogin
-          title="Continue with Apple ID"
-          icon={require("../../../assets/icons/apple.png")}
-        />
+        <SocialLogin title="Continue with Apple ID" icon={icons.apple} />
       </View>
     </ScrollView>
   );
@@ -240,17 +230,21 @@ const styles = StyleSheet.create({
   },
   policyVw: {
     flexDirection: "row",
-    alignItems: "center",
+    // alignItems: "center",
     marginTop: moderateScale(20),
     marginBottom: moderateScale(20),
+  },
+  policyvw2: {
+    flexDirection: "row",
+    // alignItems: "center",
   },
   box: {
     height: verticalScale(24),
     width: scale(24),
   },
   check: {
-    height: verticalScale(4),
-    width: scale(6),
+    height: verticalScale(8),
+    width: scale(10),
     position: "absolute",
   },
   checkboxVw: {

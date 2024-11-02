@@ -15,6 +15,12 @@ type Props = {
   textDecorationLine?: string;
   label?: any;
   labalStyle?: any;
+  marginLeft?: number;
+  marginTop?: number;
+  marginBottom?: number;
+  marginRight?: number;
+  marginHorizontal?: number;
+  marginVertical?: number;
 };
 const CustomText = ({
   color,
@@ -27,7 +33,13 @@ const CustomText = ({
   fontWeight,
   textDecorationLine,
   label,
-  labalStyle,
+
+  marginLeft,
+  marginTop,
+  marginBottom,
+  marginRight,
+  marginHorizontal,
+  marginVertical,
 }: Props) => {
   return (
     <Text
@@ -38,11 +50,16 @@ const CustomText = ({
           fontSize: size || 14,
           fontWeight: fontWeight || "500",
           fontFamily: fontFam || Fonts.regular,
-          textDecorationLine: textDecorationLine,
-          ...(lineHeight && { lineHeight: lineHeight }),
+          textDecorationLine,
+          marginLeft: marginLeft,
+          marginTop: marginTop,
+          marginBottom: marginBottom,
+          marginRight: marginRight,
+          marginHorizontal: marginHorizontal,
+          marginVertical: marginVertical,
+          lineHeight: lineHeight,
         },
         style,
-        labalStyle,
       ]}
     >
       {text}
