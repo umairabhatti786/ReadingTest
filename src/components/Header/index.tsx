@@ -1,36 +1,34 @@
-import { Image, StyleSheet, Text, View } from "react-native";
+import { Image, View } from "react-native";
 import React from "react";
 import { scale, verticalScale, moderateScale } from "react-native-size-matters";
 import { Colors } from "../../utils/Colors";
 import Fonts from "../../utils/Fonts";
-const Header = () => {
+import CustomText from "../CustomText";
+
+type Props = {
+  icon?: any;
+  width?: number;
+  height?: number;
+  title?: string;
+};
+const Header = ({ icon, width, height, title }: Props) => {
   return (
-    <View style={styles.headervw}>
+    <View style={{ flexDirection: "row", gap: scale(5), alignItems: "center" }}>
       <Image
-        source={require("../../assets/icons/ArrowLeft.png")}
-        style={styles.ArrowLeft}
+        source={icon}
+        style={{
+          width: width || scale(20),
+          height: height || scale(20),
+          resizeMode: "contain",
+        }}
       />
-      <Text style={styles.heading}>Sign Up</Text>
+      <CustomText
+        text={title}
+        color={Colors.black}
+        fontFam={Fonts.semiBold}
+        size={25}
+      />
     </View>
   );
 };
-
 export default Header;
-
-const styles = StyleSheet.create({
-  headervw: {
-    flexDirection: "row",
-    gap: scale(5),
-    alignItems: "center",
-  },
-  ArrowLeft: {
-    width: scale(20),
-    height: scale(20),
-    resizeMode: "contain",
-  },
-  heading: {
-    color: Colors.black,
-    fontSize: 25,
-    fontFamily: Fonts.semiBold,
-  },
-});

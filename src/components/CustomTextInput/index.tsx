@@ -1,16 +1,14 @@
-import React from "react";
-import {
-  Text,
-  Image,
-  View,
-  StyleSheet,
-  TextInput,
-  TouchableOpacity,
-} from "react-native";
+import React, { useState } from "react";
+import { Text, Image, View, TextInput, TouchableOpacity } from "react-native";
 import { scale, verticalScale, moderateScale } from "react-native-size-matters";
 import Fonts from "../../utils/Fonts";
 
 type inputProps = {
+  inputStyle?: any;
+  iconStyle?: any;
+  rightIconStyle?: any;
+  errorMessageStyle?: any;
+
   onChangeText: (text: string) => void;
   value?: string;
   placeholder: string;
@@ -18,9 +16,6 @@ type inputProps = {
   rightIcon?: any; // Source of image
   secureTextEntry?: boolean;
   errorMessage?: string;
-  errorMessageStyle?: any;
-  inputStyle?: any;
-  imageStyle?: any;
   inputContainerStyle?: any;
   textInputProps?: any;
   onFocus?: () => void;
@@ -29,8 +24,17 @@ type inputProps = {
   keyboardType?: string;
   placeholderTextColor?: string;
   onRightIconPress?: () => void;
-  iconStyle?: any;
-  rightIconStyle?: any;
+  borderWidth?: number;
+  borderColor?: string;
+  width?: number;
+  height?: number;
+  padding?: number;
+  borderRadius?: number;
+  backgroundColor?: string;
+  marginVertical?: number;
+  fontSize?: number;
+  fontWeight?: string;
+  fontFamily?: string;
 };
 const CustomTextInput = ({
   onChangeText,
@@ -42,7 +46,6 @@ const CustomTextInput = ({
   errorMessage,
   errorMessageStyle,
   inputStyle,
-  imageStyle,
   inputContainerStyle,
   textInputProps,
   onFocus,
@@ -50,47 +53,100 @@ const CustomTextInput = ({
   onBlur,
   keyboardType = "default",
   placeholderTextColor = "#212121",
-  onRightIconPress,
   iconStyle,
   rightIconStyle,
+
+  borderWidth,
+  borderColor,
+  width,
+  height,
+  padding,
+  borderRadius,
+  backgroundColor,
+  marginVertical,
+
+  fontSize,
+  fontWeight,
+
+  fontFamily,
 }: inputProps) => {
+  const [isSecure, setIsSecure] = useState(secureTextEntry);
+  const onRightIconPress = () => {
+    if (rightIcon) setIsSecure(!isSecure);
+  };
   return (
     <View>
-      <View style={[styles.inputContainer, inputContainerStyle]}>
-        <View style={{ flexDirection: "row", alignItems: "center" }}>
-          {icon && (
-            <Image source={icon} style={[styles.inputImage, imageStyle]} />
-          )}
-          <TextInput
-            placeholder={placeholder}
+      <View
+        style={[
+          {
+            flexDirection: "row",
+            alignItems: "center",
+            borderWidth: borderWidth || 1,
+            borderColor: borderColor || "#EEEEEE",
+            width: width || "100%",
+            height: height || verticalScale(50),
+            padding: padding || moderateScale(10),
+            borderRadius: borderRadius || moderateScale(15),
+            backgroundColor: backgroundColor || "#FFFFFF",
+            marginVertical: marginVertical || verticalScale(10),
+          },
+          inputContainerStyle,
+        ]}
+      >
+        {icon && (
+          <Image
+            source={icon}
             style={[
-              styles.textInput,
-              inputStyle,
-              { width: rightIcon ? "60%" : "100%" },
+              { resizeMode: "contain", width: scale(15), height: scale(15) },
+              iconStyle,
             ]}
-            onChangeText={onChangeText}
-            value={value}
-            secureTextEntry={secureTextEntry}
-            keyboardType={keyboardType}
-            {...textInputProps}
-            onFocus={onFocus}
-            onBlur={onBlur}
-            maxLength={maxLength}
-            placeholderTextColor={placeholderTextColor}
           />
-        </View>
+        )}
+        <TextInput
+          placeholder={placeholder}
+          style={[
+            {
+              flex: 1,
+              padding: 5,
+              fontSize: fontSize || 16,
+              fontWeight: fontWeight || "bold",
+              fontFamily: fontFamily || Fonts.regular,
+            },
+            inputStyle,
+          ]}
+          onChangeText={onChangeText}
+          value={value}
+          secureTextEntry={rightIcon ? isSecure : false}
+          keyboardType={keyboardType}
+          {...textInputProps}
+          onFocus={onFocus}
+          onBlur={onBlur}
+          maxLength={maxLength}
+          placeholderTextColor={placeholderTextColor}
+        />
         {rightIcon && (
           <TouchableOpacity onPress={onRightIconPress}>
-            {/* <View style={[rightIconStyle, styles.iconStyle]}>{rightIcon}</View> */}
             <Image
               source={rightIcon}
-              style={[rightIconStyle, styles.iconStyle]}
+              style={[
+                rightIconStyle,
+                {
+                  paddingRight: moderateScale(10),
+                  width: scale(15),
+                  height: scale(15),
+                },
+              ]}
             />
           </TouchableOpacity>
         )}
       </View>
       {errorMessage && (
-        <Text style={[styles.errorMessage, errorMessageStyle]}>
+        <Text
+          style={[
+            { color: "red", textAlign: "right", fontFamily: Fonts.regular },
+            errorMessageStyle,
+          ]}
+        >
           {errorMessage}
         </Text>
       )}
@@ -99,45 +155,3 @@ const CustomTextInput = ({
 };
 
 export default CustomTextInput;
-
-const styles = StyleSheet.create({
-  inputContainer: {
-    flexDirection: "row",
-    borderWidth: 1,
-    borderColor: "#EEEEEE",
-    width: "100%",
-    height: verticalScale(50),
-    padding: moderateScale(10),
-    alignItems: "center",
-    borderRadius: moderateScale(15),
-    backgroundColor: "#FFFFFF",
-    marginVertical: verticalScale(10),
-    justifyContent: "space-between",
-  },
-  inputLabal: {
-    fontSize: 16,
-    fontWeight: "bold",
-    paddingVertical: verticalScale(7),
-    fontFamily: Fonts.regular,
-  },
-  textInput: {
-    marginLeft: moderateScale(10),
-    height: verticalScale(60),
-    fontFamily: Fonts.regular,
-  },
-  inputImage: {
-    resizeMode: "contain",
-    width: scale(24),
-    height: scale(24),
-  },
-  errorMessage: {
-    color: "red",
-    textAlign: "right",
-    fontFamily: Fonts.regular,
-  },
-  iconStyle: {
-    paddingRight: moderateScale(10),
-    width: scale(15),
-    height: scale(15),
-  },
-});
