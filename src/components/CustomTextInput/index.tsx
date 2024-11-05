@@ -108,8 +108,8 @@ const CustomTextInput = ({
             {
               flex: 1,
               padding: 5,
-              fontSize: fontSize || 16,
-              fontWeight: fontWeight || "bold",
+              fontSize: fontSize || 14,
+              fontWeight: fontWeight,
               fontFamily: fontFamily || Fonts.regular,
             },
             inputStyle,

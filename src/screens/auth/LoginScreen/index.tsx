@@ -1,63 +1,74 @@
 import React, { useState } from "react";
 import {
   StyleSheet,
-  View,
   Text,
-  Keyboard,
+  View,
   Image,
-  Alert,
-  ScrollView,
   TouchableOpacity,
+  Keyboard,
+  ScrollView,
+  ActivityIndicator,
+  Alert,
 } from "react-native";
-import Fonts from "../../../utils/Fonts";
+//import auth from '@react-native-firebase/auth';
 import { Colors } from "../../../utils/Colors";
-import Header from "../../../components/Header";
+import CustomInput from "../../../components/CustomTextInput";
+import CustomButton from "../../../components/CustomButton";
+import { emailReges } from "../../../utils/Reges";
+import icons from "../../../assets/icons";
+import Fonts from "../../../utils/Fonts";
 import { scale, verticalScale, moderateScale } from "react-native-size-matters";
+
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamsList } from "../../../routes/RootNavigator";
-import CustomTextInput from "../../../components/CustomTextInput";
-import CustomButton from "../../../components/CustomButton";
 import SocialLogin from "../../../components/SocialLogin";
 import CustomText from "../../../components/CustomText";
-import icons from "../../../assets/icons";
-import { emailReges } from "../../../utils/Reges";
+import Header from "../../../components/Header";
+import CustomTextInput from "../../../components/CustomTextInput";
+//import FontAwesome6 from 'react-native-vector-icons/FontAwesome6';
+//import AsyncStorage from '@react-native-async-storage/async-storage';
+//import {GoogleSignin} from '@react-native-google-signin/google-signin';
+//.............redux...................
+//import {useDispatch} from 'react-redux';
+//import {setUserData} from '../../../components/redux/Action';
+// .............................Configure Google Sign-In
+// GoogleSignin.configure({
+//   webClientId:
+//     '743868485620-fhnrut2ee0ng5k5nt8b0ij613o4in3ff.apps.googleusercontent.com',
+// });
 //.....................types.....................
 interface LoginScreenProps {
   navigation: StackNavigationProp<RootStackParamsList, "LoginScreen">;
 }
 
-//.................main func.......................
+//............................main func....................
 const LoginScreen = ({ navigation }: LoginScreenProps) => {
-  //.................inputs.........................
+  //const dispatch = useDispatch(); //....for redux..............
+
+  // ................inputs............
   type inputs = {
     email: string;
     password: string;
-    confirm: string;
   };
-  const [inputs, setInputs] = useState<inputs>({
-    email: "",
-    password: "",
-    confirm: "",
-  });
-  //........................errors...........................
+  const [inputs, setInputs] = useState({ email: "", password: "" });
+  //........errors..............
   type errors = {
     email: string;
     password: string;
-    confirm: string;
   };
-  const [errors, setErrors] = useState<errors>({
-    email: "",
-    password: "",
-    confirm: "",
-  });
-  //..................check.................
-  const [check, setCheck] = useState<boolean>(false);
-  const checkHandler = () => setCheck(!check);
-  //...................OnChange........................
+  const [errors, setErrors] = useState({ email: "", password: "" });
+
+  //..................loader................
+  const [showLoader, setshowLoader] = useState(false);
+  //...............check......................
+  const [rememberMe, setRememberMe] = useState(false);
+  const handleCheck = () => {
+    setRememberMe(!rememberMe);
+  };
+  //...........................................
   const handleOnChange = (text: string, CustomTextInput: string) => {
     setInputs((prevState) => ({ ...prevState, [CustomTextInput]: text }));
   };
-  //...................Error........................
   const handleError = (
     errorMessage: string | null,
     CustomTextInput: string
@@ -67,6 +78,33 @@ const LoginScreen = ({ navigation }: LoginScreenProps) => {
       [CustomTextInput]: errorMessage,
     }));
   };
+  //.............................email logIn.........
+  // const emailLogin = () => {
+  //   setshowLoader(true);
+  //   auth()
+  //     .signInWithEmailAndPassword(inputs.email, inputs.password)
+  //     .then(() => {
+  //       setshowLoader(false);
+  //       props.navigation.navigate("BottomTab");
+  //     })
+  //     .catch((error) => {
+  //       Alert.alert("Account not found");
+  //     });
+  //   console.log("email user", auth().currentUser);
+  //   const emailUserData = auth().currentUser;
+  //   //console.log('emailUser Info name: ', emailUserData.email); // Log the entire userInfo
+  //   if (emailUserData) {
+  //     const userData = {
+  //       name: emailUserData.displayName || "Email User", // Fallback if no displayName
+  //       email: emailUserData.email,
+  //       photo: emailUserData.photoURL || null, // Fallback if no photoURL
+  //       uid: emailUserData.uid,
+  //     };
+  //     dispatch(setUserData(userData)); // Dispatch user data to Redux store
+  //   }
+  //   AsyncStorage.setItem("check-status", rememberMe ? "true" : "false"); //....store to local storage
+  // };
+
   //..................validater....................
   const validater = () => {
     Keyboard.dismiss();
@@ -75,7 +113,7 @@ const LoginScreen = ({ navigation }: LoginScreenProps) => {
       handleError("Enter the Email", "email");
       valid = false;
     } else if (
-      //(!inputs.email.match(/\S+@\S+\.\S+/))
+      //!inputs.email.match(/\S+@\S+\.\S+/))
       !emailReges.test(inputs.email)
     ) {
       handleError("Enter a valid Email", "email");
@@ -84,116 +122,141 @@ const LoginScreen = ({ navigation }: LoginScreenProps) => {
     if (!inputs.password) {
       handleError("Enter the Password", "password");
       valid = false;
-    } else if (inputs.password.length < 6) {
-      handleError("Password must have at least 6 characters", "password");
+    } else if (inputs.password.length < 8) {
+      handleError("Password must have at least 8 characters", "password");
       valid = false;
     }
-    if (!inputs.confirm) {
-      handleError(" Confirm Password please ", "confirm");
-      valid = false;
-    } else if (inputs.password !== inputs.confirm) {
-      handleError("Password did not match ", "confirm");
-      valid = false;
-    }
-    if (valid && check) {
-      Alert.alert("logged In");
+    if (valid) {
+      // emailLogin();
     }
   };
-  return (
-    <ScrollView showsVerticalScrollIndicator={false}>
-      <View style={styles.screenContainer}>
-        <Header icon={icons.ArrowLeft} title="Sign Up" />
-        <CustomText
-          text={"Enter the following details to create an account"}
-          color={Colors.black}
-          fontFam={Fonts.regular}
-          style={{ marginTop: moderateScale(10), marginLeft: moderateScale(5) }}
-        />
-        {/* ...................Email............................................ */}
-        <CustomTextInput
-          placeholder="Email Address"
-          secureTextEntry={false}
-          keyboardType="email-address"
-          onChangeText={(text) => handleOnChange(text, "email")}
-          errorMessage={errors.email}
-          onFocus={() => handleError(null, "email")}
-          placeholderTextColor={Colors.gray}
-        />
-        {/* ...................Password....................... */}
-        <CustomTextInput
-          placeholder={"Password"}
-          secureTextEntry={true}
-          onChangeText={(text) => handleOnChange(text, "password")}
-          rightIcon={icons.Eye}
-          rightIconStyle={styles.rightIconStyle}
-          errorMessage={errors.password}
-          onFocus={() => handleError(null, "password")}
-          placeholderTextColor={Colors.gray}
-        />
-        {/* ...................Confirm Password..................... */}
-        <CustomTextInput
-          placeholder={"Confirm Password"}
-          onChangeText={(text) => handleOnChange(text, "confirm")}
-          rightIcon={icons.Eye}
-          rightIconStyle={styles.rightIconStyle}
-          errorMessage={errors.confirm}
-          onFocus={() => handleError(null, "confirm")}
-          placeholderTextColor={Colors.gray}
-        />
-        {/* ..................policy.......................... */}
-        <View style={styles.policyVw}>
-          <TouchableOpacity style={styles.checkboxVw} onPress={checkHandler}>
-            <Image source={icons.box} style={styles.box} />
-            {check && <Image source={icons.check} style={styles.check} />}
-          </TouchableOpacity>
-          <View>
-            <CustomText
-              text={" By selecting this, you agree to the Readings"}
-              marginLeft={moderateScale(5)}
-            />
-            <View style={styles.policyvw2}>
-              <CustomText
-                text={"Terms of service"}
-                color={Colors.blue}
-                textDecorationLine="underline"
-                marginLeft={moderateScale(5)}
-              />
-              <CustomText text={" and "} />
-              <CustomText
-                text={"privacy policy"}
-                color={Colors.blue}
-                textDecorationLine="underline"
-              />
-            </View>
-          </View>
-        </View>
+  //..........................................google sign in code.....................
+  // const onGoogleButtonPress = async () => {
+  //   try {
+  //     await GoogleSignin.signOut();
+  //     await GoogleSignin.hasPlayServices({
+  //       showPlayServicesUpdateDialog: true,
+  //     });
+  //     const userInfo = await GoogleSignin.signIn();
+  //     //console.log('User Info: ', userInfo); // Log the entire userInfo object
+  //     // console.log('User Info name: ', userInfo.data.user.name); // Log the entire userInfo object
+  //     // Check where the ID token is located
+  //     const idToken =
+  //       userInfo.idToken ||
+  //       userInfo.data.idToken ||
+  //       userInfo.authentication.idToken; // Adjust based on the structure
+  //     console.log("ID Token: ", idToken); // Log the ID token
 
-        {/* ........................CustomButton.................. */}
-        <CustomButton
-          title="Sign Up"
-          style={styles.button}
-          onPress={validater}
-        />
-        {/* .............Already have an account?.................. */}
-        <CustomText
-          text={"Already have an account?"}
-          label={" Login"}
-          style={{ marginTop: moderateScale(20) }}
-        />
-        {/* ................OR......................... */}
-        <View style={styles.lineVw}>
-          <View style={styles.line} />
-          <CustomText text={"OR"} style={styles.or} />
-          <View style={styles.line} />
+  //     if (!idToken) {
+  //       throw new Error("Google Sign-In failed: No ID token received.");
+  //     }
+  //     setshowLoader(true); // Show loader when signing in with Google
+  //     const googleCredential = auth.GoogleAuthProvider.credential(idToken);
+  //     await auth().signInWithCredential(googleCredential);
+
+  //     // Extract useful user information
+  //     const userData = {
+  //       name: userInfo.data.user.name,
+  //       email: userInfo.data.user.email,
+  //       photo: userInfo.data.user.photo,
+  //       id: userInfo.data.user.id,
+  //     };
+  //     // setUserInfo(userData);
+  //     //console.log('Success', 'Google Sign-In Successful!');
+
+  //     dispatch(setUserData(userData)); // Dispatch user data to Redux store
+  //     await AsyncStorage.setItem("check-status", rememberMe ? "true" : "false"); //....store to local storage
+  //     //await AsyncStorage.setItem('asm', 'tayyab');
+  //     setshowLoader(false); // hide loader when go to home
+  //     props.navigation.navigate("BottomTab");
+  //     //...............storeData on AsyncStorage....
+  //   } catch (error) {
+  //     console.error(error);
+  //     Alert.alert("Google Sign-In Error", error.message);
+  //   }
+  // };
+
+  //................................
+  return (
+    <View style={{ flex: 1 }}>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        style={styles.screenContainer}
+      >
+        <View>
+          <Header icon={icons.ArrowLeft} title="Login" />
+          <CustomText
+            text={"Enter your email address and password to login."}
+            color={Colors.black}
+            fontFam={Fonts.regular}
+            style={{
+              marginTop: moderateScale(10),
+              marginLeft: moderateScale(5),
+            }}
+          />
+          {/* ...................Email............................................ */}
+          <CustomTextInput
+            placeholder="Email Address"
+            secureTextEntry={false}
+            keyboardType="email-address"
+            onChangeText={(text) => handleOnChange(text, "email")}
+            errorMessage={errors.email}
+            onFocus={() => handleError(null, "email")}
+            placeholderTextColor={Colors.gray}
+          />
+          {/* ...................Password....................... */}
+          <CustomTextInput
+            placeholder={"Password"}
+            secureTextEntry={true}
+            onChangeText={(text) => handleOnChange(text, "password")}
+            rightIcon={icons.Eye}
+            errorMessage={errors.password}
+            onFocus={() => handleError(null, "password")}
+            placeholderTextColor={Colors.gray}
+          />
+          {/* //............Forgot the password? */}
+          <TouchableOpacity>
+            <CustomText
+              text={"Forgot the password?"}
+              color={Colors.blue}
+              fontWeight="bold"
+              fontFam={Fonts.semiBold}
+              marginBottom={20}
+            />
+          </TouchableOpacity>
+          {/* ...................Login Button.......................... */}
+          <CustomButton
+            title={"Login"}
+            onPress={validater}
+            marginVertical={20}
+          />
+          {/* .........Signin option............ */}
+          <TouchableOpacity onPress={() => navigation.navigate("SignUpScreen")}>
+            <CustomText
+              text={" Don’t have an account? "}
+              label={<CustomText text={"Sign Up"} color={Colors.blue} />}
+            />
+          </TouchableOpacity>
+          {/* ................OR......................... */}
+          <View style={styles.lineVw}>
+            <View style={styles.line} />
+            <CustomText text={"  OR  "} />
+            <View style={styles.line} />
+          </View>
+
+          {/* ..................SocialLogin................... */}
+          <SocialLogin title="Continue with Google" icon={icons.google} />
+          <SocialLogin title="Continue with facebook" icon={icons.fb} />
+          <SocialLogin title="Continue with Apple ID" icon={icons.apple} />
         </View>
-        {/* ..................google................... */}
-        <SocialLogin title="Continue with Google" icon={icons.google} />
-        {/* ..................facebook................... */}
-        <SocialLogin title="Continue with facebook" icon={icons.fb} />
-        {/* ..................apple................... */}
-        <SocialLogin title="Continue with Apple ID" icon={icons.apple} />
-      </View>
-    </ScrollView>
+      </ScrollView>
+      {/* Loader Overlay */}
+      {showLoader && (
+        <View style={styles.loaderContainer}>
+          <ActivityIndicator size="large" color={Colors.orange} />
+        </View>
+      )}
+    </View>
   );
 };
 
@@ -208,85 +271,26 @@ const styles = StyleSheet.create({
     marginTop: moderateScale(10),
     marginBottom: moderateScale(20),
   },
-  header: {
-    flexDirection: "row",
-  },
-  text1: {
-    color: Colors.black,
-    fontSize: 14,
-    fontFamily: Fonts.regular,
-    marginTop: moderateScale(10),
-    marginLeft: moderateScale(5),
-  },
-  policyText: {
-    color: Colors.black,
-    fontSize: 14,
-    fontFamily: Fonts.regular,
-    marginLeft: moderateScale(5),
-  },
-  rightIconStyle: {
-    height: verticalScale(24),
-    width: scale(24),
-  },
-  policyVw: {
-    flexDirection: "row",
-    // alignItems: "center",
-    marginTop: moderateScale(20),
-    marginBottom: moderateScale(20),
-  },
-  policyvw2: {
-    flexDirection: "row",
-    // alignItems: "center",
-  },
-  box: {
-    height: verticalScale(24),
-    width: scale(24),
-  },
-  check: {
-    height: verticalScale(8),
-    width: scale(10),
-    position: "absolute",
-  },
-  checkboxVw: {
-    alignItems: "center",
-    justifyContent: "center",
-    marginRight: moderateScale(5),
-  },
-  button: {
-    backgroundColor: Colors.blue,
-  },
-  lineVw: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginTop: moderateScale(10),
-  },
   line: {
     height: 2,
     width: "45%",
     backgroundColor: "#E3E5E7",
   },
-  or: {
-    color: Colors.gray,
-    fontSize: 12,
-    fontFamily: Fonts.regular,
-    padding: 10,
-  },
-  socialLogin: {
-    height: 60,
-    width: "100%",
-    alignItems: "center",
-    justifyContent: "center",
-    alignSelf: "center",
-    backgroundColor: Colors.white,
-    borderRadius: 10,
+  lineVw: {
     flexDirection: "row",
+    alignItems: "center",
+    marginTop: moderateScale(60),
+    marginBottom: scale(40),
   },
-  socialIcon: {
-    height: verticalScale(20),
-    width: scale(20),
-  },
-  link: {
-    color: Colors.blue,
-    textDecorationLine: "underline",
+  loaderContainer: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(0,0,0,0.5)", // Semi-transparent background
+    zIndex: 10, // Ensure it's on top
   },
 });
