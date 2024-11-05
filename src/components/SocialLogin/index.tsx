@@ -31,7 +31,7 @@ const SocialLogin = ({
         alignSelf: "center",
         flexDirection: "row",
 
-        height: height || moderateScale(50),
+        height: height || verticalScale(50),
         width: width || "100%",
         backgroundColor: backgroundColor || Colors.white,
         borderRadius: borderRadius || moderateScale(10),
