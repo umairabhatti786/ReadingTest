@@ -36,6 +36,8 @@ type inputProps = {
   fontSize?: number;
   fontWeight?: string;
   fontFamily?: string;
+  rightIconWidth?: number;
+  rightIconheight?: number;
 };
 const CustomTextInput = ({
   onChangeText,
@@ -57,8 +59,6 @@ const CustomTextInput = ({
   iconStyle,
   rightIconStyle,
 
-  borderWidth,
-  borderColor,
   width,
   height,
   padding,
@@ -70,6 +70,8 @@ const CustomTextInput = ({
   fontWeight,
 
   fontFamily,
+  rightIconWidth,
+  rightIconheight,
 }: inputProps) => {
   const [isSecure, setIsSecure] = useState(secureTextEntry);
   const onRightIconPress = () => {
@@ -87,7 +89,7 @@ const CustomTextInput = ({
             padding: moderateScale(padding || 10),
             borderRadius: moderateScale(borderRadius || 15),
             backgroundColor: backgroundColor || "#FFFFFF",
-            marginVertical: verticalScale(marginVertical || 10),
+            marginVertical: verticalScale(marginVertical || 0.01),
           },
           inputContainerStyle,
         ]}
@@ -131,8 +133,8 @@ const CustomTextInput = ({
                 rightIconStyle,
                 {
                   paddingRight: moderateScale(10),
-                  width: scale(15),
-                  height: scale(15),
+                  width: scale(rightIconWidth || 15),
+                  height: verticalScale(rightIconheight || 15),
                 },
               ]}
             />

@@ -9,9 +9,9 @@ import BottomTab from "../BottomTab";
 import SendGiftCardScreen from "../../screens/main/SendGiftCardScreen";
 import ChooseAddress from "../../screens/main/ChooseAddress";
 import NewAddress from "../../screens/main/NewAddress";
-import PersonalInfoScreen from "../../components/CountryDropDown";
 import PaymentScreen from "../../screens/main/PaymentScreen";
 import RequestBookScreen from "../../screens/main/RequestBookScreen";
+import PersonalInfoScreen from "../../screens/main/PersonalInfoScreen";
 export type RootStackParamsList = {
   SignUpScreen: any;
   LoginScreen: any;
@@ -28,13 +28,12 @@ const RootNavigator = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="PaymentScreen" component={PaymentScreen} />
         <Stack.Screen
           name="PersonalInfoScreen"
           component={PersonalInfoScreen}
         />
         <Stack.Screen name="RequestBookScreen" component={RequestBookScreen} />
-
-        <Stack.Screen name="PaymentScreen" component={PaymentScreen} />
 
         <Stack.Screen name="LoginScreen" component={LoginScreen} />
 

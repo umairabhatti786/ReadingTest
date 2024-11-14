@@ -19,6 +19,7 @@ import icons from "../../../assets/icons";
 import { Colors } from "../../../utils/Colors";
 import CustomButton from "../../../components/CustomButton";
 import CountryPicker, { Country } from "react-native-country-picker-modal";
+import CountryDropDown from "../../../components/CountryDropDown";
 //.....................types.....................
 interface PersonalInfoScreen {
   navigation: StackNavigationProp<RootStackParamsList, "PersonalInfoScreen">;
@@ -48,10 +49,9 @@ const PersonalInfoScreen = ({ navigation }: PersonalInfoScreen) => {
             <CustomTextInput placeholder="City" width={scale(150)} />
             <CustomTextInput placeholder="State/Province" width={scale(150)} />
           </View>
-          <CustomTextInput placeholder="Country" rightIcon={icons.ArrowDown} />
+          <CountryDropDown />
           <CustomTextInput placeholder="ZIP Code" />
-          {/* Country Picker Modal */}
-
+          {/* ..................Country Picker Modal.......... */}
           <View style={styles.countryContainer}>
             <CountryPicker
               withFlag
@@ -78,10 +78,8 @@ const PersonalInfoScreen = ({ navigation }: PersonalInfoScreen) => {
               keyboardType="numeric"
             />
           </View>
-
           {/* ..............Map................ */}
           <View style={styles.map} />
-
           <TouchableOpacity
             style={{
               justifyContent: "center",
@@ -90,7 +88,6 @@ const PersonalInfoScreen = ({ navigation }: PersonalInfoScreen) => {
           >
             <CustomText text={"skip"} color={Colors.blue} />
           </TouchableOpacity>
-
           <CustomButton title="Continue" marginTop={10} />
         </View>
       </ScrollView>

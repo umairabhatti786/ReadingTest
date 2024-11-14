@@ -11,6 +11,7 @@ import CustomTextInput from "../../../components/CustomTextInput";
 import icons from "../../../assets/icons";
 import { Colors } from "../../../utils/Colors";
 import CustomButton from "../../../components/CustomButton";
+import CountryDropDown from "../../../components/CountryDropDown";
 //.....................types.....................
 interface PaymentScreen {
   navigation: StackNavigationProp<RootStackParamsList, "PaymentScreen">;
@@ -21,26 +22,38 @@ interface PaymentScreen {
 const PaymentScreen = ({ navigation }: PaymentScreen) => {
   return (
     <View style={styles.screenContainer}>
-      <Header title="Payment Info" />
-      <CustomText
-        text={"Add your optional payment method to save for future purchases."}
-        marginVertical={verticalScale(10)}
-      />
-      <CustomTextInput placeholder="Card Nuumber" rightIcon={icons.visa} />
-      <CustomTextInput placeholder="Card Holder Name" />
-      <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
-        <CustomTextInput placeholder="06 / 27" width={scale(163)} />
-        <CustomTextInput placeholder="CVC" width={scale(163)} />
+      <View style={styles.content}>
+        <Header title="Payment Info" />
+        <CustomText
+          text={
+            "Add your optional payment method to save for future purchases."
+          }
+          marginVertical={10}
+        />
+        <CustomTextInput
+          placeholder="Card Nuumber"
+          rightIcon={icons.visa}
+          rightIconWidth={45}
+          rightIconheight={20}
+        />
+        <CustomTextInput placeholder="Card Holder Name" />
+        <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+          <CustomTextInput placeholder="06 / 27" width={scale(150)} />
+          <CustomTextInput placeholder="CVC" width={scale(150)} />
+        </View>
+        <CustomTextInput placeholder="Address" />
+        <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+          <CustomTextInput placeholder="City" width={scale(150)} />
+          <CustomTextInput placeholder="State/Province" width={scale(150)} />
+        </View>
+        <CountryDropDown />
+        <CustomTextInput placeholder="ZIP Code" />
       </View>
-      <CustomTextInput placeholder="Address" />
-      <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
-        <CustomTextInput placeholder="City" width={scale(163)} />
-        <CustomTextInput placeholder="State/Province" width={scale(163)} />
-      </View>
-      <CustomTextInput placeholder="Country" />
-      <CustomTextInput placeholder="ZIP Code" />
       <TouchableOpacity
-        style={{ justifyContent: "center", marginVertical: verticalScale(20) }}
+        style={{
+          justifyContent: "center",
+          alignItems: "center",
+        }}
       >
         <CustomText text={"skip"} color={Colors.blue} />
       </TouchableOpacity>
@@ -57,7 +70,10 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.primary,
     marginHorizontal: scale(20),
     marginVertical: verticalScale(10),
-    marginTop: moderateScale(10),
-    marginBottom: moderateScale(20),
+    justifyContent: "space-between",
+  },
+  content: {
+    gap: moderateScale(20),
+    marginBottom: verticalScale(25),
   },
 });
