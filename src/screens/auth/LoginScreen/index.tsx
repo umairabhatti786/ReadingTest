@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 import {
   StyleSheet,
-  Text,
   View,
-  Image,
   TouchableOpacity,
   Keyboard,
   ScrollView,
   ActivityIndicator,
   Alert,
+  Platform,
 } from "react-native";
 //import auth from '@react-native-firebase/auth';
 import { Colors } from "../../../utils/Colors";
@@ -60,11 +59,7 @@ const LoginScreen = ({ navigation }: LoginScreenProps) => {
 
   //..................loader................
   const [showLoader, setshowLoader] = useState(false);
-  //...............check......................
-  const [rememberMe, setRememberMe] = useState(false);
-  const handleCheck = () => {
-    setRememberMe(!rememberMe);
-  };
+
   //...........................................
   const handleOnChange = (text: string, CustomTextInput: string) => {
     setInputs((prevState) => ({ ...prevState, [CustomTextInput]: text }));
@@ -126,8 +121,9 @@ const LoginScreen = ({ navigation }: LoginScreenProps) => {
       handleError("Password must have at least 8 characters", "password");
       valid = false;
     }
+    console.log(valid);
     if (valid) {
-      // emailLogin();
+      navigation.navigate("BottomTab");
     }
   };
   //..........................................google sign in code.....................
@@ -178,21 +174,20 @@ const LoginScreen = ({ navigation }: LoginScreenProps) => {
 
   //................................
   return (
-    <View style={{ flex: 1 }}>
+    <View style={styles.screenContainer}>
       <ScrollView
         showsVerticalScrollIndicator={false}
-        style={styles.screenContainer}
+        contentContainerStyle={styles.scrollContainer}
       >
         <View>
-          <Header icon={icons.ArrowLeft} title="Login" />
+          <Header title="Login" />
           <CustomText
             text={"Enter your email address and password to login."}
             color={Colors.black}
             fontFam={Fonts.regular}
-            style={{
-              marginTop: moderateScale(10),
-              marginLeft: moderateScale(5),
-            }}
+            marginTop={10}
+            marginLeft={5}
+            marginBottom={10}
           />
           {/* ...................Email............................................ */}
           <CustomTextInput
@@ -221,7 +216,8 @@ const LoginScreen = ({ navigation }: LoginScreenProps) => {
               color={Colors.blue}
               fontWeight="bold"
               fontFam={Fonts.semiBold}
-              marginBottom={20}
+              marginBottom={30}
+              marginTop={25}
             />
           </TouchableOpacity>
           {/* ...................Login Button.......................... */}
@@ -230,7 +226,9 @@ const LoginScreen = ({ navigation }: LoginScreenProps) => {
             onPress={validater}
             marginVertical={20}
           />
-          {/* .........Signin option............ */}
+        </View>
+        <View style={styles.loginOptions}>
+          {/* .........Sign up option............ */}
           <TouchableOpacity onPress={() => navigation.navigate("SignUpScreen")}>
             <CustomText
               text={" Don’t have an account? "}
@@ -245,17 +243,21 @@ const LoginScreen = ({ navigation }: LoginScreenProps) => {
           </View>
 
           {/* ..................SocialLogin................... */}
-          <SocialLogin title="Continue with Google" icon={icons.google} />
-          <SocialLogin title="Continue with facebook" icon={icons.fb} />
-          <SocialLogin title="Continue with Apple ID" icon={icons.apple} />
+          <View>
+            <SocialLogin title="Continue with Google" icon={icons.google} />
+            <SocialLogin title="Continue with facebook" icon={icons.fb} />
+            {Platform.OS === "ios" && (
+              <SocialLogin title="Continue with Apple ID" icon={icons.apple} />
+            )}
+          </View>
         </View>
       </ScrollView>
       {/* Loader Overlay */}
-      {showLoader && (
+      {/* {showLoader && (
         <View style={styles.loaderContainer}>
           <ActivityIndicator size="large" color={Colors.orange} />
         </View>
-      )}
+      )} */}
     </View>
   );
 };
@@ -266,10 +268,14 @@ const styles = StyleSheet.create({
   screenContainer: {
     flex: 1,
     backgroundColor: Colors.primary,
-    marginHorizontal: 20,
-    marginVertical: 10,
+  },
+  scrollContainer: {
+    marginHorizontal: scale(20),
+    marginVertical: verticalScale(10),
     marginTop: moderateScale(10),
     marginBottom: moderateScale(20),
+    // justifyContent: "space-between",
+    flexGrow: 1,
   },
   line: {
     height: 2,
@@ -279,8 +285,10 @@ const styles = StyleSheet.create({
   lineVw: {
     flexDirection: "row",
     alignItems: "center",
-    marginTop: moderateScale(60),
-    marginBottom: scale(40),
+  },
+  loginOptions: {
+    flex: 1,
+    justifyContent: "space-between",
   },
   loaderContainer: {
     position: "absolute",

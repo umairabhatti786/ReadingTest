@@ -2,19 +2,21 @@ import React, { useState } from "react";
 import {
   StyleSheet,
   View,
-  Text,
   Keyboard,
   Image,
   Alert,
   ScrollView,
   TouchableOpacity,
+  Platform,
 } from "react-native";
 import Fonts from "../../../utils/Fonts";
 import { Colors } from "../../../utils/Colors";
 import Header from "../../../components/Header";
 import { scale, verticalScale, moderateScale } from "react-native-size-matters";
+
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamsList } from "../../../routes/RootNavigator";
+
 import CustomTextInput from "../../../components/CustomTextInput";
 import CustomButton from "../../../components/CustomButton";
 import SocialLogin from "../../../components/SocialLogin";
@@ -97,17 +99,23 @@ const SignUpScreen = ({ navigation }: SignUpScreenProps) => {
     }
     if (valid && check) {
       Alert.alert("logged In");
+      () => navigation.navigate("BottomTab");
     }
   };
   return (
-    <ScrollView showsVerticalScrollIndicator={false}>
-      <View style={styles.screenContainer}>
-        <Header icon={icons.ArrowLeft} title="Sign Up" />
+    <ScrollView
+      showsVerticalScrollIndicator={false}
+      contentContainerStyle={styles.screenContainer}
+    >
+      <View>
+        <Header title="Sign Up" />
         <CustomText
           text={"Enter the following details to create an account"}
           color={Colors.black}
           fontFam={Fonts.regular}
-          style={{ marginTop: moderateScale(10), marginLeft: moderateScale(5) }}
+          marginTop={15}
+          marginLeft={5}
+          marginBottom={10}
         />
         {/* ...................Email............................................ */}
         <CustomTextInput
@@ -147,14 +155,14 @@ const SignUpScreen = ({ navigation }: SignUpScreenProps) => {
           <View>
             <CustomText
               text={" By selecting this, you agree to the Readings"}
-              marginLeft={moderateScale(5)}
+              marginLeft={5}
             />
             <View style={styles.policyvw2}>
               <CustomText
                 text={"Terms of service"}
                 color={Colors.blue}
                 textDecorationLine="underline"
-                marginLeft={moderateScale(5)}
+                marginLeft={5}
               />
               <CustomText text={" and "} />
               <CustomText
@@ -166,18 +174,21 @@ const SignUpScreen = ({ navigation }: SignUpScreenProps) => {
           </View>
         </View>
 
-        {/* ........................CustomButton.................. */}
+        {/* ........................Sign Up Button.................. */}
         <CustomButton
           title="Sign Up"
           backgroundColor={Colors.blue}
           onPress={validater}
+          marginVertical={20}
         />
+      </View>
+      <View style={styles.loginOptions}>
         {/* .............Already have an account?.................. */}
         <TouchableOpacity onPress={() => navigation.navigate("LoginScreen")}>
           <CustomText
             text={" Already have an account?"}
             label={<CustomText text={" Login"} color={Colors.blue} />}
-            style={{ marginTop: moderateScale(20) }}
+            // marginTop={20}
           />
         </TouchableOpacity>
         {/* ................OR......................... */}
@@ -187,9 +198,13 @@ const SignUpScreen = ({ navigation }: SignUpScreenProps) => {
           <View style={styles.line} />
         </View>
         {/* ..................SocialLogin................... */}
-        <SocialLogin title="Continue with Google" icon={icons.google} />
-        <SocialLogin title="Continue with facebook" icon={icons.fb} />
-        <SocialLogin title="Continue with Apple ID" icon={icons.apple} />
+        <View>
+          <SocialLogin title="Continue with Google" icon={icons.google} />
+          <SocialLogin title="Continue with facebook" icon={icons.fb} />
+          {Platform.OS === "ios" && (
+            <SocialLogin title="Continue with Apple ID" icon={icons.apple} />
+          )}
+        </View>
       </View>
     </ScrollView>
   );
@@ -209,7 +224,6 @@ const styles = StyleSheet.create({
   policyVw: {
     flexDirection: "row",
     marginTop: moderateScale(20),
-    marginBottom: moderateScale(20),
   },
   policyvw2: {
     flexDirection: "row",
@@ -228,10 +242,13 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     marginRight: moderateScale(5),
   },
+  loginOptions: {
+    flex: 1,
+    justifyContent: "space-between",
+  },
   lineVw: {
     flexDirection: "row",
     alignItems: "center",
-    marginTop: moderateScale(10),
   },
   line: {
     height: 2,
