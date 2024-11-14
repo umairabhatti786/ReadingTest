@@ -1,92 +1,143 @@
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import HomeScreen from '../../screens/main/HomeScreen';
-import SubscriptionScreen from '../../screens/main/SubscriptionScreen';
-import ProfileScreen from '../../screens/main/ProfileScreen';
-import ChatsScreen from '../../screens/main/ChatsScreen';
-import MatchScreen from '../../screens/main/MatchScreen';
-import Octicons from 'react-native-vector-icons/Octicons';
-import Ionicons from 'react-native-vector-icons/Ionicons';
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import {StyleSheet, Text, View} from 'react-native';
-import React from 'react';
-import Colors from '../../components/Colors';
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import HomeScreen from "../../screens/main/HomeScreen";
+import CategoriesScreen from "../../screens/main/CategoriesScreen";
+import OrdersScreen from "../../screens/main/OrdersScreen";
+import CartScreen from "../../screens/main/CartScreen";
+import LikedScreen from "../../screens/main/LikedScreen";
 
-const Tab = createBottomTabNavigator();
+import { Image, StyleSheet, Text, View } from "react-native";
+import React from "react";
+import { Colors } from "../../utils/Colors";
+import { scale, verticalScale } from "react-native-size-matters";
+import icons from "../../assets/icons";
+
+export type BottomTabParams = {
+  HomeScreen: any;
+  CategoriesScreen: any;
+  OrdersScreen: any;
+  CartScreen: any;
+  LikedScreen: any;
+};
+const Tab = createBottomTabNavigator<BottomTabParams>();
 
 const BottomTab = () => {
   return (
     <Tab.Navigator
-      screenOptions={({route}) => ({
+      screenOptions={{
+        headerShown: false,
         tabBarStyle: {
-          height: 70,
-          paddingBottom: 10,
-          paddingTop: 10,
+          height: verticalScale(70),
+          paddingVertical: verticalScale(10),
         },
-        tabBarIcon: ({focused, color, size}) => {
-          let iconName;
-          let IconComponent;
+      }}
+      // screenOptions={({ route }) => ({
+      //   headerShown: false, // Hide header on all screens
+      //   tabBarStyle: {
+      //     height: 70,
+      //     paddingBottom: 10,
+      //     paddingTop: 10,
+      //   },
+      //   tabBarIcon: ({ focused, color, size }) => {
+      //     let iconName;
+      //     let IconComponent;
 
-          switch (route.name) {
-            case 'HomeScreen':
-              IconComponent = Octicons;
-              iconName = 'home';
-              break;
-            case 'SubscriptionScreen':
-              IconComponent = Ionicons;
-              iconName = 'pricetag-outline';
-              break;
-            case 'MatchScreen':
-              IconComponent = Octicons;
-              iconName = 'heart';
-              break;
-            case 'ChatsScreen':
-              IconComponent = Ionicons;
-              iconName = 'chatbubble-ellipses-outline';
-              break;
-            case 'ProfileScreen':
-              IconComponent = FontAwesome5;
-              iconName = 'user';
-              break;
-            default:
-              return null;
-          }
+      //     switch (route.name) {
+      //       case "HomeScreen":
+      //         IconComponent = Octicons;
+      //         iconName = "home";
+      //         break;
+      //       case "SubscriptionScreen":
+      //         IconComponent = Ionicons;
+      //         iconName = "pricetag-outline";
+      //         break;
+      //       case "MatchScreen":
+      //         IconComponent = Octicons;
+      //         iconName = "heart";
+      //         break;
+      //       case "ChatsScreen":
+      //         IconComponent = Ionicons;
+      //         iconName = "chatbubble-ellipses-outline";
+      //         break;
+      //       case "ProfileScreen":
+      //         IconComponent = FontAwesome5;
+      //         iconName = "user";
+      //         break;
+      //       default:
+      //         return null;
+      //     }
 
-          // Return the icon component with dynamic color
-          return (
-            <IconComponent
-              name={iconName}
-              size={size}
-              color={focused ? Colors.orange : Colors.inactiveTabColor}
-            />
-          );
-        },
-        tabBarActiveTintColor: Colors.orange, // Active color
-        tabBarInactiveTintColor: '#9E9E9E', // Inactive color
-      })}>
+      //     // Return the icon component with dynamic color
+      //     return (
+      //       <IconComponent
+      //         name={iconName}
+      //         size={size}
+      //         // color={focused ? Colors.orange : Colors.inactiveTabColor}
+      //       />
+      //     );
+      //   },
+      //   tabBarActiveTintColor: Colors.orange, // Active color
+      //   tabBarInactiveTintColor: "#9E9E9E", // Inactive color
+      // })}
+    >
       <Tab.Screen
         name="HomeScreen"
         component={HomeScreen}
-        options={{headerShown: false}}
+        options={{
+          tabBarIcon: () => (
+            <Image
+              source={icons.Home}
+              style={{ height: verticalScale(20), width: scale(20) }}
+            />
+          ),
+        }}
       />
       <Tab.Screen
-        name="SubscriptionScreen"
-        component={SubscriptionScreen}
-        options={{headerShown: false}}
+        name="CategoriesScreen"
+        component={CategoriesScreen}
+        options={{
+          tabBarIcon: () => (
+            <Image
+              source={icons.Categories}
+              style={{ height: verticalScale(20), width: scale(20) }}
+            />
+          ),
+        }}
       />
       <Tab.Screen
-        name="MatchScreen"
-        component={MatchScreen}
-        options={{headerShown: false}}
+        name="OrdersScreen"
+        component={OrdersScreen}
+        options={{
+          tabBarIcon: () => (
+            <Image
+              source={icons.Orders}
+              style={{ height: verticalScale(20), width: scale(20) }}
+            />
+          ),
+        }}
       />
       <Tab.Screen
-        name="ChatsScreen"
-        component={ChatsScreen}
-        options={{headerShown: false}}
+        name="CartScreen"
+        component={CartScreen}
+        options={{
+          tabBarIcon: () => (
+            <Image
+              source={icons.Cart}
+              style={{ height: verticalScale(20), width: scale(20) }}
+            />
+          ),
+        }}
       />
       <Tab.Screen
-        name="ProfileScreen"
-        component={ProfileScreen}
-        options={{headerShown: false}}
+        name="LikedScreen"
+        component={LikedScreen}
+        options={{
+          tabBarIcon: () => (
+            <Image
+              source={icons.Heart}
+              style={{ height: verticalScale(20), width: scale(20) }}
+            />
+          ),
+        }}
       />
     </Tab.Navigator>
   );

@@ -65,8 +65,8 @@ const CustomButton = ({
       style={[
         {
           backgroundColor: backgroundColor || Colors.blue,
-          borderRadius: borderRadius || moderateScale(15),
-          height: height || verticalScale(50),
+          borderRadius: moderateScale(borderRadius || 15),
+          height: verticalScale(height || 45),
           width: width || "100%",
           alignItems: alignItems || "center",
           justifyContent: justifyContent || "center",

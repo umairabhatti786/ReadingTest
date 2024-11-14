@@ -31,11 +31,11 @@ const SocialLogin = ({
         alignSelf: "center",
         flexDirection: "row",
 
-        height: height || verticalScale(50),
+        height: verticalScale(height || 45),
         width: width || "100%",
         backgroundColor: backgroundColor || Colors.white,
-        borderRadius: borderRadius || moderateScale(10),
-        marginTop: marginTop || moderateScale(20),
+        borderRadius: moderateScale(borderRadius || 10),
+        marginTop: moderateScale(marginTop || 20),
       }}
     >
       <Image

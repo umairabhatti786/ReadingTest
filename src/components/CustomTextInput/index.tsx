@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Text, Image, View, TextInput, TouchableOpacity } from "react-native";
 import { scale, verticalScale, moderateScale } from "react-native-size-matters";
 import Fonts from "../../utils/Fonts";
+import { Colors } from "../../utils/Colors";
 
 type inputProps = {
   inputStyle?: any;
@@ -9,7 +10,7 @@ type inputProps = {
   rightIconStyle?: any;
   errorMessageStyle?: any;
 
-  onChangeText: (text: string) => void;
+  onChangeText?: (text: string) => void;
   value?: string;
   placeholder: string;
   icon?: any; // Source of image
@@ -52,7 +53,7 @@ const CustomTextInput = ({
   maxLength,
   onBlur,
   keyboardType = "default",
-  placeholderTextColor = "#212121",
+  placeholderTextColor,
   iconStyle,
   rightIconStyle,
 
@@ -81,14 +82,14 @@ const CustomTextInput = ({
           {
             flexDirection: "row",
             alignItems: "center",
-            borderWidth: borderWidth || 1,
+            borderWidth: scale(borderWidth || 1),
             borderColor: borderColor || "#EEEEEE",
             width: width || "100%",
-            height: height || verticalScale(50),
-            padding: padding || moderateScale(10),
-            borderRadius: borderRadius || moderateScale(15),
+            height: verticalScale(height || 45),
+            padding: moderateScale(padding || 10),
+            borderRadius: moderateScale(borderRadius || 15),
             backgroundColor: backgroundColor || "#FFFFFF",
-            marginVertical: marginVertical || verticalScale(10),
+            marginVertical: verticalScale(marginVertical || 10),
           },
           inputContainerStyle,
         ]}
@@ -122,7 +123,7 @@ const CustomTextInput = ({
           onFocus={onFocus}
           onBlur={onBlur}
           maxLength={maxLength}
-          placeholderTextColor={placeholderTextColor}
+          placeholderTextColor={placeholderTextColor || Colors.gray}
         />
         {rightIcon && (
           <TouchableOpacity onPress={onRightIconPress}>

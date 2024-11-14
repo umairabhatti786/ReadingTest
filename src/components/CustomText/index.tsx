@@ -2,6 +2,7 @@ import { Text } from "react-native";
 import React from "react";
 import { Colors } from "../../utils/Colors";
 import Fonts from "../../utils/Fonts";
+import { scale, verticalScale } from "react-native-size-matters";
 
 type Props = {
   color?: string;
@@ -51,12 +52,12 @@ const CustomText = ({
           fontWeight: fontWeight || "500",
           fontFamily: fontFam || Fonts.regular,
           textDecorationLine,
-          marginLeft: marginLeft,
-          marginTop: marginTop,
-          marginBottom: marginBottom,
-          marginRight: marginRight,
-          marginHorizontal: marginHorizontal,
-          marginVertical: marginVertical,
+          marginLeft: scale(marginLeft || 0),
+          marginTop: verticalScale(marginTop || 0),
+          marginBottom: verticalScale(marginBottom || 0),
+          marginRight: scale(marginRight || 0),
+          marginHorizontal: scale(marginHorizontal || 0),
+          marginVertical: verticalScale(marginVertical || 0),
           lineHeight: lineHeight,
         },
         style,
