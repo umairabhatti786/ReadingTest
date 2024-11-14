@@ -65,7 +65,7 @@ const PersonalInfoScreen = ({ navigation }: PersonalInfoScreen) => {
               }}
               onClose={() => setIsCountryPickerVisible(false)}
             />
-            <Image source={icons.ArrowDown} style={styles.arrowDown} />
+            <Image source={icons.ArrowDown} style={styles.ArrowDown} />
             {country && (
               <CustomText
                 text={` +${country.callingCode[0]}`}
@@ -143,10 +143,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
 
-  arrowDown: {
-    width: scale(20),
-    height: verticalScale(20),
-  },
   countryCode: {
     marginRight: scale(10), // Space between code and phone input
   },
