@@ -82,7 +82,6 @@ const CustomTextInput = ({
           {
             flexDirection: "row",
             alignItems: "center",
-            borderWidth: scale(borderWidth || 1),
             borderColor: borderColor || "#EEEEEE",
             width: width || "100%",
             height: verticalScale(height || 45),

@@ -1,5 +1,12 @@
-import { ScrollView, StyleSheet, TouchableOpacity, View } from "react-native";
-import React from "react";
+import {
+  Image,
+  ScrollView,
+  StyleSheet,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from "react-native";
+import React, { useState } from "react";
 
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamsList } from "../../../routes/RootNavigator";
@@ -11,7 +18,7 @@ import CustomTextInput from "../../../components/CustomTextInput";
 import icons from "../../../assets/icons";
 import { Colors } from "../../../utils/Colors";
 import CustomButton from "../../../components/CustomButton";
-
+import CountryPicker, { Country } from "react-native-country-picker-modal";
 //.....................types.....................
 interface PersonalInfoScreen {
   navigation: StackNavigationProp<RootStackParamsList, "PersonalInfoScreen">;
@@ -20,6 +27,9 @@ interface PersonalInfoScreen {
 //............................main func....................
 
 const PersonalInfoScreen = ({ navigation }: PersonalInfoScreen) => {
+  const [country, setCountry] = useState<Country | null>(null);
+  const [isCountryPickerVisible, setIsCountryPickerVisible] = useState(false);
+
   return (
     <View style={styles.screenContainer}>
       <ScrollView showsVerticalScrollIndicator={false}>
@@ -40,11 +50,34 @@ const PersonalInfoScreen = ({ navigation }: PersonalInfoScreen) => {
           </View>
           <CustomTextInput placeholder="Country" rightIcon={icons.ArrowDown} />
           <CustomTextInput placeholder="ZIP Code" />
+          {/* Country Picker Modal */}
 
-          <CustomTextInput
-            placeholder="+92 345 123 456 7"
-            icon={icons.ArrowDown}
-          />
+          <View style={styles.countryContainer}>
+            <CountryPicker
+              withFlag
+              withCallingCode
+              withFilter
+              countryCode={country?.cca2 || "PA"}
+              visible={isCountryPickerVisible}
+              onSelect={(selectedCountry) => {
+                setCountry(selectedCountry);
+                setIsCountryPickerVisible(false);
+              }}
+              onClose={() => setIsCountryPickerVisible(false)}
+            />
+            <Image source={icons.ArrowDown} style={styles.arrowDown} />
+            {country && (
+              <CustomText
+                text={` +${country.callingCode[0]}`}
+                style={styles.countryCode}
+              />
+            )}
+            <TextInput
+              placeholder="345 123 456 7"
+              style={styles.phoneInput}
+              keyboardType="numeric"
+            />
+          </View>
 
           {/* ..............Map................ */}
           <View style={styles.map} />
@@ -82,5 +115,39 @@ const styles = StyleSheet.create({
     height: verticalScale(240),
     backgroundColor: Colors.gray,
     marginVertical: verticalScale(10),
+  },
+  countryContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    width: "100%",
+    height: verticalScale(45),
+    padding: moderateScale(10),
+    borderRadius: moderateScale(15),
+    backgroundColor: "#FFFFFF",
+    marginVertical: verticalScale(10),
+  },
+  flagArrowContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginRight: scale(10),
+  },
+  ArrowDown: {
+    width: scale(20),
+    height: verticalScale(20),
+  },
+  phoneInput: {
+    width: scale(200),
+    height: verticalScale(45),
+    fontSize: 14,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+
+  arrowDown: {
+    width: scale(20),
+    height: verticalScale(20),
+  },
+  countryCode: {
+    marginRight: scale(10), // Space between code and phone input
   },
 });

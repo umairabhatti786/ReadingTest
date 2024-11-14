@@ -11,6 +11,7 @@ import ChooseAddress from "../../screens/main/ChooseAddress";
 import NewAddress from "../../screens/main/NewAddress";
 import PersonalInfoScreen from "../../screens/main/PersonalInfoScreen";
 import PaymentScreen from "../../screens/main/PaymentScreen";
+import RequestBookScreen from "../../screens/main/RequestBookScreen";
 export type RootStackParamsList = {
   SignUpScreen: any;
   LoginScreen: any;
@@ -20,18 +21,20 @@ export type RootStackParamsList = {
   NewAddress: any;
   PersonalInfoScreen: any;
   PaymentScreen: any;
+  RequestBookScreen: any;
 };
 const Stack = createNativeStackNavigator<RootStackParamsList>();
 const RootNavigator = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="PaymentScreen" component={PaymentScreen} />
-
+        <Stack.Screen name="RequestBookScreen" component={RequestBookScreen} />
         <Stack.Screen
           name="PersonalInfoScreen"
           component={PersonalInfoScreen}
         />
+        <Stack.Screen name="PaymentScreen" component={PaymentScreen} />
+
         <Stack.Screen name="LoginScreen" component={LoginScreen} />
 
         <Stack.Screen
