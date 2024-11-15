@@ -28,6 +28,11 @@ const RootNavigator = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="BottomTab" component={BottomTab} />
+        <Stack.Screen
+          name="SendGiftCardScreen"
+          component={SendGiftCardScreen}
+        />
         <Stack.Screen name="PaymentScreen" component={PaymentScreen} />
         <Stack.Screen
           name="PersonalInfoScreen"
@@ -37,14 +42,9 @@ const RootNavigator = () => {
 
         <Stack.Screen name="LoginScreen" component={LoginScreen} />
 
-        <Stack.Screen
-          name="SendGiftCardScreen"
-          component={SendGiftCardScreen}
-        />
         <Stack.Screen name="ChooseAddress" component={ChooseAddress} />
         <Stack.Screen name="NewAddress" component={NewAddress} />
         <Stack.Screen name="SignUpScreen" component={SignUpScreen} />
-        <Stack.Screen name="BottomTab" component={BottomTab} />
       </Stack.Navigator>
     </NavigationContainer>
   );

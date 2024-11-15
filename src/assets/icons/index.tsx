@@ -19,5 +19,8 @@ export default {
   visa: require("./visa.png"),
   visa2: require("./visa2.png"),
   ArrowDown: require("./ArrowDown.png"),
-  pakFlag: require("./pakFlag.png"),
+  Tuning: require("./Tuning.png"),
+  Magnifer: require("./Magnifer.png"),
+  Share: require("./Share.png"),
+  CartPlus: require("./CartPlus.png"),
 };

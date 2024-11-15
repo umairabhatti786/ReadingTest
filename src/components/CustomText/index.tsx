@@ -12,7 +12,7 @@ type Props = {
   style?: any;
   lineHeight?: number;
   numberOfLines?: number;
-  fontWeight?: string;
+  fontWeight?: string | number;
   textDecorationLine?: string;
   label?: any;
   labalStyle?: any;

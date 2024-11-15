@@ -32,56 +32,56 @@ const SendGiftCardScreen = () => {
       showsVerticalScrollIndicator={false}
       style={styles.screenContainer}
     >
-      <Header title="Send Gift Card" />
-      <CustomText
-        text={"Add your gift recipient details below."}
-        marginVertical={verticalScale(10)}
-      />
-      <CustomTextInput placeholder="Recipient Name" />
-      <CustomTextInput placeholder="Recipient Email" />
-      <CustomTextInput
-        placeholder="+92 345 123 456 7"
-        icon={icons.ArrowDown}
-        placeholderTextColor={Colors.black}
-      />
-      <CustomText
-        text={"Add/update your details below"}
-        marginTop={verticalScale(20)}
-      />
-      <CustomTextInput placeholder="John Doe" />
-      <CustomTextInput placeholder="johndoe121@gmail.com" />
-      <CustomTextInput placeholder="+92 345 123 456 7" icon={icons.ArrowDown} />
-      <CustomText
-        text={"Gift Card Amount ( Online Payment Only )"}
-        fontWeight="bold"
-      />
-      <CustomTextInput placeholder="Amount(PKR 500 - 10,000)" />
-      <CustomText text={"Card Details"} marginVertical={verticalScale(20)} />
-      <ScrollView
-        horizontal={true}
-        showsHorizontalScrollIndicator={false}
-        contentContainerStyle={
-          {
-            //marginBottom: verticalScale(10),
-          }
-        }
-      >
-        {cards.map((cards, index) => (
-          <View key={cards.id} style={styles.card}>
-            <CustomTextInput
-              placeholder="----  ----  ----  1234"
-              icon={icons.visa2}
-            />
-            <TouchableOpacity
-              style={styles.circle}
-              onPress={() => setSelected(index)}
-            >
-              {selected === index && <View style={styles.select} />}
-            </TouchableOpacity>
-          </View>
-        ))}
-      </ScrollView>
-
+      <View style={styles.content}>
+        <Header title="Send Gift Card" />
+        <CustomText
+          text={"Add your gift recipient details below."}
+          marginVertical={verticalScale(10)}
+        />
+        <CustomTextInput placeholder="Recipient Name" />
+        <CustomTextInput placeholder="Recipient Email" />
+        <CustomTextInput
+          placeholder="+92 345 123 456 7"
+          icon={icons.ArrowDown}
+          placeholderTextColor={Colors.black}
+        />
+        <CustomText
+          text={"Add/update your details below"}
+          marginTop={verticalScale(20)}
+        />
+        <CustomTextInput placeholder="John Doe" />
+        <CustomTextInput placeholder="johndoe121@gmail.com" />
+        <CustomTextInput
+          placeholder="+92 345 123 456 7"
+          icon={icons.ArrowDown}
+        />
+        <CustomText
+          text={"Gift Card Amount ( Online Payment Only )"}
+          fontWeight="bold"
+        />
+        <CustomTextInput placeholder="Amount(PKR 500 - 10,000)" />
+        <CustomText text={"Card Details"} marginVertical={verticalScale(20)} />
+        <ScrollView
+          horizontal={true}
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={styles.cards}
+        >
+          {cards.map((cards, index) => (
+            <View key={cards.id} style={styles.card}>
+              <CustomTextInput
+                placeholder="----  ----  ----  1234"
+                icon={icons.visa2}
+              />
+              <TouchableOpacity
+                style={styles.circle}
+                onPress={() => setSelected(index)}
+              >
+                {selected === index && <View style={styles.select} />}
+              </TouchableOpacity>
+            </View>
+          ))}
+        </ScrollView>
+      </View>
       <TouchableOpacity>
         <CustomText text={"Add New Card +"} color={Colors.blue} />
       </TouchableOpacity>
@@ -116,6 +116,9 @@ const styles = StyleSheet.create({
     marginTop: moderateScale(10),
     marginBottom: moderateScale(20),
   },
+  content: {
+    gap: verticalScale(15),
+  },
   circle: {
     height: verticalScale(16),
     width: scale(16),
@@ -135,7 +138,17 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     height: verticalScale(60),
-    width: scale(282),
+    width: scale(275),
     backgroundColor: Colors.white,
+    borderRadius: verticalScale(10),
+    marginRight: scale(5),
+    alignItems: "center",
+    padding: moderateScale(10),
+  },
+  cards: {
+    flexDirection: "row",
+    // height: verticalScale(60),
+    // width: scale(282),
+    // backgroundColor: Colors.white,
   },
 });
