@@ -1,6 +1,7 @@
 export default {
   apple: require("./apple.png"),
   ArrowLeft: require("./ArrowLeft.png"),
+  ArrowBack: require("./ArrowBack.png"),
   box: require("./box.png"),
   check: require("./check.png"),
   Eye: require("./Eye.png"),

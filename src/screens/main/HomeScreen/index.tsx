@@ -1,12 +1,12 @@
+import React from "react";
 import {
   Image,
+  ImageBackground,
   ScrollView,
   StyleSheet,
-  Text,
   TouchableOpacity,
   View,
 } from "react-native";
-import React from "react";
 import { scale, verticalScale, moderateScale } from "react-native-size-matters";
 
 import HeaderBtmTabs from "../../../components/HeaderBtmTabs";
@@ -40,8 +40,31 @@ const HomeScreen = ({ navigation }: HomeScreenProps) => {
     <View style={styles.screenContainer}>
       <View style={styles.content}>
         <HeaderBtmTabs />
-        <Image source={imgs.homeImg} style={styles.img} />
-
+        {/* <Image source={imgs.homeImg} style={styles.img} /> */}
+        <View style={{ overflow: "hidden" }}>
+          <ImageBackground
+            source={imgs.homeImg}
+            style={styles.img}
+            imageStyle={{ borderRadius: moderateScale(10) }}
+          >
+            <TouchableOpacity style={styles.arrowCircle}>
+              <Image source={icons.ArrowBack} style={styles.ArrowBack} />
+            </TouchableOpacity>
+            <View style={styles.txtAtImg}>
+              <CustomText
+                text={"Grand Sale"}
+                color={Colors.white}
+                fontWeight="bold"
+                size={18}
+              />
+              <CustomText
+                text={`40% OFF\non entire literature \ncollection`}
+                color={Colors.white}
+                marginTop={5}
+              />
+            </View>
+          </ImageBackground>
+        </View>
         {/* .............search................ */}
         <View style={styles.search}>
           <CustomTextInput
@@ -102,10 +125,30 @@ const styles = StyleSheet.create({
   },
   img: {
     width: "100%",
-    height: verticalScale(135),
+    height: verticalScale(120),
+    //height: 138,
     alignSelf: "center",
     marginTop: verticalScale(10),
-    borderRadius: moderateScale(10),
+  },
+  txtAtImg: {
+    marginTop: verticalScale(20),
+    marginLeft: scale(25),
+  },
+  arrowCircle: {
+    width: scale(24),
+    height: verticalScale(24),
+    borderRadius: moderateScale(50),
+    backgroundColor: Colors.white,
+    opacity: 0.2,
+    position: "absolute",
+    top: verticalScale(50),
+    left: scale(10),
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  ArrowBack: {
+    width: scale(12),
+    height: verticalScale(12),
   },
   btn: {
     width: scale(45),
