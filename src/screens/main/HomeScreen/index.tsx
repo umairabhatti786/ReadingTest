@@ -1,14 +1,16 @@
 import React from "react";
 import {
+  Dimensions,
+  FlatList,
   Image,
   ImageBackground,
   ScrollView,
   StyleSheet,
   TouchableOpacity,
+  useWindowDimensions,
   View,
 } from "react-native";
 import { scale, verticalScale, moderateScale } from "react-native-size-matters";
-
 import HeaderBtmTabs from "../../../components/HeaderBtmTabs";
 import {
   BottomTabBarProps,
@@ -36,35 +38,97 @@ const HomeScreen = ({ navigation }: HomeScreenProps) => {
     "Horror",
     "Kids",
   ];
+  const FlatListData: FlatListProps[] = [
+    { id: "1", img: imgs.homeImg },
+    { id: "2", img: imgs.homeImg1 },
+    { id: "3", img: imgs.homeImg2 },
+  ];
+  type FlatListProps = {
+    id: string;
+    img: any;
+  };
+  const { height, width } = Dimensions.get("window");
+  // .............Recommended Data..............................
+  type RecommendedDataProps = {
+    id: string;
+    bookCover: any;
+    bookTitle: string;
+    author: string;
+    ListPrice: string;
+    AppPrice: string;
+    InStock: boolean;
+  };
+  const RecommendedData: RecommendedDataProps[] = [
+    {
+      id: "1",
+      bookCover: imgs.Lara,
+      bookTitle: "Lara: The England Chronicles",
+      author: "Brian Lara",
+      ListPrice: "£12.99 = Rs.4746",
+      AppPrice: "Rs.2335",
+      InStock: true,
+    },
+    {
+      id: "2",
+      bookCover: imgs.hobbit,
+      bookTitle: "Hobbit",
+      author: "J. R. R. Tolkien",
+      ListPrice: "£12.99 = Rs.4746",
+      AppPrice: "Rs.2335",
+      InStock: true,
+    },
+    {
+      id: "3",
+      bookCover: imgs.Lara,
+      bookTitle: "Lara: The England Chronicles",
+      author: "Brian Lara",
+      ListPrice: "£12.99 = Rs.4746",
+      AppPrice: "Rs.2335",
+      InStock: false,
+    },
+  ];
   return (
     <View style={styles.screenContainer}>
       <View style={styles.content}>
-        <HeaderBtmTabs />
-        {/* <Image source={imgs.homeImg} style={styles.img} /> */}
-        <View style={{ overflow: "hidden" }}>
-          <ImageBackground
-            source={imgs.homeImg}
-            style={styles.img}
-            imageStyle={{ borderRadius: moderateScale(10) }}
-          >
-            <TouchableOpacity style={styles.arrowCircle}>
-              <Image source={icons.ArrowBack} style={styles.ArrowBack} />
-            </TouchableOpacity>
-            <View style={styles.txtAtImg}>
-              <CustomText
-                text={"Grand Sale"}
-                color={Colors.white}
-                fontWeight="bold"
-                size={18}
-              />
-              <CustomText
-                text={`40% OFF\non entire literature \ncollection`}
-                color={Colors.white}
-                marginTop={5}
-              />
+        <HeaderBtmTabs
+        //onRightIconPress={() => navigation.navigate('LoginScreen')}
+        />
+
+        {/* .............FlatList............ */}
+        <FlatList
+          data={FlatListData}
+          keyExtractor={(item) => item.id}
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          pagingEnabled
+          renderItem={({ item }) => (
+            <View style={styles.FlatListVw}>
+              <ImageBackground
+                source={item.img}
+                style={[styles.img, { width: width * 0.88 }]}
+                imageStyle={{ borderRadius: moderateScale(10) }}
+              >
+                <TouchableOpacity style={styles.arrowCircle}>
+                  <Image source={icons.ArrowBack} style={styles.ArrowBack} />
+                </TouchableOpacity>
+                <View style={styles.txtAtImg}>
+                  <CustomText
+                    text={"Grand Sale"}
+                    color={Colors.white}
+                    fontWeight="bold"
+                    size={18}
+                  />
+                  <CustomText
+                    text={`40% OFF\non entire literature \ncollection`}
+                    color={Colors.white}
+                    marginTop={5}
+                  />
+                </View>
+              </ImageBackground>
             </View>
-          </ImageBackground>
-        </View>
+          )}
+        />
+
         {/* .............search................ */}
         <View style={styles.search}>
           <CustomTextInput
@@ -89,23 +153,29 @@ const HomeScreen = ({ navigation }: HomeScreenProps) => {
         {/* ..............Recommended................ */}
         <View style={styles.RecommendedVw}>
           <CustomText text={"Recommended"} fontWeight="bold" marginBottom={5} />
-          <ScrollView
+          <CustomText
+            text={"Most Popular "}
+            fontWeight="bold"
+            marginBottom={5}
+          />
+          <FlatList
+            data={RecommendedData}
             horizontal
             showsHorizontalScrollIndicator={false}
-            contentContainerStyle={{ gap: scale(15) }}
-          >
-            <BookCard
-              bookCover={imgs.Lara}
-              bookTitle="Lara: The England Chronicles"
-              author="Brian Lara"
-            />
-            <BookCard
-              bookCover={imgs.hobbit}
-              bookTitle="Hobbit"
-              author="J. R. R. Tolkien"
-            />
-          </ScrollView>
+            keyExtractor={(item) => item.id}
+            renderItem={({ item }) => (
+              <BookCard
+                bookCover={item.bookCover}
+                author={item.author}
+                bookTitle={item.bookTitle}
+                ListPrice={item.ListPrice}
+                AppPrice={item.AppPrice}
+                InStock
+              />
+            )}
+          />
         </View>
+
         {/* ........................end...................... */}
       </View>
     </View>
@@ -123,10 +193,16 @@ const styles = StyleSheet.create({
     marginHorizontal: scale(20),
     marginVertical: verticalScale(10),
   },
+  FlatListVw: {
+    //overflow: "hidden",
+    flex: 1,
+    marginRight: scale(2.5),
+    // height: verticalScale(120),
+    // width: "100%",
+  },
   img: {
-    width: "100%",
+    // width: "100%",
     height: verticalScale(120),
-    //height: 138,
     alignSelf: "center",
     marginTop: verticalScale(10),
   },

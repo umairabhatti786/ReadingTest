@@ -3,17 +3,23 @@ import React from "react";
 import icons from "../../assets/icons";
 
 import { scale, verticalScale, moderateScale } from "react-native-size-matters";
-
-const HeaderBtmTabs = () => {
+type HeaderBtmTabsProps = {
+  onRightIconPress?: () => void;
+  onLeftIconPress?: () => void;
+};
+const HeaderBtmTabs = ({
+  onRightIconPress,
+  onLeftIconPress,
+}: HeaderBtmTabsProps) => {
   return (
     <View style={styles.main}>
       <View style={{ flexDirection: "row", alignItems: "center" }}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={onRightIconPress}>
           <Image source={icons.bars} style={styles.icon} />
         </TouchableOpacity>
         <Image source={icons.logo} style={styles.logo} />
       </View>
-      <TouchableOpacity>
+      <TouchableOpacity onPress={onLeftIconPress}>
         <Image source={icons.bell} style={styles.icon} />
       </TouchableOpacity>
     </View>

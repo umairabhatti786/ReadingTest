@@ -24,4 +24,6 @@ export default {
   Magnifer: require("./Magnifer.png"),
   Share: require("./Share.png"),
   CartPlus: require("./CartPlus.png"),
+  Like: require("./Like.png"),
+  Pen: require("./Pen.png"),
 };

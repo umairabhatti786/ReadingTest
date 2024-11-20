@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "162246597762",
+    "project_id": "readingtest124",
+    "storage_bucket": "readingtest124.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:162246597762:android:e937812eb80902dd86a89b",
+        "android_client_info": {
+          "package_name": "com.readings"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBfg-dK2Q4mJZ4cBgmsEfHXNTqabZn74zc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

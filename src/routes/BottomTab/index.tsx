@@ -5,7 +5,7 @@ import OrdersScreen from "../../screens/main/OrdersScreen";
 import CartScreen from "../../screens/main/CartScreen";
 import LikedScreen from "../../screens/main/LikedScreen";
 
-import { Image, StyleSheet, Text, View } from "react-native";
+import { Image } from "react-native";
 import React from "react";
 import { Colors } from "../../utils/Colors";
 import { scale, verticalScale } from "react-native-size-matters";
@@ -144,5 +144,3 @@ const BottomTab = () => {
 };
 
 export default BottomTab;
-
-const styles = StyleSheet.create({});

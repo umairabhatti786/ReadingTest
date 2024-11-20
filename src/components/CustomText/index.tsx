@@ -22,6 +22,7 @@ type Props = {
   marginRight?: number;
   marginHorizontal?: number;
   marginVertical?: number;
+  textAlign?: string;
 };
 const CustomText = ({
   color,
@@ -34,6 +35,7 @@ const CustomText = ({
   fontWeight,
   textDecorationLine,
   label,
+  textAlign,
 
   marginLeft,
   marginTop,
@@ -59,6 +61,7 @@ const CustomText = ({
           marginHorizontal: scale(marginHorizontal || 0),
           marginVertical: verticalScale(marginVertical || 0),
           lineHeight: lineHeight,
+          textAlign: textAlign,
         },
         style,
       ]}

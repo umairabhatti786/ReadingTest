@@ -15,9 +15,19 @@ type props = {
   bookCover: any;
   bookTitle: string;
   author: string;
+  ListPrice: string;
+  AppPrice: string;
+  InStock: boolean;
 };
 
-const BookCard = ({ bookCover, bookTitle, author }: props) => {
+const BookCard = ({
+  bookCover,
+  bookTitle,
+  author,
+  ListPrice,
+  AppPrice,
+  InStock,
+}: props) => {
   return (
     <View style={styles.bookCard}>
       <ImageBackground source={bookCover} style={styles.imgBG}>
@@ -41,7 +51,7 @@ const BookCard = ({ bookCover, bookTitle, author }: props) => {
             color={Colors.gray}
           />
           <CustomText
-            text={"£12.99 = Rs.4746"}
+            text={ListPrice}
             size={12}
             fontWeight={400}
             color={Colors.gray}
@@ -50,13 +60,17 @@ const BookCard = ({ bookCover, bookTitle, author }: props) => {
         <View style={styles.appPriceVw}>
           <CustomText text={"App Price"} size={12} color={Colors.gray} />
           <CustomText
-            text={"Rs.2335"}
+            text={AppPrice}
             size={12}
             fontWeight="bold"
             color={Colors.orange}
           />
         </View>
-        <CustomText text={"In Stock"} size={12} color={Colors.green} />
+        <CustomText
+          text={InStock === true ? "In Stock" : "Out Of Stock"}
+          size={12}
+          color={Colors.green}
+        />
         <View style={styles.btnsVw}>
           <TouchableOpacity style={styles.btn}>
             <Image source={icons.Heart} style={styles.btnIcon} />
@@ -82,6 +96,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.white,
     borderRadius: moderateScale(15),
     overflow: "hidden",
+    marginRight: scale(10),
   },
   imgBG: {
     height: verticalScale(132),

@@ -16,7 +16,12 @@ import CustomButton from "../../../components/CustomButton";
 import { emailReges } from "../../../utils/Reges";
 import icons from "../../../assets/icons";
 import Fonts from "../../../utils/Fonts";
-import { scale, verticalScale, moderateScale } from "react-native-size-matters";
+import {
+  scale,
+  verticalScale,
+  moderateScale,
+  vs,
+} from "react-native-size-matters";
 
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamsList } from "../../../routes/RootNavigator";
@@ -198,6 +203,7 @@ const LoginScreen = ({ navigation }: LoginScreenProps) => {
             errorMessage={errors.email}
             onFocus={() => handleError(null, "email")}
             placeholderTextColor={Colors.gray}
+            marginVertical={15}
           />
           {/* ...................Password....................... */}
           <CustomTextInput
