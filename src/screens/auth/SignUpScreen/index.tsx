@@ -23,6 +23,17 @@ import SocialLogin from "../../../components/SocialLogin";
 import CustomText from "../../../components/CustomText";
 import icons from "../../../assets/icons";
 import { emailReges } from "../../../utils/Reges";
+//............fire base auth...................
+import auth from "@react-native-firebase/auth";
+import {
+  GoogleSignin,
+  SignInSuccessResponse,
+} from "@react-native-google-signin/google-signin"; // ....Configure Google Sign-In
+GoogleSignin.configure({
+  webClientId:
+    "162246597762-pj4rhqjgvge1bg7svmcecksour1q4vqo.apps.googleusercontent.com", // Web client ID
+});
+
 //.....................types.....................
 interface SignUpScreenProps {
   navigation: StackNavigationProp<RootStackParamsList, "SignUpScreen">;
@@ -30,6 +41,60 @@ interface SignUpScreenProps {
 
 //.................main func.......................
 const SignUpScreen = ({ navigation }: SignUpScreenProps) => {
+  //.................onGoogleButtonPress.........................
+  const onGoogleButtonPress = async () => {
+    try {
+      // Sign out any previously signed-in user to prompt account selection again
+      await GoogleSignin.signOut();
+      // Check if the device supports Google Play services
+      await GoogleSignin.hasPlayServices({
+        showPlayServicesUpdateDialog: true,
+      });
+      const userInfo = (await GoogleSignin.signIn()) as SignInSuccessResponse; // Sign in the user and retrieve userInfo
+      // Get the sign-in result from Google and cast it to the correct type
+
+      // Log userInfo to inspect the structure
+      // console.log('User Info: ', userInfo);
+      // Retrieve idToken from the correct property
+      const idToken = userInfo.data.idToken;
+
+      // Log the idToken to verify it's being retrieved correctly
+      console.log("ID Token: ", idToken);
+
+      if (!idToken) {
+        throw new Error("Google Sign-In failed: No ID token received.");
+      }
+      //setshowLoader(true); // Show loader when signing in with Google
+
+      // Create credential using idToken
+      const googleCredential = auth.GoogleAuthProvider.credential(idToken);
+
+      // Sign in to Firebase with Google credential
+      await auth().signInWithCredential(googleCredential);
+      //Alert.alert('Success', 'Google Sign-In Successful!');
+      // Extract useful user information
+      const userData = {
+        name: userInfo.data.user.name,
+        email: userInfo.data.user.email,
+        photo: userInfo.data.user.photo,
+        id: userInfo.data.user.id,
+      };
+      // setUserInfo(userData);
+      console.log("Success", "Google Sign-In Successful!");
+      // dispatch(setUserData(userData)); // Dispatch user data to Redux store
+      // await AsyncStorage.setItem("check-status", rememberMe ? "true" : "false"); //....store to local storage
+      // setshowLoader(false); // hide loader when go to home
+      navigation.navigate("PersonalInfoScreen", { user: userInfo });
+    } catch (error: unknown) {
+      // Type narrowing using a type guard
+      if (error instanceof Error) {
+        console.error("Google Sign-In Error:", error.message);
+      } else {
+        console.error("Unknown error occurred", error);
+      }
+      throw error; // Rethrow the error
+    }
+  };
   //.................inputs.........................
   type inputs = {
     email: string;
@@ -126,6 +191,7 @@ const SignUpScreen = ({ navigation }: SignUpScreenProps) => {
           errorMessage={errors.email}
           onFocus={() => handleError(null, "email")}
           placeholderTextColor={Colors.gray}
+          marginVertical={10}
         />
         {/* ...................Password....................... */}
         <CustomTextInput
@@ -136,6 +202,7 @@ const SignUpScreen = ({ navigation }: SignUpScreenProps) => {
           errorMessage={errors.password}
           onFocus={() => handleError(null, "password")}
           placeholderTextColor={Colors.gray}
+          marginVertical={10}
         />
         {/* ...................Confirm Password..................... */}
         <CustomTextInput
@@ -145,6 +212,7 @@ const SignUpScreen = ({ navigation }: SignUpScreenProps) => {
           errorMessage={errors.confirm}
           onFocus={() => handleError(null, "confirm")}
           placeholderTextColor={Colors.gray}
+          marginVertical={10}
         />
         {/* ..................policy.......................... */}
         <View style={styles.policyVw}>
@@ -182,8 +250,8 @@ const SignUpScreen = ({ navigation }: SignUpScreenProps) => {
           marginVertical={20}
         />
       </View>
+      {/* .............Already have an account?.................. */}
       <View style={styles.loginOptions}>
-        {/* .............Already have an account?.................. */}
         <TouchableOpacity onPress={() => navigation.navigate("LoginScreen")}>
           <CustomText
             text={" Already have an account?"}
@@ -199,7 +267,9 @@ const SignUpScreen = ({ navigation }: SignUpScreenProps) => {
         </View>
         {/* ..................SocialLogin................... */}
         <View>
-          <SocialLogin title="Continue with Google" icon={icons.google} />
+          <TouchableOpacity onPress={onGoogleButtonPress}>
+            <SocialLogin title="Continue with Google" icon={icons.google} />
+          </TouchableOpacity>
           <SocialLogin title="Continue with facebook" icon={icons.fb} />
           {Platform.OS === "ios" && (
             <SocialLogin title="Continue with Apple ID" icon={icons.apple} />

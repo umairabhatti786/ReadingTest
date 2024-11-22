@@ -20,14 +20,14 @@ import { Colors } from "../../../utils/Colors";
 import CustomButton from "../../../components/CustomButton";
 import CountryPicker, { Country } from "react-native-country-picker-modal";
 import CountryDropDown from "../../../components/CountryDropDown";
-//.....................types.....................
-interface PersonalInfoScreen {
+import MapView, { PROVIDER_GOOGLE } from "react-native-maps"; //.....................types.....................
+interface PersonalInfoScreenProps {
   navigation: StackNavigationProp<RootStackParamsList, "PersonalInfoScreen">;
 }
 
 //............................main func....................
 
-const PersonalInfoScreen = ({ navigation }: PersonalInfoScreen) => {
+const PersonalInfoScreen = ({ navigation }: PersonalInfoScreenProps) => {
   const [country, setCountry] = useState<Country | null>(null);
   const [isCountryPickerVisible, setIsCountryPickerVisible] = useState(false);
 
@@ -79,7 +79,19 @@ const PersonalInfoScreen = ({ navigation }: PersonalInfoScreen) => {
             />
           </View>
           {/* ..............Map................ */}
-          <View style={styles.map} />
+          <View style={styles.mapContainer}>
+            <MapView
+              provider={PROVIDER_GOOGLE} // remove if not using Google Maps
+              style={styles.map}
+              region={{
+                latitude: 37.78825,
+                longitude: -122.4324,
+                latitudeDelta: 0.015,
+                longitudeDelta: 0.0121,
+              }}
+            />
+          </View>
+          {/* <View style={styles.map} /> */}
           <TouchableOpacity
             style={{
               justifyContent: "center",
@@ -88,8 +100,8 @@ const PersonalInfoScreen = ({ navigation }: PersonalInfoScreen) => {
           >
             <CustomText text={"skip"} color={Colors.blue} />
           </TouchableOpacity>
-          <CustomButton title="Continue" marginTop={10} />
         </View>
+        <CustomButton title="Continue" marginTop={10} />
       </ScrollView>
     </View>
   );
@@ -105,13 +117,8 @@ const styles = StyleSheet.create({
     marginVertical: verticalScale(10),
   },
   content: {
-    gap: verticalScale(5),
+    gap: verticalScale(20),
     justifyContent: "space-between",
-  },
-  map: {
-    height: verticalScale(240),
-    backgroundColor: Colors.gray,
-    marginVertical: verticalScale(10),
   },
   countryContainer: {
     flexDirection: "row",
@@ -121,7 +128,7 @@ const styles = StyleSheet.create({
     padding: moderateScale(10),
     borderRadius: moderateScale(15),
     backgroundColor: "#FFFFFF",
-    marginVertical: verticalScale(10),
+    // marginVertical: verticalScale(10),
   },
   flagArrowContainer: {
     flexDirection: "row",
@@ -142,5 +149,14 @@ const styles = StyleSheet.create({
 
   countryCode: {
     marginRight: scale(10), // Space between code and phone input
+  },
+  mapContainer: {
+    //height: 240,
+    height: verticalScale(210),
+    width: "100%",
+    // marginVertical: verticalScale(10),
+  },
+  map: {
+    flex: 1,
   },
 });
