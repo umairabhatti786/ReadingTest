@@ -12,7 +12,12 @@ import {
 import Fonts from "../../../utils/Fonts";
 import { Colors } from "../../../utils/Colors";
 import Header from "../../../components/Header";
-import { scale, verticalScale, moderateScale } from "react-native-size-matters";
+import {
+  scale,
+  verticalScale,
+  moderateScale,
+  vs,
+} from "react-native-size-matters";
 
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamsList } from "../../../routes/RootNavigator";
@@ -173,7 +178,7 @@ const SignUpScreen = ({ navigation }: SignUpScreenProps) => {
       contentContainerStyle={styles.screenContainer}
     >
       <View>
-        <Header title="Sign Up" />
+        <Header title="Sign Up" onPress={() => navigation.goBack()} />
         <CustomText
           text={"Enter the following details to create an account"}
           color={Colors.black}
@@ -295,7 +300,8 @@ const styles = StyleSheet.create({
   },
   policyVw: {
     flexDirection: "row",
-    marginTop: moderateScale(20),
+    marginTop: vs(20),
+    marginBottom: vs(10),
   },
   policyvw2: {
     flexDirection: "row",
@@ -317,6 +323,7 @@ const styles = StyleSheet.create({
   loginOptions: {
     flex: 1,
     justifyContent: "space-between",
+    marginTop: vs(15),
   },
   lineVw: {
     flexDirection: "row",

@@ -23,7 +23,7 @@ const PaymentScreen = ({ navigation }: PaymentScreen) => {
   return (
     <View style={styles.screenContainer}>
       <View style={styles.content}>
-        <Header title="Payment Info" />
+        <Header title="Payment Info" onPress={() => navigation.goBack()} />
         <CustomText
           text={
             "Add your optional payment method to save for future purchases."
@@ -50,6 +50,7 @@ const PaymentScreen = ({ navigation }: PaymentScreen) => {
         <CustomTextInput placeholder="ZIP Code" />
       </View>
       <TouchableOpacity
+        onPress={() => navigation.navigate("BottomTab")}
         style={{
           justifyContent: "center",
           alignItems: "center",
@@ -57,7 +58,10 @@ const PaymentScreen = ({ navigation }: PaymentScreen) => {
       >
         <CustomText text={"skip"} color={Colors.blue} />
       </TouchableOpacity>
-      <CustomButton title="Continue" />
+      <CustomButton
+        title="Continue"
+        onPress={() => navigation.navigate("BottomTab")}
+      />
     </View>
   );
 };

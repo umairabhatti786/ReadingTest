@@ -36,7 +36,7 @@ const PersonalInfoScreen = ({ navigation }: PersonalInfoScreenProps) => {
     <View style={styles.screenContainer}>
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.content}>
-          <Header title="Personal Info" />
+          <Header title="Personal Info" onPress={() => navigation.goBack()} />
           <CustomText
             text={
               "You know plenty about readings. It’s our turn to know a little about you."
@@ -94,6 +94,7 @@ const PersonalInfoScreen = ({ navigation }: PersonalInfoScreenProps) => {
           </View>
           {/* <View style={styles.map} /> */}
           <TouchableOpacity
+            onPress={() => navigation.navigate("BottomTab")}
             style={{
               justifyContent: "center",
               alignItems: "center",
@@ -102,7 +103,11 @@ const PersonalInfoScreen = ({ navigation }: PersonalInfoScreenProps) => {
             <CustomText text={"skip"} color={Colors.blue} />
           </TouchableOpacity>
         </View>
-        <CustomButton title="Continue" marginTop={10} />
+        <CustomButton
+          title="Continue"
+          marginTop={10}
+          onPress={() => navigation.navigate("PaymentScreen")}
+        />
       </ScrollView>
     </View>
   );
