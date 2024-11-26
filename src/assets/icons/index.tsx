@@ -26,4 +26,6 @@ export default {
   CartPlus: require("./CartPlus.png"),
   Like: require("./Like.png"),
   Pen: require("./Pen.png"),
+  Close: require("./Close.png"),
+  Plus: require("./plus.png"),
 };

@@ -267,9 +267,11 @@ const SignUpScreen = ({ navigation }: SignUpScreenProps) => {
         </View>
         {/* ..................SocialLogin................... */}
         <View>
-          <TouchableOpacity onPress={onGoogleButtonPress}>
-            <SocialLogin title="Continue with Google" icon={icons.google} />
-          </TouchableOpacity>
+          <SocialLogin
+            title="Continue with Google"
+            icon={icons.google}
+            onPress={onGoogleButtonPress}
+          />
           <SocialLogin title="Continue with facebook" icon={icons.fb} />
           {Platform.OS === "ios" && (
             <SocialLogin title="Continue with Apple ID" icon={icons.apple} />

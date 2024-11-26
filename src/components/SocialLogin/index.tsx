@@ -1,4 +1,4 @@
-import { Image, View } from "react-native";
+import { Image, TouchableOpacity, View } from "react-native";
 import React from "react";
 import { Colors } from "../../utils/Colors";
 import { scale, verticalScale, moderateScale } from "react-native-size-matters";
@@ -12,6 +12,7 @@ type socialloginprops = {
   backgroundColor?: string;
   borderRadius?: number;
   marginTop?: number;
+  onPress?: () => void;
 };
 
 const SocialLogin = ({
@@ -22,9 +23,11 @@ const SocialLogin = ({
   backgroundColor,
   borderRadius,
   marginTop,
+  onPress,
 }: socialloginprops) => {
   return (
-    <View
+    <TouchableOpacity
+      onPress={onPress}
       style={{
         alignItems: "center",
         justifyContent: "center",
@@ -47,7 +50,7 @@ const SocialLogin = ({
         }}
       />
       <CustomText text={title} marginLeft={moderateScale(10)} />
-    </View>
+    </TouchableOpacity>
   );
 };
 

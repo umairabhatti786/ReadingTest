@@ -46,6 +46,7 @@ interface LoginScreenProps {
 //............................main func....................
 const LoginScreen = ({ navigation }: LoginScreenProps) => {
   //const dispatch = useDispatch(); //....for redux..............
+  //.................onGoogleButtonPress.........................
   const onGoogleButtonPress = async () => {
     try {
       // Sign out any previously signed-in user to prompt account selection again
@@ -54,7 +55,8 @@ const LoginScreen = ({ navigation }: LoginScreenProps) => {
       await GoogleSignin.hasPlayServices({
         showPlayServicesUpdateDialog: true,
       });
-      const userInfo = (await GoogleSignin.signIn()) as SignInSuccessResponse; // Sign in the user and retrieve userInfo // Get the sign-in result from Google and cast it to the correct type
+      const userInfo = (await GoogleSignin.signIn()) as SignInSuccessResponse; // Sign in the user and retrieve userInfo
+      // Get the sign-in result from Google and cast it to the correct type
 
       // Log userInfo to inspect the structure
       // console.log('User Info: ', userInfo);
@@ -180,51 +182,6 @@ const LoginScreen = ({ navigation }: LoginScreenProps) => {
       navigation.navigate("BottomTab");
     }
   };
-  //..........................................google sign in code.....................
-  // const onGoogleButtonPress = async () => {
-  //   try {
-  //     await GoogleSignin.signOut();
-  //     await GoogleSignin.hasPlayServices({
-  //       showPlayServicesUpdateDialog: true,
-  //     });
-  //     const userInfo = await GoogleSignin.signIn();
-  //     //console.log('User Info: ', userInfo); // Log the entire userInfo object
-  //     // console.log('User Info name: ', userInfo.data.user.name); // Log the entire userInfo object
-  //     // Check where the ID token is located
-  //     const idToken =
-  //       userInfo.idToken ||
-  //       userInfo.data.idToken ||
-  //       userInfo.authentication.idToken; // Adjust based on the structure
-  //     console.log("ID Token: ", idToken); // Log the ID token
-
-  //     if (!idToken) {
-  //       throw new Error("Google Sign-In failed: No ID token received.");
-  //     }
-  //     setshowLoader(true); // Show loader when signing in with Google
-  //     const googleCredential = auth.GoogleAuthProvider.credential(idToken);
-  //     await auth().signInWithCredential(googleCredential);
-
-  //     // Extract useful user information
-  //     const userData = {
-  //       name: userInfo.data.user.name,
-  //       email: userInfo.data.user.email,
-  //       photo: userInfo.data.user.photo,
-  //       id: userInfo.data.user.id,
-  //     };
-  //     // setUserInfo(userData);
-  //     //console.log('Success', 'Google Sign-In Successful!');
-
-  //     dispatch(setUserData(userData)); // Dispatch user data to Redux store
-  //     await AsyncStorage.setItem("check-status", rememberMe ? "true" : "false"); //....store to local storage
-  //     //await AsyncStorage.setItem('asm', 'tayyab');
-  //     setshowLoader(false); // hide loader when go to home
-  //     props.navigation.navigate("BottomTab");
-  //     //...............storeData on AsyncStorage....
-  //   } catch (error) {
-  //     console.error(error);
-  //     Alert.alert("Google Sign-In Error", error.message);
-  //   }
-  // };
 
   //................................
   return (
@@ -300,7 +257,11 @@ const LoginScreen = ({ navigation }: LoginScreenProps) => {
 
           {/* ..................SocialLogin................... */}
           <View>
-            <SocialLogin title="Continue with Google" icon={icons.google} />
+            <SocialLogin
+              title="Continue with Google"
+              icon={icons.google}
+              onPress={onGoogleButtonPress}
+            />
             <SocialLogin title="Continue with facebook" icon={icons.fb} />
             {Platform.OS === "ios" && (
               <SocialLogin title="Continue with Apple ID" icon={icons.apple} />

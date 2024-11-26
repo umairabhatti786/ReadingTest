@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import {
   Image,
   ScrollView,
@@ -6,7 +7,6 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import React, { useState } from "react";
 
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamsList } from "../../../routes/RootNavigator";
@@ -21,6 +21,7 @@ import CustomButton from "../../../components/CustomButton";
 import CountryPicker, { Country } from "react-native-country-picker-modal";
 import CountryDropDown from "../../../components/CountryDropDown";
 import MapView, { PROVIDER_GOOGLE } from "react-native-maps"; //.....................types.....................
+
 interface PersonalInfoScreenProps {
   navigation: StackNavigationProp<RootStackParamsList, "PersonalInfoScreen">;
 }

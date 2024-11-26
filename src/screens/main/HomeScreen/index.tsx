@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Dimensions,
   FlatList,
@@ -7,15 +7,24 @@ import {
   ScrollView,
   StyleSheet,
   TouchableOpacity,
-  useWindowDimensions,
+  Animated,
   View,
 } from "react-native";
-import { scale, verticalScale, moderateScale } from "react-native-size-matters";
+import {
+  scale,
+  verticalScale,
+  moderateScale,
+  vs,
+  ms,
+} from "react-native-size-matters";
 import HeaderBtmTabs from "../../../components/HeaderBtmTabs";
 import {
   BottomTabBarProps,
   BottomTabNavigationProp,
 } from "@react-navigation/bottom-tabs";
+import { StackNavigationProp } from "@react-navigation/stack";
+import { RootStackParamsList } from "../../../routes/RootNavigator";
+import { CompositeNavigationProp } from "@react-navigation/native";
 import { BottomTabParams } from "../../../routes/BottomTab";
 import { Colors } from "../../../utils/Colors";
 import imgs from "../../../assets/imgs";
@@ -24,10 +33,19 @@ import icons from "../../../assets/icons";
 import CustomText from "../../../components/CustomText";
 import BookCard from "../../../components/BookCard";
 
+// interface HomeScreenProps {
+//   navigation: BottomTabNavigationProp<BottomTabParams, "HomeScreen">;
+// }
+// type HomeScreenProps = {
+//   navigation: StackNavigationProp<RootStackParamsList, "BottomTabs">;
+// };
+type HomeScreenNavigationProp = CompositeNavigationProp<
+  BottomTabNavigationProp<BottomTabParams, "HomeScreen">, // Tab-specific navigation
+  StackNavigationProp<RootStackParamsList> // Root-level navigation
+>;
 interface HomeScreenProps {
-  navigation: BottomTabNavigationProp<BottomTabParams, "HomeScreen">;
+  navigation: HomeScreenNavigationProp;
 }
-
 const HomeScreen = ({ navigation }: HomeScreenProps) => {
   const tabs: string[] = [
     "All",
@@ -87,12 +105,28 @@ const HomeScreen = ({ navigation }: HomeScreenProps) => {
       InStock: false,
     },
   ];
+  const [showModal, setShowModal] = useState<boolean>(false); //..for modal
+  const [slideAnim] = useState(new Animated.Value(-width)); // Initial value off-screen
+  const openModal = () => {
+    setShowModal(true); // Make modal visible
+    Animated.timing(slideAnim, {
+      toValue: 0, // Slide into view
+      duration: 300,
+      useNativeDriver: true,
+    }).start();
+  };
+  const closeModal = () => {
+    Animated.timing(slideAnim, {
+      toValue: -width, // Slide out of view
+      duration: 300,
+      useNativeDriver: true,
+    }).start(() => setShowModal(false)); // Hide modal after animation
+  };
+
   return (
     <View style={styles.screenContainer}>
       <View style={styles.content}>
-        <HeaderBtmTabs
-        //onRightIconPress={() => navigation.navigate('LoginScreen')}
-        />
+        <HeaderBtmTabs onLeftIconPress={openModal} />
 
         {/* .............FlatList............ */}
         <FlatList
@@ -178,6 +212,48 @@ const HomeScreen = ({ navigation }: HomeScreenProps) => {
 
         {/* ........................end...................... */}
       </View>
+      {showModal ? (
+        <Animated.View
+          style={[styles.menuModal, { transform: [{ translateX: slideAnim }] }]}
+        >
+          <View style={styles.modalContent}>
+            <TouchableOpacity
+              onPress={() => navigation.navigate("LoginScreen")}
+            >
+              <CustomText text={"Sign Up / Login"} color={Colors.blue} />
+            </TouchableOpacity>
+            <TouchableOpacity>
+              <CustomText text={"High Discounts"} color={Colors.blue} />
+            </TouchableOpacity>
+            <TouchableOpacity>
+              <CustomText text={"Card Discounts"} color={Colors.blue} />
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => navigation.navigate("SendGiftCardScreen")}
+            >
+              <CustomText text={"Send a gift"} color={Colors.blue} />
+            </TouchableOpacity>
+            <TouchableOpacity>
+              <CustomText text={"Request a book"} color={Colors.blue} />
+            </TouchableOpacity>
+            <TouchableOpacity>
+              <CustomText text={"About"} color={Colors.blue} />
+            </TouchableOpacity>
+            <TouchableOpacity>
+              <CustomText text={"Terms of Use"} color={Colors.blue} />
+            </TouchableOpacity>
+            <TouchableOpacity>
+              <CustomText text={"Privacy Policy"} color={Colors.blue} />
+            </TouchableOpacity>
+            <TouchableOpacity>
+              <CustomText text={"Help & Support"} color={Colors.blue} />
+            </TouchableOpacity>
+          </View>
+          <TouchableOpacity style={styles.closeIconCircle} onPress={closeModal}>
+            <Image source={icons.Close} style={styles.closeIcon} />
+          </TouchableOpacity>
+        </Animated.View>
+      ) : null}
     </View>
   );
 };
@@ -256,5 +332,44 @@ const styles = StyleSheet.create({
   },
   RecommendedVw: {
     marginTop: verticalScale(10),
+  },
+  // menuModal: {
+  //   flex: 1,
+  //   backgroundColor: Colors.blue,
+  // },
+  menuModal: {
+    flex: 1,
+    backgroundColor: Colors.primary,
+    justifyContent: "space-between",
+    alignItems: "center",
+    paddingTop: ms(100),
+    paddingBottom: ms(50),
+
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    zIndex: 10, // Ensure it appears above other elements
+  },
+  modalContent: {
+    gap: vs(30),
+  },
+
+  closeIcon: {
+    width: scale(18),
+    height: verticalScale(18),
+    // width: 20,
+    // height: 20,
+  },
+  closeIconCircle: {
+    width: scale(40),
+    height: verticalScale(40),
+    // width: 48,
+    // height: 48,
+    backgroundColor: Colors.white,
+    borderRadius: ms(50),
+    alignItems: "center",
+    justifyContent: "center",
   },
 });

@@ -14,12 +14,12 @@ const HeaderBtmTabs = ({
   return (
     <View style={styles.main}>
       <View style={{ flexDirection: "row", alignItems: "center" }}>
-        <TouchableOpacity onPress={onRightIconPress}>
+        <TouchableOpacity onPress={onLeftIconPress}>
           <Image source={icons.bars} style={styles.icon} />
         </TouchableOpacity>
         <Image source={icons.logo} style={styles.logo} />
       </View>
-      <TouchableOpacity onPress={onLeftIconPress}>
+      <TouchableOpacity onPress={onRightIconPress}>
         <Image source={icons.bell} style={styles.icon} />
       </TouchableOpacity>
     </View>

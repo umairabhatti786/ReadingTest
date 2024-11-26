@@ -1,6 +1,12 @@
 import React from "react";
 import { Text, TouchableOpacity, StyleSheet } from "react-native";
-import { scale, verticalScale, moderateScale } from "react-native-size-matters";
+import {
+  scale,
+  verticalScale,
+  moderateScale,
+  vs,
+  s,
+} from "react-native-size-matters";
 import Fonts from "../../utils/Fonts";
 import { Colors } from "../../utils/Colors";
 
@@ -71,11 +77,12 @@ const CustomButton = ({
           alignItems: alignItems || "center",
           justifyContent: justifyContent || "center",
           alignSelf: alignSelf || "center",
-          marginLeft: marginLeft,
-          marginTop: marginTop,
-          marginBottom: marginBottom,
-          marginRight: marginRight,
-          marginHorizontal: marginHorizontal,
+          marginLeft: scale(marginLeft || 0),
+          marginTop: vs(marginTop || 0),
+          marginBottom: vs(marginBottom || 0),
+          marginRight: scale(marginRight || 0),
+          marginHorizontal: s(marginHorizontal || 0),
+          // marginVertical: vs(marginVertical || 0),
           marginVertical: marginVertical,
         },
         style,

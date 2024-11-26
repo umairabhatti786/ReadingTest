@@ -30,8 +30,8 @@ const RootNavigator = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="LoginScreen" component={LoginScreen} />
         <Stack.Screen name="BottomTab" component={BottomTab} />
+        <Stack.Screen name="LoginScreen" component={LoginScreen} />
         <Stack.Screen name="BookDetails" component={BookDetails} />
         <Stack.Screen
           name="SendGiftCardScreen"
