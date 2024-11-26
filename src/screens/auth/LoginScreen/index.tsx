@@ -191,7 +191,7 @@ const LoginScreen = ({ navigation }: LoginScreenProps) => {
         contentContainerStyle={styles.scrollContainer}
       >
         <View>
-          <Header title="Login" />
+          <Header title="Login" onPress={() => navigation.goBack()} />
           <CustomText
             text={"Enter your email address and password to login."}
             color={Colors.black}
@@ -223,7 +223,9 @@ const LoginScreen = ({ navigation }: LoginScreenProps) => {
             marginVertical={10}
           />
           {/* //............Forgot the password? */}
-          <TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => navigation.navigate("ForgotPasswordScreen")}
+          >
             <CustomText
               text={"Forgot the password?"}
               color={Colors.blue}
@@ -242,7 +244,10 @@ const LoginScreen = ({ navigation }: LoginScreenProps) => {
         </View>
         <View style={styles.loginOptions}>
           {/* .........Sign up option............ */}
-          <TouchableOpacity onPress={() => navigation.navigate("SignUpScreen")}>
+          <TouchableOpacity
+            onPress={() => navigation.navigate("SignUpScreen")}
+            style={{ marginTop: vs(20) }}
+          >
             <CustomText
               text={" Don’t have an account? "}
               label={<CustomText text={"Sign Up"} color={Colors.blue} />}
