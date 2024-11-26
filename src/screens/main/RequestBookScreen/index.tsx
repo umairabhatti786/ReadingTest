@@ -1,8 +1,14 @@
-import { Image, StyleSheet, Text, TextInput, View } from "react-native";
+import { Image, Modal, StyleSheet, Text, TextInput, View } from "react-native";
 import React, { useState } from "react";
 import Header from "../../../components/Header";
 import CustomText from "../../../components/CustomText";
-import { moderateScale, scale, verticalScale } from "react-native-size-matters";
+import {
+  moderateScale,
+  s,
+  scale,
+  verticalScale,
+  vs,
+} from "react-native-size-matters";
 import CustomTextInput from "../../../components/CustomTextInput";
 import CustomButton from "../../../components/CustomButton";
 import { Colors } from "../../../utils/Colors";
@@ -12,6 +18,7 @@ import CountryPicker, { Country } from "react-native-country-picker-modal";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamsList } from "../../../routes/RootNavigator";
 import icons from "../../../assets/icons";
+import imgs from "../../../assets/imgs";
 //.....................types.....................
 interface PersonalInfoScreen {
   navigation: StackNavigationProp<RootStackParamsList, "PersonalInfoScreen">;
@@ -21,6 +28,7 @@ interface PersonalInfoScreen {
 const RequestBookScreen = ({ navigation }: PersonalInfoScreen) => {
   const [country, setCountry] = useState<Country | null>(null);
   const [isCountryPickerVisible, setIsCountryPickerVisible] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
 
   return (
     <View style={styles.screenContainer}>
@@ -80,10 +88,54 @@ const RequestBookScreen = ({ navigation }: PersonalInfoScreen) => {
             placeholder="Additional Info"
             marginVertical={verticalScale(5)}
             height={verticalScale(130)}
+            alignItems="flex-start"
           />
         </View>
       </View>
-      <CustomButton title="Send Request" />
+      <CustomButton
+        title="Send Request"
+        onPress={() => setModalVisible(true)}
+      />
+      {/* ...............Modal..................... */}
+      <Modal
+        animationType="slide" // Options: 'none', 'slide', 'fade'
+        transparent={true} // Makes modal background transparent
+        visible={modalVisible}
+        onRequestClose={() => setModalVisible(false)} // Handles back button on Android
+      >
+        <View style={styles.modalOverlay}>
+          <View style={styles.modal}>
+            <View style={styles.modalContent}>
+              <Image
+                source={imgs.gift2}
+                width={scale(96)}
+                height={verticalScale(96)}
+                style={styles.gift}
+              />
+              <CustomText
+                text={"Request Received"}
+                fontWeight="bold"
+                size={20}
+              />
+              <CustomText
+                text={
+                  "We have received your request for the book. We will find it as soon as possible and notify you as it’s available"
+                }
+                textAlign="center"
+                marginTop={10}
+                color={Colors.gray}
+              />
+            </View>
+            <CustomButton
+              title="Back to Home"
+              onPress={() => {
+                setModalVisible(false);
+                navigation.navigate("BottomTab");
+              }}
+            />
+          </View>
+        </View>
+      </Modal>
     </View>
   );
 };
@@ -135,5 +187,38 @@ const styles = StyleSheet.create({
 
   countryCode: {
     marginRight: scale(10), // Space between code and phone input
+  },
+  modalOverlay: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(0, 0, 0, 0.5)", // Semi-transparent background
+  },
+  modal: {
+    // width: 300,
+    //height: 400,
+    width: s(250),
+    height: vs(350),
+    paddingHorizontal: s(20),
+    paddingVertical: s(30),
+    backgroundColor: Colors.white,
+    borderRadius: s(10),
+    justifyContent: "space-between",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 4,
+    elevation: 5, // For Android shadow
+  },
+  modalContent: {
+    alignItems: "center",
+  },
+  gift: {
+    // width: 96,
+    width: s(96),
+    // height: 96,
+    height: vs(80),
+    marginTop: vs(10),
+    marginBottom: vs(30),
   },
 });

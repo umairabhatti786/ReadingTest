@@ -233,7 +233,9 @@ const HomeScreen = ({ navigation }: HomeScreenProps) => {
             >
               <CustomText text={"Send a gift"} color={Colors.blue} />
             </TouchableOpacity>
-            <TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => navigation.navigate("RequestBookScreen")}
+            >
               <CustomText text={"Request a book"} color={Colors.blue} />
             </TouchableOpacity>
             <TouchableOpacity>

@@ -38,6 +38,7 @@ type inputProps = {
   fontFamily?: string;
   rightIconWidth?: number;
   rightIconheight?: number;
+  alignItems?: string;
 };
 const CustomTextInput = ({
   onChangeText,
@@ -58,6 +59,7 @@ const CustomTextInput = ({
   placeholderTextColor,
   iconStyle,
   rightIconStyle,
+  alignItems,
 
   width,
   height,
@@ -83,7 +85,7 @@ const CustomTextInput = ({
         style={[
           {
             flexDirection: "row",
-            alignItems: "center",
+            alignItems: alignItems || "center",
             width: width || "100%",
             height: verticalScale(height || 45),
             padding: moderateScale(padding || 10),
