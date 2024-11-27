@@ -1,6 +1,13 @@
 import React, { useState } from "react";
 import { Text, Image, View, TextInput, TouchableOpacity } from "react-native";
-import { scale, verticalScale, moderateScale } from "react-native-size-matters";
+import {
+  scale,
+  verticalScale,
+  moderateScale,
+  vs,
+  s,
+  ms,
+} from "react-native-size-matters";
 import Fonts from "../../utils/Fonts";
 import { Colors } from "../../utils/Colors";
 
@@ -34,13 +41,20 @@ type inputProps = {
   padding?: number;
   borderRadius?: number;
   backgroundColor?: string;
-  marginVertical?: number;
+
   fontSize?: number;
   fontWeight?: string;
   fontFamily?: string;
   rightIconWidth?: number;
   rightIconheight?: number;
   alignItems?: string;
+
+  marginLeft?: number;
+  marginTop?: number;
+  marginBottom?: number;
+  marginRight?: number;
+  marginHorizontal?: number;
+  marginVertical?: number;
 };
 const CustomTextInput = ({
   onChangeText,
@@ -70,7 +84,6 @@ const CustomTextInput = ({
   padding,
   borderRadius,
   backgroundColor,
-  marginVertical,
 
   fontSize,
   fontWeight,
@@ -78,6 +91,13 @@ const CustomTextInput = ({
   fontFamily,
   rightIconWidth,
   rightIconheight,
+
+  marginLeft,
+  marginTop,
+  marginBottom,
+  marginRight,
+  marginHorizontal,
+  marginVertical,
 }: inputProps) => {
   const [isSecure, setIsSecure] = useState(secureTextEntry);
   const onRightIconPress = () => {
@@ -91,11 +111,16 @@ const CustomTextInput = ({
             flexDirection: "row",
             alignItems: alignItems || "center",
             width: width || "100%",
-            height: verticalScale(height || 45),
-            padding: moderateScale(padding || 10),
-            borderRadius: moderateScale(borderRadius || 15),
+            height: vs(height || 45),
+            padding: ms(padding || 10),
+            borderRadius: ms(borderRadius || 15),
             backgroundColor: backgroundColor || "#FFFFFF",
-            marginVertical: verticalScale(marginVertical || 0.01),
+            marginVertical: vs(marginVertical || 0.001),
+            marginHorizontal: vs(marginHorizontal || 0.001),
+            marginLeft: s(marginLeft || 0.001),
+            marginTop: vs(marginTop || 0.001),
+            marginBottom: vs(marginBottom || 0.001),
+            marginRight: s(marginRight || 0.001),
           },
           inputContainerStyle,
         ]}

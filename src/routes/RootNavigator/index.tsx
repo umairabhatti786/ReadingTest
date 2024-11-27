@@ -16,6 +16,7 @@ import BookDetails from "../../screens/main/BookDetails";
 import Profile from "../../screens/main/Profile";
 import ForgotPasswordScreen from "../../screens/main/ForgotPasswordScreen";
 import ChangePasswordScreen from "../../screens/main/ChangePasswordScreen";
+import EditPersonalInfo from "../../screens/main/EditPersonalInfo";
 export type RootStackParamsList = {
   SignUpScreen: any;
   LoginScreen: any;
@@ -30,6 +31,7 @@ export type RootStackParamsList = {
   ForgotPasswordScreen: any;
   Profile: any;
   ChangePasswordScreen: any;
+  EditPersonalInfo: any;
 };
 const Stack = createNativeStackNavigator<RootStackParamsList>();
 const RootNavigator = () => {
@@ -45,6 +47,7 @@ const RootNavigator = () => {
         />
         <Stack.Screen name="PaymentScreen" component={PaymentScreen} />
         <Stack.Screen name="Profile" component={Profile} />
+        <Stack.Screen name="EditPersonalInfo" component={EditPersonalInfo} />
         <Stack.Screen
           name="PersonalInfoScreen"
           component={PersonalInfoScreen}

@@ -13,7 +13,6 @@ import { ms, s, vs } from "react-native-size-matters";
 import { Colors } from "../../../utils/Colors";
 import CustomText from "../../../components/CustomText";
 import icons from "../../../assets/icons";
-import CustomTextInput from "../../../components/CustomTextInput";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamsList } from "../../../routes/RootNavigator";
 import imgs from "../../../assets/imgs";
@@ -106,11 +105,14 @@ const Profile = ({ navigation }: ProfileProps) => {
         <View style={styles.info}>
           <TouchableOpacity
             style={styles.btn}
-            onPress={() => navigation.navigate("ForgotPasswordScreen")}
+            onPress={() => navigation.navigate("ChangePasswordScreen")}
           >
             <CustomText text={"Change Password"} color={Colors.blue} />
           </TouchableOpacity>
-          <TouchableOpacity style={styles.btn}>
+          <TouchableOpacity
+            style={styles.btn}
+            onPress={() => navigation.navigate("EditPersonalInfo")}
+          >
             <CustomText text={"Edit Info"} color={Colors.blue} />
           </TouchableOpacity>
         </View>
@@ -181,13 +183,6 @@ const Profile = ({ navigation }: ProfileProps) => {
         >
           {cards.map((cards, index) => (
             <View key={cards.id} style={styles.card}>
-              {/* <CustomTextInput
-                placeholder={cards.cardNumber}
-                icon={icons.visa2}
-                height={60}
-                iconHeight={40}
-                iconWidth={40}
-              /> */}
               <View style={{ flexDirection: "row", alignItems: "center" }}>
                 <Image source={icons.visa2} style={styles.visa2} />
                 <CustomText text={cards.cardNumber} marginLeft={10} />

@@ -198,7 +198,7 @@ const LoginScreen = ({ navigation }: LoginScreenProps) => {
             fontFam={Fonts.regular}
             marginTop={10}
             marginLeft={5}
-            marginBottom={10}
+            marginBottom={20}
           />
           {/* ...................Email............................................ */}
           <CustomTextInput
@@ -209,7 +209,7 @@ const LoginScreen = ({ navigation }: LoginScreenProps) => {
             errorMessage={errors.email}
             onFocus={() => handleError(null, "email")}
             placeholderTextColor={Colors.gray}
-            marginVertical={10}
+            marginBottom={20}
           />
           {/* ...................Password....................... */}
           <CustomTextInput
@@ -220,7 +220,6 @@ const LoginScreen = ({ navigation }: LoginScreenProps) => {
             errorMessage={errors.password}
             onFocus={() => handleError(null, "password")}
             placeholderTextColor={Colors.gray}
-            marginVertical={10}
           />
           {/* //............Forgot the password? */}
           <TouchableOpacity
