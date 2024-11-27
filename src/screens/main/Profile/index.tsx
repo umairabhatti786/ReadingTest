@@ -196,6 +196,7 @@ const Profile = ({ navigation }: ProfileProps) => {
         </ScrollView>
         {/* ..................Add New Method.................... */}
         <TouchableOpacity
+          onPress={() => navigation.navigate("PaymentScreen2")}
           style={{
             flexDirection: "row",
             alignItems: "center",

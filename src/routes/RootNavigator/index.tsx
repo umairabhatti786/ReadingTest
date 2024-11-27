@@ -10,6 +10,7 @@ import SendGiftCardScreen from "../../screens/main/SendGiftCardScreen";
 import ChooseAddress from "../../screens/main/ChooseAddress";
 import NewAddress from "../../screens/main/NewAddress";
 import PaymentScreen from "../../screens/main/PaymentScreen";
+import PaymentScreen2 from "../../screens/main/PaymentScreen2";
 import RequestBookScreen from "../../screens/main/RequestBookScreen";
 import PersonalInfoScreen from "../../screens/main/PersonalInfoScreen";
 import BookDetails from "../../screens/main/BookDetails";
@@ -26,6 +27,7 @@ export type RootStackParamsList = {
   NewAddress: any;
   PersonalInfoScreen: any;
   PaymentScreen: any;
+  PaymentScreen2: any;
   RequestBookScreen: any;
   BookDetails: any;
   ForgotPasswordScreen: any;
@@ -46,6 +48,7 @@ const RootNavigator = () => {
           component={SendGiftCardScreen}
         />
         <Stack.Screen name="PaymentScreen" component={PaymentScreen} />
+        <Stack.Screen name="PaymentScreen2" component={PaymentScreen2} />
         <Stack.Screen name="Profile" component={Profile} />
         <Stack.Screen name="EditPersonalInfo" component={EditPersonalInfo} />
         <Stack.Screen

@@ -8,4 +8,5 @@ export default {
   Lara: require("./Lara.png"),
   hobbit: require("./hobbit.png"),
   delete: require("./delete.png"),
+  MeezanBank: require("./MeezanBank.png"),
 };
