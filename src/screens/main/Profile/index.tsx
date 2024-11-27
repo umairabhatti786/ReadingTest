@@ -156,6 +156,7 @@ const Profile = ({ navigation }: ProfileProps) => {
         </View>
         {/* .................Add New Address..................... */}
         <TouchableOpacity
+          onPress={() => navigation.navigate("NewAddress")}
           style={{
             flexDirection: "row",
             alignItems: "center",

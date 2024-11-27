@@ -1,23 +1,98 @@
-import { ScrollView, StyleSheet, TouchableOpacity, View } from "react-native";
-import React from "react";
+import React, { useState } from "react";
+import {
+  Image,
+  ScrollView,
+  StyleSheet,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from "react-native";
+
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamsList } from "../../../routes/RootNavigator";
-import { moderateScale, scale, verticalScale } from "react-native-size-matters";
-import { Colors } from "../../../utils/Colors";
+
 import Header from "../../../components/Header";
 import CustomText from "../../../components/CustomText";
-import CustomButton from "../../../components/CustomButton";
+import { moderateScale, scale, verticalScale } from "react-native-size-matters";
 import CustomTextInput from "../../../components/CustomTextInput";
 import icons from "../../../assets/icons";
-import HeaderBtmTabs from "../../../components/HeaderBtmTabs";
+import { Colors } from "../../../utils/Colors";
+import CustomButton from "../../../components/CustomButton";
+import CountryPicker, { Country } from "react-native-country-picker-modal";
+import CountryDropDown from "../../../components/CountryDropDown";
+import MapView, { PROVIDER_GOOGLE } from "react-native-maps"; //.....................
 
 interface NewAddressProps {
   navigation: StackNavigationProp<RootStackParamsList, "NewAddress">;
 }
 const NewAddress = ({ navigation }: NewAddressProps) => {
+  const [country, setCountry] = useState<Country | null>(null);
+  const [isCountryPickerVisible, setIsCountryPickerVisible] = useState(false);
   return (
     <View style={styles.screenContainer}>
-      <Header title="New Address" />
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <View style={styles.content}>
+          <Header title="New Address" onPress={() => navigation.goBack()} />
+          <CustomText
+            text={"Enter the new address by filling the following information."}
+          />
+          <CustomTextInput placeholder="Email" />
+          {/* ..................Country Picker Modal.......... */}
+          <View style={styles.countryContainer}>
+            <CountryPicker
+              withFlag
+              withCallingCode
+              withFilter
+              countryCode={country?.cca2 || "PA"}
+              visible={isCountryPickerVisible}
+              onSelect={(selectedCountry) => {
+                setCountry(selectedCountry);
+                setIsCountryPickerVisible(false);
+              }}
+              onClose={() => setIsCountryPickerVisible(false)}
+            />
+            <Image source={icons.ArrowDown} style={styles.ArrowDown} />
+            {country && (
+              <CustomText
+                text={` +${country.callingCode[0]}`}
+                style={styles.countryCode}
+              />
+            )}
+            <TextInput
+              placeholder="345 123 456 7"
+              style={styles.phoneInput}
+              keyboardType="numeric"
+            />
+          </View>
+          <CustomTextInput placeholder="Address" />
+          <View
+            style={{ flexDirection: "row", justifyContent: "space-between" }}
+          >
+            <CustomTextInput placeholder="City" width={scale(150)} />
+            <CustomTextInput placeholder="State/Province" width={scale(150)} />
+          </View>
+          <CountryDropDown />
+          <CustomTextInput placeholder="ZIP Code" />
+          {/* ..............Map................ */}
+          <View style={styles.mapContainer}>
+            <MapView
+              provider={PROVIDER_GOOGLE} // remove if not using Google Maps
+              style={styles.map}
+              region={{
+                latitude: 37.78825,
+                longitude: -122.4324,
+                latitudeDelta: 0.015,
+                longitudeDelta: 0.0121,
+              }}
+            />
+          </View>
+        </View>
+        <CustomButton
+          title="Continue"
+          marginTop={10}
+          onPress={() => navigation.goBack()}
+        />
+      </ScrollView>
     </View>
   );
 };
@@ -33,5 +108,49 @@ const styles = StyleSheet.create({
     marginTop: moderateScale(10),
     marginBottom: moderateScale(20),
     justifyContent: "space-between",
+  },
+
+  content: {
+    gap: verticalScale(20),
+    justifyContent: "space-between",
+  },
+  countryContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    width: "100%",
+    height: verticalScale(45),
+    padding: moderateScale(10),
+    borderRadius: moderateScale(15),
+    backgroundColor: "#FFFFFF",
+    // marginVertical: verticalScale(10),
+  },
+  flagArrowContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginRight: scale(10),
+  },
+  ArrowDown: {
+    width: scale(20),
+    height: verticalScale(20),
+  },
+  phoneInput: {
+    width: scale(200),
+    height: verticalScale(45),
+    fontSize: 14,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+
+  countryCode: {
+    marginRight: scale(10), // Space between code and phone input
+  },
+  mapContainer: {
+    //height: 240,
+    height: verticalScale(210),
+    width: "100%",
+    // marginVertical: verticalScale(10),
+  },
+  map: {
+    flex: 1,
   },
 });
