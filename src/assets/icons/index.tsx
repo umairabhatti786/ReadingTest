@@ -28,4 +28,5 @@ export default {
   Pen: require("./Pen.png"),
   Close: require("./Close.png"),
   Plus: require("./plus.png"),
+  Dots: require("./Dots.png"),
 };

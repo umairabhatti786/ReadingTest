@@ -29,6 +29,8 @@ type inputProps = {
   borderColor?: string;
   width?: number;
   height?: number;
+  iconHeight?: number;
+  iconWidth?: number;
   padding?: number;
   borderRadius?: number;
   backgroundColor?: string;
@@ -63,6 +65,8 @@ const CustomTextInput = ({
 
   width,
   height,
+  iconHeight,
+  iconWidth,
   padding,
   borderRadius,
   backgroundColor,
@@ -100,7 +104,11 @@ const CustomTextInput = ({
           <Image
             source={icon}
             style={[
-              { resizeMode: "contain", width: scale(15), height: scale(15) },
+              {
+                resizeMode: "contain",
+                width: scale(iconWidth || 15),
+                height: scale(iconHeight || 15),
+              },
               iconStyle,
             ]}
           />

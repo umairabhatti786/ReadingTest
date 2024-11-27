@@ -13,7 +13,9 @@ import PaymentScreen from "../../screens/main/PaymentScreen";
 import RequestBookScreen from "../../screens/main/RequestBookScreen";
 import PersonalInfoScreen from "../../screens/main/PersonalInfoScreen";
 import BookDetails from "../../screens/main/BookDetails";
+import Profile from "../../screens/main/Profile";
 import ForgotPasswordScreen from "../../screens/main/ForgotPasswordScreen";
+import ChangePasswordScreen from "../../screens/main/ChangePasswordScreen";
 export type RootStackParamsList = {
   SignUpScreen: any;
   LoginScreen: any;
@@ -26,6 +28,8 @@ export type RootStackParamsList = {
   RequestBookScreen: any;
   BookDetails: any;
   ForgotPasswordScreen: any;
+  Profile: any;
+  ChangePasswordScreen: any;
 };
 const Stack = createNativeStackNavigator<RootStackParamsList>();
 const RootNavigator = () => {
@@ -40,11 +44,16 @@ const RootNavigator = () => {
           component={SendGiftCardScreen}
         />
         <Stack.Screen name="PaymentScreen" component={PaymentScreen} />
+        <Stack.Screen name="Profile" component={Profile} />
         <Stack.Screen
           name="PersonalInfoScreen"
           component={PersonalInfoScreen}
         />
         <Stack.Screen name="RequestBookScreen" component={RequestBookScreen} />
+        <Stack.Screen
+          name="ChangePasswordScreen"
+          component={ChangePasswordScreen}
+        />
         <Stack.Screen
           name="ForgotPasswordScreen"
           component={ForgotPasswordScreen}

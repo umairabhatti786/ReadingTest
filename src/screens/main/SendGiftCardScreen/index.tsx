@@ -23,7 +23,6 @@ import { Colors } from "../../../utils/Colors";
 import CustomButton from "../../../components/CustomButton";
 //...for country selection...........
 import CountryPicker, { Country } from "react-native-country-picker-modal";
-import CountryDropDown from "../../../components/CountryDropDown";
 import imgs from "../../../assets/imgs";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamsList } from "../../../routes/RootNavigator";

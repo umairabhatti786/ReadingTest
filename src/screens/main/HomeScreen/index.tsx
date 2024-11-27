@@ -222,6 +222,9 @@ const HomeScreen = ({ navigation }: HomeScreenProps) => {
             >
               <CustomText text={"Sign Up / Login"} color={Colors.blue} />
             </TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate("Profile")}>
+              <CustomText text={"Profile"} color={Colors.blue} />
+            </TouchableOpacity>
             <TouchableOpacity>
               <CustomText text={"High Discounts"} color={Colors.blue} />
             </TouchableOpacity>

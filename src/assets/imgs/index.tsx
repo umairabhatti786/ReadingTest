@@ -7,4 +7,5 @@ export default {
   homeImg2: require("./homeImg.png"),
   Lara: require("./Lara.png"),
   hobbit: require("./hobbit.png"),
+  delete: require("./delete.png"),
 };
