@@ -5,27 +5,21 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamsList } from "../../../routes/RootNavigator";
 
 import Header from "../../../components/Header";
 import CustomText from "../../../components/CustomText";
-import {
-  moderateScale,
-  ms,
-  s,
-  scale,
-  verticalScale,
-  vs,
-} from "react-native-size-matters";
+import { ms, s, scale, vs } from "react-native-size-matters";
 import CustomTextInput from "../../../components/CustomTextInput";
 import icons from "../../../assets/icons";
 import { Colors } from "../../../utils/Colors";
 import CustomButton from "../../../components/CustomButton";
-import CountryDropDown from "../../../components/CountryDropDown";
-import imgs from "../../../assets/imgs";
+import DropDown from "../../../components/DropDown";
+import { countries, banks } from "../../../utils/Data/data";
+
 //.....................types.....................
 interface PaymentScreen2Props {
   navigation: StackNavigationProp<RootStackParamsList, "PaymentScreen2">;
@@ -34,43 +28,48 @@ interface PaymentScreen2Props {
 //............................main func....................
 
 const PaymentScreen2 = ({ navigation }: PaymentScreen2Props) => {
-  const banks = [
-    {
-      id: "1",
-      title: "Meezan Bank",
-      image: imgs.MeezanBank,
-    },
-    {
-      id: "2",
-      title: "Meezan Bank",
-      image: imgs.MeezanBank,
-    },
-    {
-      id: "3",
-      title: "Meezan Bank",
-      image: imgs.MeezanBank,
-    },
-    {
-      id: "4",
-      title: "Meezan Bank",
-      image: imgs.MeezanBank,
-    },
-    {
-      id: "5",
-      title: "Meezan Bank",
-      image: imgs.MeezanBank,
-    },
-    {
-      id: "6",
-      title: "Meezan Bank",
-      image: imgs.MeezanBank,
-    },
-    {
-      id: "7",
-      title: "Meezan Bank",
-      image: imgs.MeezanBank,
-    },
-  ];
+  const [country, setCountry] = useState<{
+    label: string;
+    value: string | number;
+  } | null>(null);
+
+  // const banks = [
+  //   {
+  //     id: "1",
+  //     title: "Meezan Bank",
+  //     image: imgs.MeezanBank,
+  //   },
+  //   {
+  //     id: "2",
+  //     title: "Meezan Bank",
+  //     image: imgs.MeezanBank,
+  //   },
+  //   {
+  //     id: "3",
+  //     title: "Meezan Bank",
+  //     image: imgs.MeezanBank,
+  //   },
+  //   {
+  //     id: "4",
+  //     title: "Meezan Bank",
+  //     image: imgs.MeezanBank,
+  //   },
+  //   {
+  //     id: "5",
+  //     title: "Meezan Bank",
+  //     image: imgs.MeezanBank,
+  //   },
+  //   {
+  //     id: "6",
+  //     title: "Meezan Bank",
+  //     image: imgs.MeezanBank,
+  //   },
+  //   {
+  //     id: "7",
+  //     title: "Meezan Bank",
+  //     image: imgs.MeezanBank,
+  //   },
+  // ];
   return (
     <View style={styles.screenContainer}>
       <ScrollView showsVerticalScrollIndicator={false}>
@@ -132,7 +131,13 @@ const PaymentScreen2 = ({ navigation }: PaymentScreen2Props) => {
             <CustomTextInput placeholder="City" width={scale(150)} />
             <CustomTextInput placeholder="State/Province" width={scale(150)} />
           </View>
-          <CountryDropDown />
+          <DropDown
+            value={country}
+            data={countries}
+            placeholder="countries"
+            onChange={(selectedItem) => setCountry(selectedItem)}
+          />
+          {/* <CountryDropDown /> */}
           <CustomTextInput placeholder="ZIP Code" />
         </View>
 
@@ -149,12 +154,12 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: Colors.primary,
     marginHorizontal: scale(20),
-    marginVertical: verticalScale(10),
+    marginVertical: vs(10),
     justifyContent: "space-between",
   },
   content: {
-    gap: moderateScale(20),
-    marginBottom: verticalScale(25),
+    gap: ms(20),
+    marginBottom: vs(25),
     textAlign: "justify",
   },
   bankcard: {

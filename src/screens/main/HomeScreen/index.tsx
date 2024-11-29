@@ -170,7 +170,10 @@ const HomeScreen = ({ navigation }: HomeScreenProps) => {
             rightIcon={icons.Magnifer}
             width={scale(255)}
           />
-          <TouchableOpacity style={styles.btn}>
+          <TouchableOpacity
+            style={styles.btn}
+            onPress={() => navigation.navigate("Filters")}
+          >
             <Image source={icons.Tuning} style={styles.tuning} />
           </TouchableOpacity>
         </View>
@@ -241,16 +244,20 @@ const HomeScreen = ({ navigation }: HomeScreenProps) => {
             >
               <CustomText text={"Request a book"} color={Colors.blue} />
             </TouchableOpacity>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate("About")}>
               <CustomText text={"About"} color={Colors.blue} />
             </TouchableOpacity>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate("Terms")}>
               <CustomText text={"Terms of Use"} color={Colors.blue} />
             </TouchableOpacity>
-            <TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => navigation.navigate("PrivacyPolicy")}
+            >
               <CustomText text={"Privacy Policy"} color={Colors.blue} />
             </TouchableOpacity>
-            <TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => navigation.navigate("HelpNSupport")}
+            >
               <CustomText text={"Help & Support"} color={Colors.blue} />
             </TouchableOpacity>
           </View>

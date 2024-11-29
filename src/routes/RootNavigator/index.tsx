@@ -18,6 +18,12 @@ import Profile from "../../screens/main/Profile";
 import ForgotPasswordScreen from "../../screens/main/ForgotPasswordScreen";
 import ChangePasswordScreen from "../../screens/main/ChangePasswordScreen";
 import EditPersonalInfo from "../../screens/main/EditPersonalInfo";
+import Filters from "../../screens/main/Filters";
+import About from "../../screens/main/About";
+import Terms from "../../screens/main/Terms";
+import PrivacyPolicy from "../../screens/main/PrivacyPolicy";
+import HelpNSupport from "../../screens/main/HelpNSupport";
+
 export type RootStackParamsList = {
   SignUpScreen: any;
   LoginScreen: any;
@@ -34,7 +40,13 @@ export type RootStackParamsList = {
   Profile: any;
   ChangePasswordScreen: any;
   EditPersonalInfo: any;
+  Filters: any;
+  About: any;
+  Terms: any;
+  PrivacyPolicy: any;
+  HelpNSupport: any;
 };
+
 const Stack = createNativeStackNavigator<RootStackParamsList>();
 const RootNavigator = () => {
   return (
@@ -43,11 +55,16 @@ const RootNavigator = () => {
         <Stack.Screen name="BottomTab" component={BottomTab} />
         <Stack.Screen name="LoginScreen" component={LoginScreen} />
         <Stack.Screen name="BookDetails" component={BookDetails} />
+        <Stack.Screen name="HelpNSupport" component={HelpNSupport} />
+        <Stack.Screen name="About" component={About} />
+        <Stack.Screen name="Terms" component={Terms} />
+        <Stack.Screen name="PrivacyPolicy" component={PrivacyPolicy} />
         <Stack.Screen
           name="SendGiftCardScreen"
           component={SendGiftCardScreen}
         />
         <Stack.Screen name="PaymentScreen" component={PaymentScreen} />
+        <Stack.Screen name="Filters" component={Filters} />
         <Stack.Screen name="PaymentScreen2" component={PaymentScreen2} />
         <Stack.Screen name="Profile" component={Profile} />
         <Stack.Screen name="EditPersonalInfo" component={EditPersonalInfo} />
