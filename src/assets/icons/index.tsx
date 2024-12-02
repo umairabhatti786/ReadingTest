@@ -14,6 +14,7 @@ export default {
   arrowRight: require("./arrowRight.png"),
   Home: require("./Home.png"),
   Heart: require("./Heart.png"),
+  HeartRed: require("./HeartRed.png"),
   Cart: require("./Cart.png"),
   Categories: require("./Categories.png"),
   Orders: require("./Orders.png"),

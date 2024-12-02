@@ -1,13 +1,31 @@
-import { StyleSheet, Text, View } from "react-native";
+import { FlatList, StyleSheet, View } from "react-native";
 import React from "react";
 import HeaderBtmTabs from "../../../components/HeaderBtmTabs";
-import { scale, verticalScale, moderateScale } from "react-native-size-matters";
+import { ms, s } from "react-native-size-matters";
 import { Colors } from "../../../utils/Colors";
-
+import { LikedData } from "../../../utils/Data/data";
+import BookCardLiked from "../../../components/BookCardLiked";
 const LikedScreen = () => {
   return (
     <View style={styles.screenContainer}>
       <HeaderBtmTabs />
+      <View>
+        <FlatList
+          data={LikedData}
+          showsVerticalScrollIndicator={false}
+          keyExtractor={(item) => item.id}
+          renderItem={({ item }) => (
+            <BookCardLiked
+              bookCover={item.bookCover}
+              author={item.author}
+              bookTitle={item.bookTitle}
+              ListPrice={item.ListPrice}
+              AppPrice={item.AppPrice}
+              InStock
+            />
+          )}
+        />
+      </View>
     </View>
   );
 };
@@ -18,9 +36,8 @@ const styles = StyleSheet.create({
   screenContainer: {
     flex: 1,
     backgroundColor: Colors.primary,
-    marginHorizontal: scale(20),
-    marginVertical: verticalScale(10),
-    marginTop: moderateScale(10),
-    marginBottom: moderateScale(20),
+    marginHorizontal: s(20),
+    marginTop: ms(10),
+    marginBottom: ms(20),
   },
 });

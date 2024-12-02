@@ -252,3 +252,73 @@ export const Categories = [
   { label: "Antiques & Collectibles", value: "2" },
   { label: "Archaeology", value: "3" },
 ];
+const categories = [
+  { value: "1", title: "Art & Crafts" },
+  { value: "2", title: "Stationery" },
+  { value: "3", title: "Architecture" },
+  { value: "4", title: "Art" },
+  { value: "5", title: "Bio & Autobiography" },
+  { value: "6", title: "Body, Mind & Spirit" },
+  { value: "7", title: "Business" },
+  { value: "8", title: "Children" },
+  { value: "9", title: "Computer" },
+  { value: "10", title: "Cooking" },
+]; //.....for screen
+export const RecommendedData = [
+  {
+    id: "1",
+    bookCover: imgs.Lara,
+    bookTitle: "Lara: The England Chronicles",
+    author: "Brian Lara",
+    ListPrice: "£12.99 = Rs.4746",
+    AppPrice: "Rs.2335",
+    InStock: true,
+  },
+  {
+    id: "2",
+    bookCover: imgs.hobbit,
+    bookTitle: "Hobbit",
+    author: "J. R. R. Tolkien",
+    ListPrice: "£12.99 = Rs.4746",
+    AppPrice: "Rs.2335",
+    InStock: true,
+  },
+  {
+    id: "3",
+    bookCover: imgs.Lara,
+    bookTitle: "Lara: The England Chronicles",
+    author: "Brian Lara",
+    ListPrice: "£12.99 = Rs.4746",
+    AppPrice: "Rs.2335",
+    InStock: false,
+  },
+];
+export const LikedData = [
+  {
+    id: "1",
+    bookCover: imgs.Lara,
+    bookTitle: "Lara: The England Chronicles",
+    author: "Brian Lara",
+    ListPrice: "£12.99 = Rs.4746",
+    AppPrice: "Rs.2335",
+    InStock: true,
+  },
+  {
+    id: "2",
+    bookCover: imgs.hobbit,
+    bookTitle: "Hobbit",
+    author: "J. R. R. Tolkien",
+    ListPrice: "£12.99 = Rs.4746",
+    AppPrice: "Rs.2335",
+    InStock: true,
+  },
+  {
+    id: "3",
+    bookCover: imgs.Lara,
+    bookTitle: "Lara: The England Chronicles",
+    author: "Brian Lara",
+    ListPrice: "£12.99 = Rs.4746",
+    AppPrice: "Rs.2335",
+    InStock: false,
+  },
+];

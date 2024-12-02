@@ -32,6 +32,7 @@ import CustomTextInput from "../../../components/CustomTextInput";
 import icons from "../../../assets/icons";
 import CustomText from "../../../components/CustomText";
 import BookCard from "../../../components/BookCard";
+import { RecommendedData } from "../../../utils/Data/data";
 
 // interface HomeScreenProps {
 //   navigation: BottomTabNavigationProp<BottomTabParams, "HomeScreen">;
@@ -67,44 +68,16 @@ const HomeScreen = ({ navigation }: HomeScreenProps) => {
   };
   const { height, width } = Dimensions.get("window");
   // .............Recommended Data..............................
-  type RecommendedDataProps = {
-    id: string;
-    bookCover: any;
-    bookTitle: string;
-    author: string;
-    ListPrice: string;
-    AppPrice: string;
-    InStock: boolean;
-  };
-  const RecommendedData: RecommendedDataProps[] = [
-    {
-      id: "1",
-      bookCover: imgs.Lara,
-      bookTitle: "Lara: The England Chronicles",
-      author: "Brian Lara",
-      ListPrice: "£12.99 = Rs.4746",
-      AppPrice: "Rs.2335",
-      InStock: true,
-    },
-    {
-      id: "2",
-      bookCover: imgs.hobbit,
-      bookTitle: "Hobbit",
-      author: "J. R. R. Tolkien",
-      ListPrice: "£12.99 = Rs.4746",
-      AppPrice: "Rs.2335",
-      InStock: true,
-    },
-    {
-      id: "3",
-      bookCover: imgs.Lara,
-      bookTitle: "Lara: The England Chronicles",
-      author: "Brian Lara",
-      ListPrice: "£12.99 = Rs.4746",
-      AppPrice: "Rs.2335",
-      InStock: false,
-    },
-  ];
+  // type RecommendedDataProps = {
+  //   id: string;
+  //   bookCover: any;
+  //   bookTitle: string;
+  //   author: string;
+  //   ListPrice: string;
+  //   AppPrice: string;
+  //   InStock: boolean;
+  // };
+  //...recomended data shifted to data folder
   const [showModal, setShowModal] = useState<boolean>(false); //..for modal
   const [slideAnim] = useState(new Animated.Value(-width)); // Initial value off-screen
   const openModal = () => {
