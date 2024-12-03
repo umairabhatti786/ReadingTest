@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Image,
   ImageBackground,
@@ -10,6 +10,7 @@ import { ms, s, vs } from "react-native-size-matters";
 import { Colors } from "../../utils/Colors";
 import CustomText from "../CustomText";
 import icons from "../../assets/icons";
+import Cart from "../Cart";
 
 type props = {
   bookCover: any;
@@ -18,6 +19,7 @@ type props = {
   ListPrice: string;
   AppPrice: string;
   InStock: boolean;
+  addToCart?: () => void;
 };
 
 const BookCardLiked = ({
@@ -27,6 +29,7 @@ const BookCardLiked = ({
   ListPrice,
   AppPrice,
   InStock,
+  addToCart,
 }: props) => {
   return (
     <View style={styles.bookCard}>
@@ -79,7 +82,7 @@ const BookCardLiked = ({
           <TouchableOpacity style={styles.btn}>
             <Image source={icons.Share} style={styles.btnIcon} />
           </TouchableOpacity>
-          <TouchableOpacity style={styles.btn}>
+          <TouchableOpacity style={styles.btn} onPress={addToCart}>
             <Image source={icons.CartPlus} style={styles.btnIcon} />
           </TouchableOpacity>
         </View>
@@ -134,7 +137,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     marginVertical: vs(10),
-    borderWidth: 1,
   },
   btn: {
     height: vs(32),

@@ -28,6 +28,7 @@ export default {
   Like: require("./Like.png"),
   Pen: require("./Pen.png"),
   Close: require("./Close.png"),
+  CloseBlack: require("./CloseBlack.png"),
   Plus: require("./plus.png"),
   Dots: require("./Dots.png"),
 };

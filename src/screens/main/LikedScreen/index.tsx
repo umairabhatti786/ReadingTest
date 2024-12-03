@@ -1,11 +1,14 @@
 import { FlatList, StyleSheet, View } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import HeaderBtmTabs from "../../../components/HeaderBtmTabs";
 import { ms, s } from "react-native-size-matters";
 import { Colors } from "../../../utils/Colors";
 import { LikedData } from "../../../utils/Data/data";
 import BookCardLiked from "../../../components/BookCardLiked";
+import Cart from "../../../components/Cart";
 const LikedScreen = () => {
+  const [modalVisible, setModalVisible] = useState(false);
+
   return (
     <View style={styles.screenContainer}>
       <HeaderBtmTabs />
@@ -22,10 +25,12 @@ const LikedScreen = () => {
               ListPrice={item.ListPrice}
               AppPrice={item.AppPrice}
               InStock
+              addToCart={() => setModalVisible(true)}
             />
           )}
         />
       </View>
+      <Cart modalVisible={modalVisible} setModalVisible={setModalVisible} />
     </View>
   );
 };
