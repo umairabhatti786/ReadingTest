@@ -6,10 +6,11 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { moderateScale, scale, verticalScale } from "react-native-size-matters";
+import { ms, s, vs } from "react-native-size-matters";
 import { Colors } from "../../utils/Colors";
 import CustomText from "../CustomText";
 import icons from "../../assets/icons";
+import Fonts from "../../utils/Fonts";
 
 type props = {
   bookCover: any;
@@ -31,7 +32,7 @@ const BookCard = ({
   return (
     <View style={styles.bookCard}>
       <ImageBackground source={bookCover} style={styles.imgBG}>
-        <View style={styles.overlay}></View>
+        <View style={styles.overlay} />
         <Image source={bookCover} style={styles.img} />
       </ImageBackground>
 
@@ -61,8 +62,9 @@ const BookCard = ({
           <CustomText text={"App Price"} size={12} color={Colors.gray} />
           <CustomText
             text={AppPrice}
-            size={12}
-            fontWeight="bold"
+            size={14}
+            fontWeight="700"
+            fontFam={Fonts.bold}
             color={Colors.orange}
           />
         </View>
@@ -91,15 +93,14 @@ export default BookCard;
 
 const styles = StyleSheet.create({
   bookCard: {
-    width: scale(190),
-    height: verticalScale(280),
+    width: s(190),
+    height: vs(280),
     backgroundColor: Colors.white,
-    borderRadius: moderateScale(15),
+    borderRadius: ms(15),
     overflow: "hidden",
-    marginRight: scale(10),
   },
   imgBG: {
-    height: verticalScale(132),
+    height: vs(132),
     justifyContent: "center",
     alignItems: "center",
   },
@@ -108,38 +109,38 @@ const styles = StyleSheet.create({
     ...StyleSheet.absoluteFillObject, // This makes the overlay fill the entire ImageBackground
   },
   img: {
-    height: verticalScale(100),
-    width: scale(65),
+    height: vs(100),
+    width: s(65),
   },
   bookDetails: {
-    marginHorizontal: scale(15),
-    marginVertical: verticalScale(10),
+    marginHorizontal: s(15),
+    marginVertical: vs(10),
   },
   priceVw: {
     flexDirection: "row",
     justifyContent: "space-between",
-    marginTop: verticalScale(5),
+    marginTop: vs(5),
   },
   appPriceVw: {
     flexDirection: "row",
     justifyContent: "space-between",
-    marginTop: verticalScale(2),
+    marginTop: vs(2),
   },
   btnsVw: {
     flexDirection: "row",
     justifyContent: "space-between",
-    marginVertical: verticalScale(10),
+    marginVertical: vs(10),
   },
   btn: {
-    height: verticalScale(32),
-    width: scale(50),
+    height: vs(32),
+    width: s(50),
     backgroundColor: Colors.primary,
-    borderRadius: moderateScale(8),
+    borderRadius: ms(8),
     justifyContent: "center",
     alignItems: "center",
   },
   btnIcon: {
-    height: verticalScale(20),
-    width: scale(20),
+    height: vs(20),
+    width: s(20),
   },
 });

@@ -248,22 +248,21 @@ export const BookPriceData = [
   { label: "More then Rs 1000", value: "5", id: 4 },
 ];
 export const Categories = [
-  { label: "Anthropology", value: "1" },
-  { label: "Antiques & Collectibles", value: "2" },
-  { label: "Archaeology", value: "3" },
+  { value: "1", label: "Anthropology" },
+  { value: "2", label: "Antiques & Collectibles" },
+  { value: "3", label: "Archaeology" },
+  { value: "1", label: "Art & Crafts" },
+  { value: "2", label: "Stationery" },
+  { value: "3", label: "Architecture" },
+  { value: "4", label: "Art" },
+  { value: "5", label: "Bio & Autobiography" },
+  { value: "6", label: "Body, Mind & Spirit" },
+  { value: "7", label: "Business" },
+  { value: "8", label: "Children" },
+  { value: "9", label: "Computer" },
+  { value: "10", label: "Cooking" },
 ];
-const categories = [
-  { value: "1", title: "Art & Crafts" },
-  { value: "2", title: "Stationery" },
-  { value: "3", title: "Architecture" },
-  { value: "4", title: "Art" },
-  { value: "5", title: "Bio & Autobiography" },
-  { value: "6", title: "Body, Mind & Spirit" },
-  { value: "7", title: "Business" },
-  { value: "8", title: "Children" },
-  { value: "9", title: "Computer" },
-  { value: "10", title: "Cooking" },
-]; //.....for screen
+
 export const RecommendedData = [
   {
     id: "1",

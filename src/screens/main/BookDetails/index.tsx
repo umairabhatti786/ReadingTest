@@ -8,54 +8,16 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { ms, scale, verticalScale, vs } from "react-native-size-matters";
+import { ms, s, scale, verticalScale, vs } from "react-native-size-matters";
 import imgs from "../../../assets/imgs";
 import CustomText from "../../../components/CustomText";
 import { Colors } from "../../../utils/Colors";
 import icons from "../../../assets/icons";
 import BookReviews from "../../../components/Book Reviews";
 import BookCard from "../../../components/BookCard";
+import { RecommendedData } from "../../../utils/Data/data";
 
-// { bookCover, bookTitle, author }: props
 const BookDetails = () => {
-  type RecommendedDataProps = {
-    id: string;
-    bookCover: any;
-    bookTitle: string;
-    author: string;
-    ListPrice: string;
-    AppPrice: string;
-    InStock: boolean;
-  };
-  const RecommendedData: RecommendedDataProps[] = [
-    {
-      id: "1",
-      bookCover: imgs.Lara,
-      bookTitle: "Lara: The England Chronicles",
-      author: "Brian Lara",
-      ListPrice: "£12.99 = Rs.4746",
-      AppPrice: "Rs.2335",
-      InStock: true,
-    },
-    {
-      id: "2",
-      bookCover: imgs.hobbit,
-      bookTitle: "Hobbit",
-      author: "J. R. R. Tolkien",
-      ListPrice: "£12.99 = Rs.4746",
-      AppPrice: "Rs.2335",
-      InStock: true,
-    },
-    {
-      id: "3",
-      bookCover: imgs.Lara,
-      bookTitle: "Lara: The England Chronicles",
-      author: "Brian Lara",
-      ListPrice: "£12.99 = Rs.4746",
-      AppPrice: "Rs.2335",
-      InStock: true,
-    },
-  ];
   return (
     <View style={styles.main}>
       <ScrollView showsVerticalScrollIndicator={false}>
@@ -165,7 +127,9 @@ const BookDetails = () => {
           </View>
           {/* .................Book Reviews...................... */}
           <BookReviews />
-          <TouchableOpacity style={{ flexDirection: "row", marginTop: vs(10) }}>
+          <TouchableOpacity
+            style={{ flexDirection: "row", marginVertical: vs(10) }}
+          >
             <CustomText
               text={"Write a Review"}
               fontWeight="bold"
@@ -177,6 +141,13 @@ const BookDetails = () => {
           <FlatList
             data={RecommendedData}
             keyExtractor={(item) => item.id}
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            contentContainerStyle={{
+              //paddingHorizontal: s(20),
+              marginBottom: vs(65),
+              gap: s(15),
+            }}
             renderItem={({ item }) => (
               <BookCard
                 bookCover={item.bookCover}

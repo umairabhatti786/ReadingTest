@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   Dimensions,
   FlatList,
@@ -7,21 +7,11 @@ import {
   ScrollView,
   StyleSheet,
   TouchableOpacity,
-  Animated,
   View,
 } from "react-native";
-import {
-  scale,
-  verticalScale,
-  moderateScale,
-  vs,
-  ms,
-} from "react-native-size-matters";
+import { vs, ms, s } from "react-native-size-matters";
 import HeaderBtmTabs from "../../../components/HeaderBtmTabs";
-import {
-  BottomTabBarProps,
-  BottomTabNavigationProp,
-} from "@react-navigation/bottom-tabs";
+import { BottomTabNavigationProp } from "@react-navigation/bottom-tabs";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamsList } from "../../../routes/RootNavigator";
 import { CompositeNavigationProp } from "@react-navigation/native";
@@ -49,7 +39,7 @@ interface HomeScreenProps {
 }
 const HomeScreen = ({ navigation }: HomeScreenProps) => {
   const tabs: string[] = [
-    "All",
+    "  All  ",
     "Literature",
     "Journeys",
     "History",
@@ -67,113 +57,107 @@ const HomeScreen = ({ navigation }: HomeScreenProps) => {
     img: any;
   };
   const { height, width } = Dimensions.get("window");
-  // .............Recommended Data..............................
-  // type RecommendedDataProps = {
-  //   id: string;
-  //   bookCover: any;
-  //   bookTitle: string;
-  //   author: string;
-  //   ListPrice: string;
-  //   AppPrice: string;
-  //   InStock: boolean;
-  // };
-  //...recomended data shifted to data folder
-  const [showModal, setShowModal] = useState<boolean>(false); //..for modal
-  const [slideAnim] = useState(new Animated.Value(-width)); // Initial value off-screen
-  const openModal = () => {
-    setShowModal(true); // Make modal visible
-    Animated.timing(slideAnim, {
-      toValue: 0, // Slide into view
-      duration: 300,
-      useNativeDriver: true,
-    }).start();
-  };
-  const closeModal = () => {
-    Animated.timing(slideAnim, {
-      toValue: -width, // Slide out of view
-      duration: 300,
-      useNativeDriver: true,
-    }).start(() => setShowModal(false)); // Hide modal after animation
-  };
 
   return (
     <View style={styles.screenContainer}>
-      <View style={styles.content}>
-        <HeaderBtmTabs onLeftIconPress={openModal} />
-
-        {/* .............FlatList............ */}
-        <FlatList
-          data={FlatListData}
-          keyExtractor={(item) => item.id}
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          pagingEnabled
-          renderItem={({ item }) => (
-            <View style={styles.FlatListVw}>
-              <ImageBackground
-                source={item.img}
-                style={[styles.img, { width: width * 0.88 }]}
-                imageStyle={{ borderRadius: moderateScale(10) }}
-              >
-                <TouchableOpacity style={styles.arrowCircle}>
-                  <Image source={icons.ArrowBack} style={styles.ArrowBack} />
-                </TouchableOpacity>
-                <View style={styles.txtAtImg}>
-                  <CustomText
-                    text={"Grand Sale"}
-                    color={Colors.white}
-                    fontWeight="bold"
-                    size={18}
-                  />
-                  <CustomText
-                    text={`40% OFF\non entire literature \ncollection`}
-                    color={Colors.white}
-                    marginTop={5}
-                  />
-                </View>
-              </ImageBackground>
-            </View>
-          )}
-        />
-
-        {/* .............search................ */}
-        <View style={styles.search}>
-          <CustomTextInput
-            placeholder="Search"
-            rightIcon={icons.Magnifer}
-            width={scale(255)}
-          />
-          <TouchableOpacity
-            style={styles.btn}
-            onPress={() => navigation.navigate("Filters")}
-          >
-            <Image source={icons.Tuning} style={styles.tuning} />
-          </TouchableOpacity>
-        </View>
-        {/* ............tabs...................... */}
-        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-          <View style={{ flexDirection: "row", marginTop: verticalScale(10) }}>
-            {tabs.map((item, index) => (
-              <TouchableOpacity key={index} style={styles.tab}>
-                <CustomText text={item} />
-              </TouchableOpacity>
-            ))}
-          </View>
-        </ScrollView>
-        {/* ..............Recommended................ */}
-        <View style={styles.RecommendedVw}>
-          <CustomText text={"Recommended"} fontWeight="bold" marginBottom={5} />
-          <CustomText
-            text={"Most Popular "}
-            fontWeight="bold"
-            marginBottom={5}
-          />
+      <HeaderBtmTabs
+        navigation={navigation}
+        marginHorizontal={20}
+        marginTop={10}
+      />
+      <ScrollView
+        contentContainerStyle={{ flexGrow: 1 }}
+        showsVerticalScrollIndicator={false}
+      >
+        <View style={styles.content}>
+          {/* .............FlatList for img............ */}
           <FlatList
-            data={RecommendedData}
+            data={FlatListData}
+            keyExtractor={(item) => item.id}
             horizontal
             showsHorizontalScrollIndicator={false}
-            keyExtractor={(item) => item.id}
+            pagingEnabled
             renderItem={({ item }) => (
+              <View style={styles.FlatListVw}>
+                <ImageBackground
+                  source={item.img}
+                  style={[styles.img, { width: width * 0.88 }]}
+                  imageStyle={{ borderRadius: ms(10) }}
+                >
+                  <TouchableOpacity style={styles.arrowCircle}>
+                    <Image source={icons.ArrowBack} style={styles.ArrowBack} />
+                  </TouchableOpacity>
+                  <View style={styles.txtAtImg}>
+                    <CustomText
+                      text={"Grand Sale"}
+                      color={Colors.white}
+                      fontWeight="bold"
+                      size={18}
+                    />
+                    <CustomText
+                      text={`40% OFF\non entire literature \ncollection`}
+                      color={Colors.white}
+                      marginTop={5}
+                    />
+                  </View>
+                </ImageBackground>
+              </View>
+            )}
+          />
+          {/* .............search................ */}
+          <View style={styles.search}>
+            <CustomTextInput
+              placeholder="Search"
+              rightIcon={icons.Magnifer}
+              width={s(255)}
+            />
+            <TouchableOpacity
+              style={styles.btn}
+              onPress={() => navigation.navigate("Filters")}
+            >
+              <Image source={icons.Tuning} style={styles.tuning} />
+            </TouchableOpacity>
+          </View>
+        </View>
+        {/* ............tabs...................... */}
+        <ScrollView
+          horizontal={true}
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={{
+            flexDirection: "row",
+            paddingHorizontal: s(20),
+            paddingVertical: vs(13),
+            gap: s(5),
+          }}
+        >
+          {tabs.map((item, index) => (
+            <TouchableOpacity key={index} style={styles.tab}>
+              <CustomText text={item} />
+            </TouchableOpacity>
+          ))}
+        </ScrollView>
+        {/* ..............Recommended................ */}
+        <CustomText text={"Recommended"} fontWeight="bold" marginLeft={20} />
+        <CustomText
+          text={"Most Popular "}
+          fontWeight="bold"
+          marginLeft={20}
+          marginTop={5}
+        />
+        <FlatList
+          data={RecommendedData}
+          horizontal
+          contentContainerStyle={{
+            paddingHorizontal: s(20),
+            marginVertical: vs(5),
+            gap: s(15),
+          }}
+          showsHorizontalScrollIndicator={false}
+          keyExtractor={(item) => item.id}
+          renderItem={({ item }) => (
+            <TouchableOpacity
+              onPress={() => navigation.navigate("BookDetails")}
+            >
               <BookCard
                 bookCover={item.bookCover}
                 author={item.author}
@@ -182,63 +166,12 @@ const HomeScreen = ({ navigation }: HomeScreenProps) => {
                 AppPrice={item.AppPrice}
                 InStock
               />
-            )}
-          />
-        </View>
-
+            </TouchableOpacity>
+          )}
+        />
+        <Image source={imgs.Lara} />
         {/* ........................end...................... */}
-      </View>
-      {showModal ? (
-        <Animated.View
-          style={[styles.menuModal, { transform: [{ translateX: slideAnim }] }]}
-        >
-          <View style={styles.modalContent}>
-            <TouchableOpacity
-              onPress={() => navigation.navigate("LoginScreen")}
-            >
-              <CustomText text={"Sign Up / Login"} color={Colors.blue} />
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => navigation.navigate("Profile")}>
-              <CustomText text={"Profile"} color={Colors.blue} />
-            </TouchableOpacity>
-            <TouchableOpacity>
-              <CustomText text={"High Discounts"} color={Colors.blue} />
-            </TouchableOpacity>
-            <TouchableOpacity>
-              <CustomText text={"Card Discounts"} color={Colors.blue} />
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => navigation.navigate("SendGiftCardScreen")}
-            >
-              <CustomText text={"Send a gift"} color={Colors.blue} />
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => navigation.navigate("RequestBookScreen")}
-            >
-              <CustomText text={"Request a book"} color={Colors.blue} />
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => navigation.navigate("About")}>
-              <CustomText text={"About"} color={Colors.blue} />
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => navigation.navigate("Terms")}>
-              <CustomText text={"Terms of Use"} color={Colors.blue} />
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => navigation.navigate("PrivacyPolicy")}
-            >
-              <CustomText text={"Privacy Policy"} color={Colors.blue} />
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => navigation.navigate("HelpNSupport")}
-            >
-              <CustomText text={"Help & Support"} color={Colors.blue} />
-            </TouchableOpacity>
-          </View>
-          <TouchableOpacity style={styles.closeIconCircle} onPress={closeModal}>
-            <Image source={icons.Close} style={styles.closeIcon} />
-          </TouchableOpacity>
-        </Animated.View>
-      ) : null}
+      </ScrollView>
     </View>
   );
 };
@@ -247,114 +180,78 @@ export default HomeScreen;
 
 const styles = StyleSheet.create({
   screenContainer: {
-    flex: 1,
+    //flex: 1,
     backgroundColor: Colors.primary,
   },
   content: {
-    marginHorizontal: scale(20),
-    marginVertical: verticalScale(10),
+    marginHorizontal: s(20),
+    // marginHorizontal: 24,
+    marginTop: vs(10),
+    gap: vs(13),
+    //gap: 15,
+    // flex: 1,
   },
   FlatListVw: {
     //overflow: "hidden",
     flex: 1,
-    marginRight: scale(2.5),
+    marginRight: s(2.5),
     // height: verticalScale(120),
     // width: "100%",
   },
   img: {
     // width: "100%",
-    height: verticalScale(120),
+    height: vs(120),
     alignSelf: "center",
-    marginTop: verticalScale(10),
+    // marginTop: verticalScale(10),
   },
   txtAtImg: {
-    marginTop: verticalScale(20),
-    marginLeft: scale(25),
+    marginTop: vs(20),
+    marginLeft: s(25),
   },
   arrowCircle: {
-    width: scale(24),
-    height: verticalScale(24),
-    borderRadius: moderateScale(50),
+    width: s(24),
+    height: vs(24),
+    borderRadius: ms(50),
     backgroundColor: Colors.white,
     opacity: 0.2,
     position: "absolute",
-    top: verticalScale(50),
-    left: scale(10),
+    top: vs(50),
+    left: s(10),
     alignItems: "center",
     justifyContent: "center",
   },
   ArrowBack: {
-    width: scale(12),
-    height: verticalScale(12),
+    width: s(12),
+    height: vs(12),
   },
   btn: {
-    width: scale(45),
-    height: verticalScale(45),
+    width: s(45),
+    height: vs(45),
     backgroundColor: Colors.blue,
-    borderRadius: moderateScale(10),
+    borderRadius: ms(10),
     alignItems: "center",
     justifyContent: "center",
   },
   tuning: {
-    width: scale(20),
-    height: verticalScale(20),
+    width: s(20),
+    height: vs(20),
   },
   search: {
     flexDirection: "row",
-    marginTop: verticalScale(10),
+    // marginTop: verticalScale(10),
     width: "100%",
     justifyContent: "space-between",
   },
   tab: {
-    height: verticalScale(40),
-    borderRadius: moderateScale(40),
+    height: vs(40),
+    borderRadius: ms(40),
+    //borderRadius: 40,
     backgroundColor: Colors.white,
     alignItems: "center",
     justifyContent: "center",
-    marginRight: scale(10),
-    paddingVertical: verticalScale(10),
-    paddingHorizontal: scale(16),
-  },
-  RecommendedVw: {
-    marginTop: verticalScale(10),
-  },
-  // menuModal: {
-  //   flex: 1,
-  //   backgroundColor: Colors.blue,
-  // },
-  menuModal: {
-    flex: 1,
-    backgroundColor: Colors.primary,
-    justifyContent: "space-between",
-    alignItems: "center",
-    paddingTop: ms(100),
-    paddingBottom: ms(50),
-
-    position: "absolute",
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    zIndex: 10, // Ensure it appears above other elements
-  },
-  modalContent: {
-    gap: vs(30),
-  },
-
-  closeIcon: {
-    width: scale(18),
-    height: verticalScale(18),
-    // width: 20,
-    // height: 20,
-  },
-  closeIconCircle: {
-    width: scale(40),
-    height: verticalScale(40),
-    // width: 48,
-    // height: 48,
-    backgroundColor: Colors.white,
-    borderRadius: ms(50),
-    alignItems: "center",
-    justifyContent: "center",
+    // marginRight: scale(5),
+    // paddingVertical: verticalScale(10),
+    //gap: s(5),
+    paddingHorizontal: s(16),
   },
 });

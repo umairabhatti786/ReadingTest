@@ -5,10 +5,10 @@ import OrdersScreen from "../../screens/main/OrdersScreen";
 import CartScreen from "../../screens/main/CartScreen";
 import LikedScreen from "../../screens/main/LikedScreen";
 
-import { Image } from "react-native";
+import { Image, StyleSheet, View } from "react-native";
 import React from "react";
 import { Colors } from "../../utils/Colors";
-import { scale, verticalScale } from "react-native-size-matters";
+import { s, vs } from "react-native-size-matters";
 import icons from "../../assets/icons";
 
 export type BottomTabParams = {
@@ -26,8 +26,21 @@ const BottomTab = () => {
       screenOptions={{
         headerShown: false,
         tabBarStyle: {
-          height: verticalScale(70),
-          paddingVertical: verticalScale(10),
+          height: vs(60),
+          //height: 75,
+          //paddingVertical: verticalScale(10),
+        },
+        tabBarLabelStyle: {
+          fontSize: 10, // Font size for the label
+          //marginTop: -5, // Adjust spacing if needed
+          // color: focused ? "black" : "gray",
+        },
+        tabBarIconStyle: {
+          alignItems: "center", // Center icon within its container
+          justifyContent: "center",
+        },
+        tabBarItemStyle: {
+          justifyContent: "center", // Center items within their tab
         },
       }}
       // screenOptions={({ route }) => ({
@@ -83,11 +96,16 @@ const BottomTab = () => {
         name="HomeScreen"
         component={HomeScreen}
         options={{
-          tabBarIcon: () => (
-            <Image
-              source={icons.Home}
-              style={{ height: verticalScale(20), width: scale(20) }}
-            />
+          tabBarIcon: ({ focused }) => (
+            <View style={styles.iconContainer}>
+              <Image
+                source={icons.Home}
+                style={[
+                  styles.icon,
+                  { tintColor: focused ? "black" : "gray" }, // Adjust focus color
+                ]}
+              />
+            </View>
           ),
         }}
       />
@@ -95,23 +113,34 @@ const BottomTab = () => {
         name="CategoriesScreen"
         component={CategoriesScreen}
         options={{
-          tabBarIcon: () => (
-            <Image
-              source={icons.Categories}
-              style={{ height: verticalScale(20), width: scale(20) }}
-            />
+          tabBarIcon: ({ focused }) => (
+            <View style={styles.iconContainer}>
+              <Image
+                source={icons.Categories}
+                style={[
+                  styles.icon,
+                  { tintColor: focused ? "black" : "gray" }, // Adjust focus color
+                ]}
+              />
+            </View>
           ),
         }}
       />
+
       <Tab.Screen
         name="OrdersScreen"
         component={OrdersScreen}
         options={{
-          tabBarIcon: () => (
-            <Image
-              source={icons.Orders}
-              style={{ height: verticalScale(20), width: scale(20) }}
-            />
+          tabBarIcon: ({ focused }) => (
+            <View style={styles.iconContainer}>
+              <Image
+                source={icons.Orders}
+                style={[
+                  styles.icon,
+                  { tintColor: focused ? "black" : "gray" }, // Adjust focus color
+                ]}
+              />
+            </View>
           ),
         }}
       />
@@ -119,11 +148,16 @@ const BottomTab = () => {
         name="CartScreen"
         component={CartScreen}
         options={{
-          tabBarIcon: () => (
-            <Image
-              source={icons.Cart}
-              style={{ height: verticalScale(20), width: scale(20) }}
-            />
+          tabBarIcon: ({ focused }) => (
+            <View style={styles.iconContainer}>
+              <Image
+                source={icons.Cart}
+                style={[
+                  styles.icon,
+                  { tintColor: focused ? "black" : "gray" }, // Adjust focus color
+                ]}
+              />
+            </View>
           ),
         }}
       />
@@ -131,11 +165,16 @@ const BottomTab = () => {
         name="LikedScreen"
         component={LikedScreen}
         options={{
-          tabBarIcon: () => (
-            <Image
-              source={icons.Heart}
-              style={{ height: verticalScale(20), width: scale(20) }}
-            />
+          tabBarIcon: ({ focused }) => (
+            <View style={styles.iconContainer}>
+              <Image
+                source={icons.Heart}
+                style={[
+                  styles.icon,
+                  { tintColor: focused ? "black" : "gray" }, // Adjust focus color
+                ]}
+              />
+            </View>
           ),
         }}
       />
@@ -144,3 +183,16 @@ const BottomTab = () => {
 };
 
 export default BottomTab;
+const styles = StyleSheet.create({
+  iconContainer: {
+    alignItems: "center", // Ensures icon is centered horizontally
+    justifyContent: "center", // Ensures icon is centered vertically
+    width: 40, // Adjust container width if needed
+    height: 40, // Adjust container height if needed
+  },
+  icon: {
+    height: vs(20),
+    width: s(20),
+    resizeMode: "contain",
+  },
+});

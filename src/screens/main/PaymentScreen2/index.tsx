@@ -33,43 +33,6 @@ const PaymentScreen2 = ({ navigation }: PaymentScreen2Props) => {
     value: string | number;
   } | null>(null);
 
-  // const banks = [
-  //   {
-  //     id: "1",
-  //     title: "Meezan Bank",
-  //     image: imgs.MeezanBank,
-  //   },
-  //   {
-  //     id: "2",
-  //     title: "Meezan Bank",
-  //     image: imgs.MeezanBank,
-  //   },
-  //   {
-  //     id: "3",
-  //     title: "Meezan Bank",
-  //     image: imgs.MeezanBank,
-  //   },
-  //   {
-  //     id: "4",
-  //     title: "Meezan Bank",
-  //     image: imgs.MeezanBank,
-  //   },
-  //   {
-  //     id: "5",
-  //     title: "Meezan Bank",
-  //     image: imgs.MeezanBank,
-  //   },
-  //   {
-  //     id: "6",
-  //     title: "Meezan Bank",
-  //     image: imgs.MeezanBank,
-  //   },
-  //   {
-  //     id: "7",
-  //     title: "Meezan Bank",
-  //     image: imgs.MeezanBank,
-  //   },
-  // ];
   return (
     <View style={styles.screenContainer}>
       <ScrollView showsVerticalScrollIndicator={false}>
@@ -121,15 +84,15 @@ const PaymentScreen2 = ({ navigation }: PaymentScreen2Props) => {
           <View
             style={{ flexDirection: "row", justifyContent: "space-between" }}
           >
-            <CustomTextInput placeholder="06 / 27" width={scale(150)} />
-            <CustomTextInput placeholder="CVC" width={scale(150)} />
+            <CustomTextInput placeholder="06 / 27" width={s(150)} />
+            <CustomTextInput placeholder="CVC" width={s(150)} />
           </View>
           <CustomTextInput placeholder="Address" />
           <View
             style={{ flexDirection: "row", justifyContent: "space-between" }}
           >
-            <CustomTextInput placeholder="City" width={scale(150)} />
-            <CustomTextInput placeholder="State/Province" width={scale(150)} />
+            <CustomTextInput placeholder="City" width={s(150)} />
+            <CustomTextInput placeholder="State/Province" width={s(150)} />
           </View>
           <DropDown
             value={country}
