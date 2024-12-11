@@ -321,3 +321,47 @@ export const LikedData = [
     InStock: false,
   },
 ];
+export const CartItemsData = [
+  {
+    id: "1",
+    bookCover: imgs.Lara,
+    bookTitle: "Lara: The England Chronicles",
+    author: "Brian Lara",
+    ListPrice: "£12.99 = Rs.4746",
+    AppPrice: {
+      currency: "Rs.",
+      value: 2335, // Numeric value
+    },
+    // AppPrice: "Rs.2335",
+    InStock: true,
+    quantity: 1,
+  },
+  {
+    id: "2",
+    bookCover: imgs.hobbit,
+    bookTitle: "Hobbit",
+    author: "J. R. R. Tolkien",
+    ListPrice: "£12.99 = Rs.4746",
+    AppPrice: {
+      currency: "Rs.",
+      value: 2335, // Numeric value
+    },
+    //AppPrice: "Rs.2335",
+    InStock: true,
+    quantity: 1,
+  },
+  {
+    id: "3",
+    bookCover: imgs.Lara,
+    bookTitle: "Lara: The England Chronicles",
+    author: "Brian Lara",
+    ListPrice: "£12.99 = Rs.4746",
+    AppPrice: {
+      currency: "Rs.",
+      value: 2335, // Numeric value
+    },
+    //AppPrice: "Rs.2335",
+    InStock: false,
+    quantity: 1,
+  },
+];

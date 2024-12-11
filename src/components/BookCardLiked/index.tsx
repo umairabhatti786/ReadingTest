@@ -10,7 +10,6 @@ import { ms, s, vs } from "react-native-size-matters";
 import { Colors } from "../../utils/Colors";
 import CustomText from "../CustomText";
 import icons from "../../assets/icons";
-import Cart from "../Cart";
 
 type props = {
   bookCover: any;
@@ -20,6 +19,8 @@ type props = {
   AppPrice: string;
   InStock: boolean;
   addToCart?: () => void;
+  quantity?: number;
+  onQuantityChange?: (itemQuantity: number) => void; // Callback for parent
 };
 
 const BookCardLiked = ({
@@ -30,11 +31,49 @@ const BookCardLiked = ({
   AppPrice,
   InStock,
   addToCart,
+  quantity = 0,
+  onQuantityChange,
 }: props) => {
+  const [itemQuantity, setItemQuantity] = useState(quantity);
+  // const handleIncrease = () => {setItemQuantity((prev) => prev + 1; onQuantityChange?.(itemQuantity); // Notify parent});
+  // const handleDecrease = () => {
+  //   if (itemQuantity > 1) setItemQuantity((prev) => prev - 1);
+  // };
+
+  // const handleIncrease = () => {
+  //   setItemQuantity((prev) => prev + 1);
+  //   onQuantityChange?.(itemQuantity); // Notify parent
+  // };........not updating on first press but on 2nd
+
+  const handleIncrease = () => {
+    // Increment the quantity first, then notify the parent
+    setItemQuantity((prev) => {
+      const newQuantity = prev + 1;
+      onQuantityChange?.(newQuantity); // Notify parent with the updated quantity
+      return newQuantity;
+    });
+  };
+
+  // const handleDecrease = () => {
+  //   if (itemQuantity > 1) {
+  //     setItemQuantity((prev) => prev - 1);
+  //     onQuantityChange?.(itemQuantity); // Notify parent
+  //   }
+  // };
+
+  const handleDecrease = () => {
+    if (itemQuantity > 1) {
+      setItemQuantity((prev) => {
+        const newQuantity = prev - 1;
+        onQuantityChange?.(newQuantity); // Notify parent with the updated quantity
+        return newQuantity;
+      });
+    }
+  };
   return (
     <View style={styles.bookCard}>
       <ImageBackground source={bookCover} style={styles.imgBG}>
-        <View style={styles.overlay}></View>
+        <View style={styles.overlay} />
         <Image source={bookCover} style={styles.img} />
       </ImageBackground>
 
@@ -75,17 +114,41 @@ const BookCardLiked = ({
           size={12}
           color={Colors.green}
         />
-        <View style={styles.btnsVw}>
-          <TouchableOpacity style={styles.btn}>
-            <Image source={icons.HeartRed} style={styles.btnIcon} />
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.btn}>
-            <Image source={icons.Share} style={styles.btnIcon} />
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.btn} onPress={addToCart}>
-            <Image source={icons.CartPlus} style={styles.btnIcon} />
-          </TouchableOpacity>
-        </View>
+
+        {quantity > 0 ? (
+          <View style={styles.quantityBtnVw}>
+            {/* ........................quantity Btns............................ */}
+            <TouchableOpacity
+              style={styles.quantityBtn}
+              onPress={handleDecrease}
+            >
+              <Image source={icons.Minus} style={{ height: 10, width: 10 }} />
+            </TouchableOpacity>
+            <CustomText text={itemQuantity} size={12} />
+            <TouchableOpacity
+              style={styles.quantityBtn}
+              onPress={handleIncrease}
+            >
+              <Image
+                source={icons.PlusWhite}
+                style={{ height: 10, width: 10 }}
+              />
+            </TouchableOpacity>
+          </View>
+        ) : (
+          <View style={styles.btnsVw}>
+            {/* ................like,share,addToCart btns............... */}
+            <TouchableOpacity style={styles.btn}>
+              <Image source={icons.HeartRed} style={styles.btnIcon} />
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.btn}>
+              <Image source={icons.Share} style={styles.btnIcon} />
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.btn} onPress={addToCart}>
+              <Image source={icons.CartPlus} style={styles.btnIcon} />
+            </TouchableOpacity>
+          </View>
+        )}
       </View>
     </View>
   );
@@ -96,12 +159,12 @@ export default BookCardLiked;
 const styles = StyleSheet.create({
   bookCard: {
     //width: scale(190),
-    flex: 1,
+    // flex: 1,
     height: vs(164),
     backgroundColor: Colors.white,
     borderRadius: ms(15),
     overflow: "hidden",
-    marginVertical: vs(5),
+    // marginVertical: vs(5),
     flexDirection: "row",
   },
   imgBG: {
@@ -149,5 +212,21 @@ const styles = StyleSheet.create({
   btnIcon: {
     height: vs(20),
     width: s(20),
+  },
+  quantityBtnVw: {
+    flexDirection: "row",
+    width: s(90),
+    height: vs(32),
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginVertical: vs(10),
+  },
+  quantityBtn: {
+    height: vs(20),
+    width: s(20),
+    backgroundColor: Colors.blue,
+    borderRadius: ms(5),
+    alignItems: "center",
+    justifyContent: "center",
   },
 });

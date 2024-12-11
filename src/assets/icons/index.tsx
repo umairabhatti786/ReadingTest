@@ -31,4 +31,8 @@ export default {
   CloseBlack: require("./CloseBlack.png"),
   Plus: require("./plus.png"),
   Dots: require("./Dots.png"),
+  Minus: require("./minus.png"),
+  PlusWhite: require("./plusWhite.png"),
+  star: require("./star.png"),
+  starColored: require("./starColored.png"),
 };

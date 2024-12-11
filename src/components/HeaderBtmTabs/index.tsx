@@ -39,10 +39,6 @@ const HeaderBtmTabs = ({
   marginHorizontal,
   navigation,
 }: HeaderBtmTabsProps) => {
-  const { height, width } = Dimensions.get("window");
-  const [showModal, setShowModal] = useState<boolean>(false); //..for modal
-  const [slideAnim] = useState(new Animated.Value(-width)); // Initial value
-
   //off-screen
 
   const [modalVisible, setModalVisible] = useState(false);
