@@ -1,28 +1,16 @@
-import { Text } from "react-native";
+import { StyleProp, Text, TextProps, TextStyle } from "react-native";
 import React from "react";
 import { Colors } from "../../utils/Colors";
 import Fonts from "../../utils/Fonts";
-import { scale, verticalScale } from "react-native-size-matters";
 
-type Props = {
+type Props = TextProps & {
   color?: string;
   size?: number;
   fontFam?: string;
-  text?: any;
-  style?: any;
-  lineHeight?: number;
-  numberOfLines?: number;
+  text?: string;
+  style?: StyleProp<TextStyle>;
   fontWeight?: string | number;
-  textDecorationLine?: string;
-  label?: any;
-  labalStyle?: any;
-  marginLeft?: number;
-  marginTop?: number;
-  marginBottom?: number;
-  marginRight?: number;
-  marginHorizontal?: number;
-  marginVertical?: number;
-  textAlign?: string;
+  //  fontWeight?: "normal" | "bold" | "100" | "200" | "300" | "400" | "500" | "600" | "700" | "800" | "900" | number;
 };
 const CustomText = ({
   color,
@@ -30,44 +18,24 @@ const CustomText = ({
   fontFam,
   text,
   style,
-  lineHeight,
-  numberOfLines,
   fontWeight,
-  textDecorationLine,
-  label,
-  textAlign,
-
-  marginLeft,
-  marginTop,
-  marginBottom,
-  marginRight,
-  marginHorizontal,
-  marginVertical,
+  ...rest // Capture all other props
 }: Props) => {
   return (
     <Text
-      numberOfLines={numberOfLines}
       style={[
         {
           color: color || Colors.black,
           fontSize: size || 14,
-          fontWeight: fontWeight || "500",
+          // fontWeight: fontWeight || "500",
+          fontWeight: fontWeight as TextStyle["fontWeight"], // Explicitly cast
           fontFamily: fontFam || Fonts.regular,
-          textDecorationLine,
-          marginLeft: scale(marginLeft || 0),
-          marginTop: verticalScale(marginTop || 0),
-          marginBottom: verticalScale(marginBottom || 0),
-          marginRight: scale(marginRight || 0),
-          marginHorizontal: scale(marginHorizontal || 0),
-          marginVertical: verticalScale(marginVertical || 0),
-          lineHeight: lineHeight,
-          textAlign: textAlign,
         },
         style,
       ]}
+      {...rest} // Spread additional props here
     >
       {text}
-      {label}
     </Text>
   );
 };

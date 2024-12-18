@@ -196,7 +196,7 @@ const SignUpScreen = ({ navigation }: SignUpScreenProps) => {
           errorMessage={errors.email}
           onFocus={() => handleError(null, "email")}
           placeholderTextColor={Colors.gray}
-          marginVertical={10}
+          marginBottom={20}
         />
         {/* ...................Password....................... */}
         <CustomTextInput
@@ -207,7 +207,7 @@ const SignUpScreen = ({ navigation }: SignUpScreenProps) => {
           errorMessage={errors.password}
           onFocus={() => handleError(null, "password")}
           placeholderTextColor={Colors.gray}
-          marginVertical={10}
+          marginBottom={20}
         />
         {/* ...................Confirm Password..................... */}
         <CustomTextInput
@@ -217,7 +217,7 @@ const SignUpScreen = ({ navigation }: SignUpScreenProps) => {
           errorMessage={errors.confirm}
           onFocus={() => handleError(null, "confirm")}
           placeholderTextColor={Colors.gray}
-          marginVertical={10}
+          marginBottom={20}
         />
         {/* ..................policy.......................... */}
         <View style={styles.policyVw}>

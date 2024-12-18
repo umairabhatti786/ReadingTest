@@ -22,14 +22,8 @@ import CustomTextInput from "../../../components/CustomTextInput";
 import icons from "../../../assets/icons";
 import CustomText from "../../../components/CustomText";
 import BookCard from "../../../components/BookCard";
-import { RecommendedData } from "../../../utils/Data/data";
+import { HomeImgs, RecommendedData, tabs } from "../../../utils/Data/data";
 
-// interface HomeScreenProps {
-//   navigation: BottomTabNavigationProp<BottomTabParams, "HomeScreen">;
-// }
-// type HomeScreenProps = {
-//   navigation: StackNavigationProp<RootStackParamsList, "BottomTabs">;
-// };
 type HomeScreenNavigationProp = CompositeNavigationProp<
   BottomTabNavigationProp<BottomTabParams, "HomeScreen">, // Tab-specific navigation
   StackNavigationProp<RootStackParamsList> // Root-level navigation
@@ -37,27 +31,11 @@ type HomeScreenNavigationProp = CompositeNavigationProp<
 interface HomeScreenProps {
   navigation: HomeScreenNavigationProp;
 }
+//..main fun..........
 const HomeScreen = ({ navigation }: HomeScreenProps) => {
-  const tabs: string[] = [
-    "  All  ",
-    "Literature",
-    "Journeys",
-    "History",
-    "Fantasy",
-    "Horror",
-    "Kids",
-  ];
-  const FlatListData: FlatListProps[] = [
-    { id: "1", img: imgs.homeImg },
-    { id: "2", img: imgs.homeImg1 },
-    { id: "3", img: imgs.homeImg2 },
-  ];
-  type FlatListProps = {
-    id: string;
-    img: any;
-  };
-  const { height, width } = Dimensions.get("window");
+  const { width } = Dimensions.get("window");
 
+  //..main return
   return (
     <View style={styles.screenContainer}>
       <HeaderBtmTabs
@@ -72,7 +50,7 @@ const HomeScreen = ({ navigation }: HomeScreenProps) => {
         <View style={styles.content}>
           {/* .............FlatList for img............ */}
           <FlatList
-            data={FlatListData}
+            data={HomeImgs}
             keyExtractor={(item) => item.id}
             horizontal
             showsHorizontalScrollIndicator={false}
@@ -97,7 +75,7 @@ const HomeScreen = ({ navigation }: HomeScreenProps) => {
                     <CustomText
                       text={`40% OFF\non entire literature \ncollection`}
                       color={Colors.white}
-                      marginTop={5}
+                      style={{ marginTop: vs(5) }}
                     />
                   </View>
                 </ImageBackground>
@@ -137,13 +115,18 @@ const HomeScreen = ({ navigation }: HomeScreenProps) => {
           ))}
         </ScrollView>
         {/* ..............Recommended................ */}
-        <CustomText text={"Recommended"} fontWeight="bold" marginLeft={20} />
         <CustomText
-          text={"Most Popular "}
+          text={"Recommended"}
           fontWeight="bold"
-          marginLeft={20}
-          marginTop={5}
+          style={{ marginLeft: s(20) }}
         />
+        <CustomText
+          text={"Most Popular"}
+          fontWeight="bold"
+          style={{ marginLeft: s(20), marginTop: vs(5) }}
+        />
+
+        {/* //..flat list for RecommendedData */}
         <FlatList
           data={RecommendedData}
           horizontal
@@ -169,7 +152,6 @@ const HomeScreen = ({ navigation }: HomeScreenProps) => {
             </TouchableOpacity>
           )}
         />
-        <Image source={imgs.Lara} />
         {/* ........................end...................... */}
       </ScrollView>
     </View>

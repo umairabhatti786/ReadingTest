@@ -1,52 +1,22 @@
-import { FlatList, Image, StyleSheet, Text, View } from "react-native";
+import { FlatList, Image, StyleSheet, View } from "react-native";
 import React from "react";
 import CustomText from "../CustomText";
-import { ms, scale, verticalScale, vs } from "react-native-size-matters";
+import { ms, s, vs } from "react-native-size-matters";
 import { Colors } from "../../utils/Colors";
 import icons from "../../assets/icons";
+import { BookReviewsData } from "../../utils/Data/data";
 
 const BookReviews = () => {
-  type BookReviewsProps = {
-    id: string;
-    title: string;
-    likes: number;
-    review: string;
-  };
-  const BookReviewsData: BookReviewsProps[] = [
-    {
-      id: "1",
-      title: "John Doe",
-      likes: 123,
-      review:
-        "Lorem ipsum dolor sit amet consectetur. Metus aliquam mauris quam nec magna facilisis. Ultricies auctor eu sit feugiat felis quis. Mauris suspendisse tortor enim condimentum nulla. ",
-    },
-    {
-      id: "2",
-      title: "John Doe",
-      likes: 123,
-      review:
-        "Lorem ipsum dolor sit amet consectetur. Metus aliquam mauris quam nec magna facilisis. Ultricies auctor eu sit feugiat felis quis. Mauris suspendisse tortor enim condimentum nulla. ",
-    },
-    {
-      id: "3",
-      title: "John Doe",
-      likes: 123,
-      review:
-        "Lorem ipsum dolor sit amet consectetur. Metus aliquam mauris quam nec magna facilisis. Ultricies auctor eu sit feugiat felis quis. Mauris suspendisse tortor enim condimentum nulla. ",
-    },
-  ];
   return (
-    <View style={{ marginTop: verticalScale(10) }}>
-      <CustomText
-        text={"Book Reviews"}
-        fontWeight="bold"
-        size={18}
-        marginBottom={vs(5)}
-      />
+    <View style={{ flex: 1 }}>
       <FlatList
         data={BookReviewsData}
         horizontal
         showsHorizontalScrollIndicator={false}
+        contentContainerStyle={{
+          paddingHorizontal: s(20),
+          gap: s(15),
+        }}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
           <View style={styles.main}>
@@ -57,11 +27,19 @@ const BookReviews = () => {
               text={item.review}
               size={12}
               color={Colors.gray}
-              textAlign="justify"
+              numberOfLines={6}
+              style={{
+                textAlign: "justify",
+                letterSpacing: 1.5,
+                lineHeight: 17,
+              }}
             />
             <View style={styles.likes}>
               <Image source={icons.Like} style={styles.likeIcon} />
-              <CustomText text={item.likes} marginLeft={5} />
+              <CustomText
+                text={item.likes.toString()}
+                style={{ marginLeft: s(5) }}
+              />
             </View>
           </View>
         )}
@@ -77,13 +55,12 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.white,
     borderRadius: ms(10),
     padding: ms(15),
-    marginRight: scale(15),
-    width: scale(225),
-    gap: ms(10),
+    width: s(225),
+    gap: vs(10),
   },
   likeIcon: {
     height: vs(24),
-    width: scale(24),
+    width: s(24),
   },
   likes: {
     flexDirection: "row",

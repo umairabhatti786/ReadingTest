@@ -1,110 +1,62 @@
 import React from "react";
-import { Text, TouchableOpacity, StyleSheet } from "react-native";
-import {
-  scale,
-  verticalScale,
-  moderateScale,
-  vs,
-  s,
-} from "react-native-size-matters";
+import { StyleProp, TouchableOpacity, ViewStyle } from "react-native";
+import { vs, ms } from "react-native-size-matters";
 import Fonts from "../../utils/Fonts";
 import { Colors } from "../../utils/Colors";
+import CustomText from "../CustomText";
 
 type custombuttonprops = {
-  style?: any;
+  buttonStyle?: StyleProp<ViewStyle>;
   title: string;
   onPress?: () => void;
-  textStyle?: any;
-  disabled?: boolean;
-  activeOpacity?: number;
-
   backgroundColor?: string;
-  borderRadius?: number;
   height?: number;
-  width?: number;
+  //width?: string | number;
+  width?: number | `${number}%` | "auto"; // Updated width type
   alignItems?: string;
   justifyContent?: string;
   alignSelf?: string;
-
   color?: string;
   fontWeight?: string | number;
   fontSize?: number;
   fontFamily?: string;
-
-  marginLeft?: number;
-  marginTop?: number;
-  marginBottom?: number;
-  marginRight?: number;
-  marginHorizontal?: number;
-  marginVertical?: number;
 };
 const CustomButton = ({
-  style,
+  buttonStyle,
   title,
   onPress,
-  textStyle,
-  disabled,
-  activeOpacity,
-
   backgroundColor,
-  borderRadius,
   height,
   width,
-  alignItems,
-  justifyContent,
-  alignSelf,
-
   color,
   fontWeight,
   fontSize,
   fontFamily,
-
-  marginLeft,
-  marginTop,
-  marginBottom,
-  marginRight,
-  marginHorizontal,
-  marginVertical,
 }: custombuttonprops) => {
   return (
     <TouchableOpacity
+      onPress={onPress}
       style={[
         {
           backgroundColor: backgroundColor || Colors.blue,
-          borderRadius: moderateScale(borderRadius || 15),
-          height: verticalScale(height || 45),
+          height: vs(height || 45),
           width: width || "100%",
-          alignItems: alignItems || "center",
-          justifyContent: justifyContent || "center",
-          alignSelf: alignSelf || "center",
-          marginLeft: scale(marginLeft || 0),
-          marginTop: vs(marginTop || 0),
-          marginBottom: vs(marginBottom || 0),
-          marginRight: scale(marginRight || 0),
-          marginHorizontal: s(marginHorizontal || 0),
-          // marginVertical: vs(marginVertical || 0),
-          marginVertical: marginVertical,
+
+          borderRadius: ms(10),
+          alignItems: "center",
+          justifyContent: "center",
+          alignSelf: "center",
         },
-        style,
+        buttonStyle,
       ]}
-      onPress={onPress}
-      activeOpacity={activeOpacity}
-      disabled={disabled}
     >
-      <Text
-        style={[
-          {
-            color: color || Colors.white,
-            fontWeight: fontWeight || "bold",
-            fontSize: fontSize || 16,
-            fontFamily: fontFamily || Fonts.bold,
-          },
-          textStyle,
-          disabled,
-        ]}
-      >
-        {title}
-      </Text>
+      <CustomText
+        text={title}
+        color={color || Colors.white}
+        fontWeight={fontWeight || "bold"}
+        size={fontSize || 16}
+        fontFam={fontFamily || Fonts.bold}
+      />
     </TouchableOpacity>
   );
 };

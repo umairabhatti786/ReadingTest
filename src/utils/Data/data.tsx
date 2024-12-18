@@ -365,3 +365,40 @@ export const CartItemsData = [
     quantity: 1,
   },
 ];
+export const BookReviewsData = [
+  {
+    id: "1",
+    title: "John Doe",
+    likes: 123,
+    review:
+      "Lorem ipsum dolor sit amet consectetur. Metus aliquam mauris quam nec magna facilisis. Ultricies auctor eu sit feugiat felis quis. Mauris suspendisse tortor enim condimentum nulla.",
+  },
+  {
+    id: "2",
+    title: "John Doe",
+    likes: 123,
+    review:
+      "Lorem ipsum dolor sit amet consectetur. Metus aliquam mauris quam nec magna facilisis. Ultricies auctor eu sit feugiat felis quis. Mauris suspendisse tortor enim condimentum nulla.",
+  },
+  {
+    id: "3",
+    title: "John Doe",
+    likes: 123,
+    review:
+      "Lorem ipsum dolor sit amet consectetur. Metus aliquam mauris quam nec magna facilisis. Ultricies auctor eu sit feugiat felis quis. Mauris suspendisse tortor enim condimentum nulla.",
+  },
+];
+export const tabs = [
+  "  All  ",
+  "Literature",
+  "Journeys",
+  "History",
+  "Fantasy",
+  "Horror",
+  "Kids",
+];
+export const HomeImgs = [
+  { id: "1", img: imgs.homeImg },
+  { id: "2", img: imgs.homeImg1 },
+  { id: "3", img: imgs.homeImg2 },
+];

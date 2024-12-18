@@ -1,13 +1,6 @@
-import {
-  Animated,
-  Image,
-  StyleSheet,
-  Dimensions,
-  TouchableOpacity,
-  View,
-  Modal,
-} from "react-native";
+import { Image, StyleSheet, TouchableOpacity, View } from "react-native";
 import React, { useState } from "react";
+import Modal from "react-native-modal";
 import icons from "../../assets/icons";
 import { CompositeNavigationProp } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
@@ -42,7 +35,11 @@ const HeaderBtmTabs = ({
   //off-screen
 
   const [modalVisible, setModalVisible] = useState(false);
-
+  // Helper function to handle navigation and close the modal
+  const navigateAndCloseModal = (screenName: keyof RootStackParamsList) => {
+    setModalVisible(false); // Close the modal
+    navigation.navigate(screenName); // Navigate to the screen
+  };
   // const openModal = () => {
   //   setShowModal(true); // Make modal visible
   //   Animated.timing(slideAnim, {
@@ -79,49 +76,60 @@ const HeaderBtmTabs = ({
       </TouchableOpacity>
       {/* ..................Modal................ */}
       <Modal
-        animationType="slide" // Options: 'none', 'slide', 'fade'
-        visible={modalVisible}
-        onRequestClose={() => setModalVisible(false)}
+        animationIn="slideInLeft"
+        animationOut="slideOutLeft"
+        isVisible={modalVisible}
+        // coverScreen={true}
+        style={{ margin: 0 }}
       >
         <View style={styles.modal}>
           <View style={styles.modalContent}>
             <TouchableOpacity
-              onPress={() => navigation.navigate("LoginScreen")}
+              onPress={() => navigateAndCloseModal("LoginScreen")}
             >
               <CustomText text={"Sign Up / Login"} color={Colors.blue} />
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => navigation.navigate("Profile")}>
+
+            <TouchableOpacity onPress={() => navigateAndCloseModal("Profile")}>
               <CustomText text={"Profile"} color={Colors.blue} />
             </TouchableOpacity>
+
             <TouchableOpacity>
               <CustomText text={"High Discounts"} color={Colors.blue} />
             </TouchableOpacity>
+
             <TouchableOpacity>
               <CustomText text={"Card Discounts"} color={Colors.blue} />
             </TouchableOpacity>
+
             <TouchableOpacity
-              onPress={() => navigation.navigate("SendGiftCardScreen")}
+              onPress={() => navigateAndCloseModal("SendGiftCardScreen")}
             >
               <CustomText text={"Send a gift"} color={Colors.blue} />
             </TouchableOpacity>
+
             <TouchableOpacity
-              onPress={() => navigation.navigate("RequestBookScreen")}
+              onPress={() => navigateAndCloseModal("RequestBookScreen")}
             >
               <CustomText text={"Request a book"} color={Colors.blue} />
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => navigation.navigate("About")}>
+
+            <TouchableOpacity onPress={() => navigateAndCloseModal("About")}>
               <CustomText text={"About"} color={Colors.blue} />
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => navigation.navigate("Terms")}>
+
+            <TouchableOpacity onPress={() => navigateAndCloseModal("Terms")}>
               <CustomText text={"Terms of Use"} color={Colors.blue} />
             </TouchableOpacity>
+
             <TouchableOpacity
-              onPress={() => navigation.navigate("PrivacyPolicy")}
+              onPress={() => navigateAndCloseModal("PrivacyPolicy")}
             >
               <CustomText text={"Privacy Policy"} color={Colors.blue} />
             </TouchableOpacity>
+
             <TouchableOpacity
-              onPress={() => navigation.navigate("HelpNSupport")}
+              onPress={() => navigateAndCloseModal("HelpNSupport")}
             >
               <CustomText text={"Help & Support"} color={Colors.blue} />
             </TouchableOpacity>

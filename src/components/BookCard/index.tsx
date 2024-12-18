@@ -44,6 +44,7 @@ const BookCard = ({
           fontWeight={400}
           color={Colors.gray}
         />
+
         <View style={styles.priceVw}>
           <CustomText
             text={"List Price"}
@@ -58,16 +59,17 @@ const BookCard = ({
             color={Colors.gray}
           />
         </View>
+
         <View style={styles.appPriceVw}>
           <CustomText text={"App Price"} size={12} color={Colors.gray} />
           <CustomText
             text={AppPrice}
-            size={14}
-            fontWeight="700"
+            fontWeight="600"
             fontFam={Fonts.bold}
             color={Colors.orange}
           />
         </View>
+
         <CustomText
           text={InStock === true ? "In Stock" : "Out Of Stock"}
           size={12}
@@ -119,11 +121,13 @@ const styles = StyleSheet.create({
   priceVw: {
     flexDirection: "row",
     justifyContent: "space-between",
+    alignItems: "center",
     marginTop: vs(5),
   },
   appPriceVw: {
     flexDirection: "row",
     justifyContent: "space-between",
+    alignItems: "center",
     marginTop: vs(2),
   },
   btnsVw: {
