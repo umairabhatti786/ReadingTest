@@ -11,6 +11,8 @@ import { BottomTabNavigationProp } from "@react-navigation/bottom-tabs";
 import { ms, s, vs } from "react-native-size-matters";
 import CustomText from "../CustomText";
 import { Colors } from "../../utils/Colors";
+import imgs from "../../assets/imgs";
+import CustomButton from "../CustomButton";
 
 // Define navigation prop types properly
 type HeaderBtmTabsNavigationProps = CompositeNavigationProp<
@@ -33,7 +35,7 @@ const HeaderBtmTabs = ({
   navigation,
 }: HeaderBtmTabsProps) => {
   //off-screen
-
+  const [logoutmodal, setLogoutModal] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
   // Helper function to handle navigation and close the modal
   const navigateAndCloseModal = (screenName: keyof RootStackParamsList) => {
@@ -98,7 +100,9 @@ const HeaderBtmTabs = ({
               <CustomText text={"High Discounts"} color={Colors.blue} />
             </TouchableOpacity>
 
-            <TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => navigateAndCloseModal("CardDiscounts")}
+            >
               <CustomText text={"Card Discounts"} color={Colors.blue} />
             </TouchableOpacity>
 
@@ -133,6 +137,13 @@ const HeaderBtmTabs = ({
             >
               <CustomText text={"Help & Support"} color={Colors.blue} />
             </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => {
+                setModalVisible(false), setLogoutModal(true);
+              }}
+            >
+              <CustomText text={"Logout"} color={Colors.blue} />
+            </TouchableOpacity>
           </View>
           <TouchableOpacity
             style={styles.closeIconCircle}
@@ -140,6 +151,51 @@ const HeaderBtmTabs = ({
           >
             <Image source={icons.Close} style={styles.closeIcon} />
           </TouchableOpacity>
+        </View>
+      </Modal>
+      {/* ............log out...Modal..................... */}
+      <Modal
+        animationIn="slideInLeft"
+        animationOut="slideOutLeft"
+        isVisible={logoutmodal}
+        style={{ alignSelf: "center" }}
+      >
+        <View style={styles.modal2}>
+          <View style={styles.modalContent2}>
+            <Image source={imgs.logout} style={styles.gift} />
+            <CustomText text={"Logout?"} fontWeight="bold" size={20} />
+            <CustomText
+              text={
+                "Are you sure you want to logout of this beautiful platform full of knowledge and stories and fascinating stuff?"
+              }
+              style={{ textAlign: "center", marginTop: vs(10) }}
+              color={Colors.gray}
+            />
+          </View>
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-between",
+            }}
+          >
+            <CustomButton
+              title="Cancel"
+              width={"45%"}
+              onPress={() => {
+                setLogoutModal(false);
+              }}
+            />
+            <CustomButton
+              title="Logout"
+              color={Colors.red}
+              backgroundColor={Colors.primary}
+              width={"45%"}
+              onPress={() => {
+                setLogoutModal(false);
+                navigation.navigate("BottomTab");
+              }}
+            />
+          </View>
         </View>
       </Modal>
     </View>
@@ -185,5 +241,28 @@ const styles = StyleSheet.create({
     borderRadius: ms(50),
     alignItems: "center",
     justifyContent: "center",
+  },
+
+  modal2: {
+    // width: 300,
+    //height: 400,
+    width: s(250),
+    height: vs(350),
+    paddingHorizontal: s(20),
+    paddingVertical: s(30),
+    backgroundColor: Colors.white,
+    borderRadius: s(10),
+    justifyContent: "space-between",
+  },
+  modalContent2: {
+    alignItems: "center",
+  },
+  gift: {
+    //width: 96,
+    width: s(96),
+    //height: 96,
+    height: vs(96),
+    marginTop: vs(10),
+    marginBottom: vs(30),
   },
 });

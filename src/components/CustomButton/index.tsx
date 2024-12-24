@@ -11,7 +11,8 @@ type custombuttonprops = {
   onPress?: () => void;
   backgroundColor?: string;
   height?: number;
-  //width?: string | number;
+  // width?: any;
+  // width?: string | number;
   width?: number | `${number}%` | "auto"; // Updated width type
   alignItems?: string;
   justifyContent?: string;

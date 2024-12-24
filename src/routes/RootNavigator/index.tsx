@@ -23,6 +23,7 @@ import About from "../../screens/main/About";
 import Terms from "../../screens/main/Terms";
 import PrivacyPolicy from "../../screens/main/PrivacyPolicy";
 import HelpNSupport from "../../screens/main/HelpNSupport";
+import CardDiscounts from "../../screens/main/CardDiscounts";
 
 export type RootStackParamsList = {
   SignUpScreen: any;
@@ -45,13 +46,16 @@ export type RootStackParamsList = {
   Terms: any;
   PrivacyPolicy: any;
   HelpNSupport: any;
+  CardDiscounts: any;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamsList>();
 const RootNavigator = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Navigator
+        screenOptions={{ headerShown: false, animation: "slide_from_left" }}
+      >
         <Stack.Screen name="BottomTab" component={BottomTab} />
         <Stack.Screen name="LoginScreen" component={LoginScreen} />
         <Stack.Screen name="BookDetails" component={BookDetails} />
@@ -64,6 +68,7 @@ const RootNavigator = () => {
           component={SendGiftCardScreen}
         />
         <Stack.Screen name="PaymentScreen" component={PaymentScreen} />
+        <Stack.Screen name="CardDiscounts" component={CardDiscounts} />
         <Stack.Screen name="Filters" component={Filters} />
         <Stack.Screen name="PaymentScreen2" component={PaymentScreen2} />
         <Stack.Screen name="Profile" component={Profile} />

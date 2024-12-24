@@ -241,7 +241,9 @@ const SendGiftCardScreen = ({ navigation }: SendGiftCardScreenProps) => {
       <CustomButton
         title="Send Request"
         onPress={() => setModalVisible(true)}
+        // width="calc(100% - 40px)"
         width={"90%"}
+        // buttonStyle={{ marginHorizontal: vs(20) }}
       />
       {/* ............Send Request...Modal..................... */}
       <Modal
@@ -271,7 +273,6 @@ const styles = StyleSheet.create({
   screenContainer: {
     flex: 1,
     backgroundColor: Colors.primary,
-    marginTop: vs(10),
     marginBottom: vs(20),
   },
   content: {

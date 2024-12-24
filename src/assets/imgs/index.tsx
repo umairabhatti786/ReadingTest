@@ -9,4 +9,5 @@ export default {
   hobbit: require("./hobbit.png"),
   delete: require("./delete.png"),
   MeezanBank: require("./MeezanBank.png"),
+  logout: require("./logout.png"),
 };

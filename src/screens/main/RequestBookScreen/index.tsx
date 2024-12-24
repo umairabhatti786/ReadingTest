@@ -121,7 +121,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: Colors.primary,
     marginHorizontal: s(20),
-    marginVertical: vs(10),
+    marginBottom: vs(20),
     justifyContent: "space-between",
   },
   content: {

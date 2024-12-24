@@ -48,7 +48,7 @@ const HelpNSupport = ({ navigation }: HelpNSupportProps) => {
   };
   return (
     <ScrollView
-      contentContainerStyle={{ ...styles.screenContainer, flexGrow: 1 }}
+      contentContainerStyle={styles.screenContainer}
       showsVerticalScrollIndicator={false}
     >
       <Header title="Help & Support" onPress={() => navigation.goBack()} />
@@ -56,13 +56,10 @@ const HelpNSupport = ({ navigation }: HelpNSupportProps) => {
         text={
           "Here are some commonly asked questions by our customers. If you can’t find your answers, reach out to our customer support."
         }
-        marginTop={10}
+        style={{ marginTop: vs(10) }}
       />
       {/* ...............questions  Map............................... */}
-      {/* <ScrollView
-        contentContainerStyle={styles.mapScroll}
-        showsVerticalScrollIndicator={false}
-      > */}
+
       <View style={styles.mapScroll}>
         {questions.map((item, index) => (
           <View key={item.id} style={styles.questionVw}>
@@ -77,7 +74,7 @@ const HelpNSupport = ({ navigation }: HelpNSupportProps) => {
                     text={"Action"}
                     fontWeight="bold"
                     color={Colors.blue}
-                    marginTop={5}
+                    style={{ marginTop: vs(10) }}
                   />
                 </TouchableOpacity>
               </View>
@@ -85,7 +82,7 @@ const HelpNSupport = ({ navigation }: HelpNSupportProps) => {
           </View>
         ))}
       </View>
-      {/* </ScrollView> */}
+
       {/* ........................................ */}
       <CustomText
         text={
@@ -114,6 +111,7 @@ Feel free to reach out to us during working hours. We're happy to assist you!`}
           size={12}
         />
       </View>
+
       {/* ........................................ */}
     </ScrollView>
   );
@@ -123,10 +121,8 @@ export default HelpNSupport;
 
 const styles = StyleSheet.create({
   screenContainer: {
-    flex: 1,
     backgroundColor: Colors.primary,
     marginHorizontal: s(20),
-    marginTop: ms(10),
     marginBottom: ms(20),
   },
   questionVw: {
