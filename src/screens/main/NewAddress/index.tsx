@@ -13,7 +13,7 @@ import { RootStackParamsList } from "../../../routes/RootNavigator";
 
 import Header from "../../../components/Header";
 import CustomText from "../../../components/CustomText";
-import { moderateScale, scale, verticalScale } from "react-native-size-matters";
+import { ms, s, vs } from "react-native-size-matters";
 import CustomTextInput from "../../../components/CustomTextInput";
 import icons from "../../../assets/icons";
 import { Colors } from "../../../utils/Colors";
@@ -26,8 +26,18 @@ interface NewAddressProps {
   navigation: StackNavigationProp<RootStackParamsList, "NewAddress">;
 }
 const NewAddress = ({ navigation }: NewAddressProps) => {
-  const [country, setCountry] = useState<Country | null>(null);
+  //...for country selection...........
   const [isCountryPickerVisible, setIsCountryPickerVisible] = useState(false);
+  const [country, setCountry] = useState<Country | null>({
+    // default country
+    cca2: "PK", // Country code for Pakistan
+    callingCode: ["92"],
+    name: "Pakistan",
+    region: "Asia",
+    subregion: "Southern Asia",
+    currency: ["PKR"],
+    flag: "flag-pk",
+  });
   return (
     <View style={styles.screenContainer}>
       <ScrollView showsVerticalScrollIndicator={false}>
@@ -39,19 +49,27 @@ const NewAddress = ({ navigation }: NewAddressProps) => {
           <CustomTextInput placeholder="Email" />
           {/* ..................Country Picker Modal.......... */}
           <View style={styles.countryContainer}>
-            <CountryPicker
-              withFlag
-              withCallingCode
-              withFilter
-              countryCode={country?.cca2 || "PA"}
-              visible={isCountryPickerVisible}
-              onSelect={(selectedCountry) => {
-                setCountry(selectedCountry);
-                setIsCountryPickerVisible(false);
+            <TouchableOpacity
+              onPress={() => setIsCountryPickerVisible(true)}
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
               }}
-              onClose={() => setIsCountryPickerVisible(false)}
-            />
-            <Image source={icons.ArrowDown} style={styles.ArrowDown} />
+            >
+              <CountryPicker
+                withFlag
+                withCallingCode
+                withFilter
+                countryCode={country?.cca2 || "PA"}
+                visible={isCountryPickerVisible}
+                onSelect={(selectedCountry) => {
+                  setCountry(selectedCountry);
+                  setIsCountryPickerVisible(false);
+                }}
+                onClose={() => setIsCountryPickerVisible(false)}
+              />
+              <Image source={icons.ArrowDown} style={styles.ArrowDown} />
+            </TouchableOpacity>
             {country && (
               <CustomText
                 text={` +${country.callingCode[0]}`}
@@ -68,8 +86,8 @@ const NewAddress = ({ navigation }: NewAddressProps) => {
           <View
             style={{ flexDirection: "row", justifyContent: "space-between" }}
           >
-            <CustomTextInput placeholder="City" width={scale(150)} />
-            <CustomTextInput placeholder="State/Province" width={scale(150)} />
+            <CustomTextInput placeholder="City" width={s(150)} />
+            <CustomTextInput placeholder="State/Province" width={s(150)} />
           </View>
           <CountryDropDown />
           <CustomTextInput placeholder="ZIP Code" />
@@ -86,12 +104,8 @@ const NewAddress = ({ navigation }: NewAddressProps) => {
               }}
             />
           </View>
+          <CustomButton title="Continue" onPress={() => navigation.goBack()} />
         </View>
-        <CustomButton
-          title="Continue"
-          marginTop={10}
-          onPress={() => navigation.goBack()}
-        />
       </ScrollView>
     </View>
   );
@@ -103,52 +117,45 @@ const styles = StyleSheet.create({
   screenContainer: {
     flex: 1,
     backgroundColor: Colors.primary,
-    marginHorizontal: scale(20),
-    marginVertical: verticalScale(10),
-    marginTop: moderateScale(10),
-    marginBottom: moderateScale(20),
-    justifyContent: "space-between",
   },
-
   content: {
-    gap: verticalScale(20),
-    justifyContent: "space-between",
+    gap: vs(20),
+    marginHorizontal: s(20),
+    marginBottom: vs(20),
   },
   countryContainer: {
     flexDirection: "row",
     alignItems: "center",
     width: "100%",
-    height: verticalScale(45),
-    padding: moderateScale(10),
-    borderRadius: moderateScale(15),
-    backgroundColor: "#FFFFFF",
-    // marginVertical: verticalScale(10),
+    height: vs(45),
+    padding: ms(10),
+    borderRadius: ms(15),
+    backgroundColor: Colors.white,
   },
   flagArrowContainer: {
     flexDirection: "row",
     alignItems: "center",
-    marginRight: scale(10),
+    marginRight: s(10),
   },
   ArrowDown: {
-    width: scale(20),
-    height: verticalScale(20),
+    width: s(20),
+    height: vs(20),
   },
   phoneInput: {
-    width: scale(200),
-    height: verticalScale(45),
+    width: s(200),
+    height: vs(45),
     fontSize: 14,
     alignItems: "center",
     justifyContent: "center",
   },
-
   countryCode: {
-    marginRight: scale(10), // Space between code and phone input
+    marginRight: s(10), // Space between code and phone input
   },
   mapContainer: {
-    //height: 240,
-    height: verticalScale(210),
+    height: vs(210),
     width: "100%",
-    // marginVertical: verticalScale(10),
+    borderRadius: ms(10),
+    overflow: "hidden",
   },
   map: {
     flex: 1,

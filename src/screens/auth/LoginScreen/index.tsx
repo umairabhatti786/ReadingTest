@@ -19,6 +19,7 @@ import {
   verticalScale,
   moderateScale,
   vs,
+  s,
 } from "react-native-size-matters";
 
 import { StackNavigationProp } from "@react-navigation/stack";
@@ -196,20 +197,22 @@ const LoginScreen = ({ navigation }: LoginScreenProps) => {
             text={"Enter your email address and password to login."}
             color={Colors.black}
             fontFam={Fonts.regular}
-            marginTop={10}
-            marginLeft={5}
-            marginBottom={20}
+            style={{
+              marginTop: vs(10),
+              marginLeft: s(5),
+              marginBottom: vs(20),
+            }}
           />
           {/* ...................Email............................................ */}
           <CustomTextInput
             placeholder="Email Address"
             secureTextEntry={false}
-            keyboardType="email-address"
             onChangeText={(text) => handleOnChange(text, "email")}
             errorMessage={errors.email}
             onFocus={() => handleError(null, "email")}
             placeholderTextColor={Colors.gray}
-            marginBottom={20}
+            inputContainerStyle={{ marginBottom: vs(20) }}
+            textInputProps={{ keyboardType: "email-address" }}
           />
           {/* ...................Password....................... */}
           <CustomTextInput
@@ -230,15 +233,14 @@ const LoginScreen = ({ navigation }: LoginScreenProps) => {
               color={Colors.blue}
               fontWeight="bold"
               fontFam={Fonts.semiBold}
-              marginBottom={30}
-              marginTop={25}
+              style={{ marginBottom: vs(30), marginTop: 25 }}
             />
           </TouchableOpacity>
           {/* ...................Login Button.......................... */}
           <CustomButton
             title={"Login"}
             onPress={validater}
-            marginVertical={20}
+            buttonStyle={{ marginVertical: vs(20) }}
           />
         </View>
         <View style={styles.loginOptions}>
@@ -273,12 +275,6 @@ const LoginScreen = ({ navigation }: LoginScreenProps) => {
           </View>
         </View>
       </ScrollView>
-      {/* Loader Overlay */}
-      {/* {showLoader && (
-        <View style={styles.loaderContainer}>
-          <ActivityIndicator size="large" color={Colors.orange} />
-        </View>
-      )} */}
     </View>
   );
 };

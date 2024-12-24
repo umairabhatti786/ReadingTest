@@ -17,6 +17,7 @@ import {
   verticalScale,
   moderateScale,
   vs,
+  s,
 } from "react-native-size-matters";
 
 import { StackNavigationProp } from "@react-navigation/stack";
@@ -183,65 +184,58 @@ const SignUpScreen = ({ navigation }: SignUpScreenProps) => {
           text={"Enter the following details to create an account"}
           color={Colors.black}
           fontFam={Fonts.regular}
-          marginTop={15}
-          marginLeft={5}
-          marginBottom={10}
+          style={{ marginTop: vs(15), marginBottom: vs(10), marginLeft: s(5) }}
         />
-        {/* ...................Email............................................ */}
-        <CustomTextInput
-          placeholder="Email Address"
-          secureTextEntry={false}
-          keyboardType="email-address"
-          onChangeText={(text) => handleOnChange(text, "email")}
-          errorMessage={errors.email}
-          onFocus={() => handleError(null, "email")}
-          placeholderTextColor={Colors.gray}
-          marginBottom={20}
-        />
-        {/* ...................Password....................... */}
-        <CustomTextInput
-          placeholder={"Password"}
-          secureTextEntry={true}
-          onChangeText={(text) => handleOnChange(text, "password")}
-          rightIcon={icons.Eye}
-          errorMessage={errors.password}
-          onFocus={() => handleError(null, "password")}
-          placeholderTextColor={Colors.gray}
-          marginBottom={20}
-        />
-        {/* ...................Confirm Password..................... */}
-        <CustomTextInput
-          placeholder={"Confirm Password"}
-          onChangeText={(text) => handleOnChange(text, "confirm")}
-          rightIcon={icons.Eye}
-          errorMessage={errors.confirm}
-          onFocus={() => handleError(null, "confirm")}
-          placeholderTextColor={Colors.gray}
-          marginBottom={20}
-        />
+        {/* ...................inputs............................................ */}
+        <View style={{ gap: vs(20) }}>
+          <CustomTextInput
+            placeholder="Email Address"
+            secureTextEntry={false}
+            textInputProps={{ keyboardType: "email-address" }}
+            onChangeText={(text) => handleOnChange(text, "email")}
+            errorMessage={errors.email}
+            onFocus={() => handleError(null, "email")}
+            placeholderTextColor={Colors.gray}
+          />
+          {/* ...................Password....................... */}
+          <CustomTextInput
+            placeholder={"Password"}
+            secureTextEntry={true}
+            onChangeText={(text) => handleOnChange(text, "password")}
+            rightIcon={icons.Eye}
+            errorMessage={errors.password}
+            onFocus={() => handleError(null, "password")}
+            placeholderTextColor={Colors.gray}
+          />
+          {/* ...................Confirm Password..................... */}
+          <CustomTextInput
+            placeholder={"Confirm Password"}
+            onChangeText={(text) => handleOnChange(text, "confirm")}
+            rightIcon={icons.Eye}
+            errorMessage={errors.confirm}
+            onFocus={() => handleError(null, "confirm")}
+            placeholderTextColor={Colors.gray}
+          />
+        </View>
         {/* ..................policy.......................... */}
         <View style={styles.policyVw}>
           <TouchableOpacity style={styles.checkboxVw} onPress={checkHandler}>
             <Image source={icons.box} style={styles.box} />
             {check && <Image source={icons.check} style={styles.check} />}
           </TouchableOpacity>
-          <View>
-            <CustomText
-              text={" By selecting this, you agree to the Readings"}
-              marginLeft={5}
-            />
+          <View style={{ marginLeft: s(5) }}>
+            <CustomText text={"By selecting this, you agree to the Readings"} />
             <View style={styles.policyvw2}>
               <CustomText
                 text={"Terms of service"}
                 color={Colors.blue}
-                textDecorationLine="underline"
-                marginLeft={5}
+                style={{ textDecorationLine: "underline" }}
               />
               <CustomText text={" and "} />
               <CustomText
                 text={"privacy policy"}
                 color={Colors.blue}
-                textDecorationLine="underline"
+                style={{ textDecorationLine: "underline" }}
               />
             </View>
           </View>
@@ -252,16 +246,21 @@ const SignUpScreen = ({ navigation }: SignUpScreenProps) => {
           title="Sign Up"
           backgroundColor={Colors.blue}
           onPress={validater}
-          marginVertical={20}
+          buttonStyle={{ marginVertical: s(20) }}
         />
       </View>
       {/* .............Already have an account?.................. */}
       <View style={styles.loginOptions}>
         <TouchableOpacity onPress={() => navigation.navigate("LoginScreen")}>
           <CustomText
-            text={" Already have an account?"}
-            label={<CustomText text={" Login"} color={Colors.blue} />}
-            // marginTop={20}
+            text={" Already have an account?  "}
+            label={
+              <CustomText
+                text={"Login"}
+                color={Colors.blue}
+                style={{ textDecorationLine: "underline" }}
+              />
+            }
           />
         </TouchableOpacity>
         {/* ................OR......................... */}

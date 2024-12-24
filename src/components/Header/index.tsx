@@ -1,26 +1,31 @@
 import { Image, TouchableOpacity, View } from "react-native";
 import React from "react";
-import { scale, verticalScale, moderateScale } from "react-native-size-matters";
+import { s, vs } from "react-native-size-matters";
 import { Colors } from "../../utils/Colors";
 import Fonts from "../../utils/Fonts";
 import CustomText from "../CustomText";
 import icons from "../../assets/icons";
 
 type Props = {
-  width?: number;
-  height?: number;
   title?: string;
   onPress?: () => void;
 };
-const Header = ({ width, height, title, onPress }: Props) => {
+const Header = ({ title, onPress }: Props) => {
   return (
-    <View style={{ flexDirection: "row", gap: scale(5), alignItems: "center" }}>
+    <View
+      style={{
+        flexDirection: "row",
+        gap: s(7),
+        alignItems: "center",
+        marginTop: vs(10),
+      }}
+    >
       <TouchableOpacity onPress={onPress}>
         <Image
           source={icons.ArrowLeft}
           style={{
-            width: scale(width || 20),
-            height: scale(height || 20),
+            width: s(15),
+            height: s(15),
             resizeMode: "contain",
           }}
         />

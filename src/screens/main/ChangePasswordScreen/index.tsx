@@ -11,6 +11,7 @@ import imgs from "../../../assets/imgs";
 
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamsList } from "../../../routes/RootNavigator";
+import ModalScreen from "../../../components/ModalScreen";
 // ..................types.....................
 
 interface ChangePasswordScreenProps {
@@ -23,55 +24,43 @@ const ChangePasswordScreen = ({ navigation }: ChangePasswordScreenProps) => {
 
   return (
     <View style={styles.screenContainer}>
-      <View style={styles.content}>
-        <Header title="Change Password" onPress={() => navigation.goBack()} />
-        <CustomText
-          text={"Enter your current password and create new password below."}
+      <View style={styles.layout}>
+        <View style={styles.content}>
+          <Header title="Change Password" onPress={() => navigation.goBack()} />
+          <CustomText
+            text={"Enter your current password and create new password below."}
+          />
+          <CustomTextInput placeholder="Email address" rightIcon={icons.Eye} />
+          <CustomTextInput
+            placeholder="New Password"
+            rightIcon={icons.Eye}
+            inputContainerStyle={{ marginTop: vs(20) }}
+          />
+          <CustomTextInput placeholder="Confirm New Password" />
+        </View>
+        <CustomButton
+          title="Change Password"
+          onPress={() => setModalVisible(true)}
         />
-        <CustomTextInput placeholder="Email address" rightIcon={icons.Eye} />
-        <CustomTextInput
-          placeholder="New Password"
-          rightIcon={icons.Eye}
-          marginTop={20}
-        />
-        <CustomTextInput placeholder="Confirm New Password" />
       </View>
-      <CustomButton
-        title="Change Password"
-        onPress={() => setModalVisible(true)}
-      />
       {/* ...............Modal..................... */}
+
       <Modal
         animationType="slide" // Options: 'none', 'slide', 'fade'
         transparent={true} // Makes modal background transparent
         visible={modalVisible}
         onRequestClose={() => setModalVisible(false)} // Handles back button on Android
       >
-        <View style={styles.modalOverlay}>
-          <View style={styles.modal}>
-            <View style={styles.modalContent}>
-              <Image source={imgs.ok} style={styles.ok} resizeMode="contain" />
-              <CustomText
-                text={"Password Changed"}
-                fontWeight="bold"
-                size={20}
-              />
-              <CustomText
-                text={"Your password has been updated successfully"}
-                textAlign="center"
-                marginTop={10}
-                color={Colors.gray}
-              />
-            </View>
-            <CustomButton
-              title="Great!"
-              onPress={() => {
-                setModalVisible(false);
-                navigation.navigate("Profile");
-              }}
-            />
-          </View>
-        </View>
+        <ModalScreen
+          img={imgs.ok}
+          heading="Password Changed"
+          status="Your password has been updated successfully"
+          btnTitle="Great!"
+          onPress={() => {
+            setModalVisible(false);
+            navigation.navigate("Profile");
+          }}
+        />
       </Modal>
     </View>
   );
@@ -83,9 +72,12 @@ const styles = StyleSheet.create({
   screenContainer: {
     flex: 1,
     backgroundColor: Colors.primary,
-    marginHorizontal: scale(20),
-    marginTop: ms(10),
+    // marginTop: ms(10),
     marginBottom: ms(20),
+  },
+  layout: {
+    flex: 1,
+    marginHorizontal: s(20),
     justifyContent: "space-between",
   },
   content: {
@@ -107,11 +99,6 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.white,
     borderRadius: s(10),
     justifyContent: "space-between",
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.3,
-    shadowRadius: 4,
-    elevation: 5, // For Android shadow
   },
   modalContent: {
     alignItems: "center",

@@ -34,6 +34,7 @@ type inputProps = {
   textInputProps?: any;
   placeholderTextColor?: string;
   onRightIconPress?: () => void;
+  onFocus?: () => void;
   borderWidth?: number;
   borderColor?: string;
   width?: number | `${number}%` | "auto"; // Updated width type
@@ -66,7 +67,7 @@ const CustomTextInput = ({
   placeholderTextColor,
   iconStyle,
   rightIconStyle,
-
+  onFocus,
   width,
   iconHeight,
   iconWidth,
@@ -126,6 +127,7 @@ const CustomTextInput = ({
           ]}
           onChangeText={onChangeText}
           value={value}
+          onFocus={onFocus}
           secureTextEntry={rightIcon ? isSecure : false}
           {...textInputProps}
           placeholderTextColor={placeholderTextColor || Colors.gray}

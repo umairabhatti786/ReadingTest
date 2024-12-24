@@ -38,11 +38,13 @@ const ModalScreen = ({
             }}
           />
         </View>
-        <CustomButton
-          title={btnTitle}
-          buttonStyle={{ marginTop: vs(45) }}
-          onPress={onPress}
-        />
+        <View>
+          <CustomButton
+            title={btnTitle}
+            buttonStyle={{ marginTop: vs(45) }}
+            onPress={onPress}
+          />
+        </View>
       </View>
     </View>
   );

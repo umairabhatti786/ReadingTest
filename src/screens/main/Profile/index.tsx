@@ -16,6 +16,7 @@ import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamsList } from "../../../routes/RootNavigator";
 import imgs from "../../../assets/imgs";
 import CustomButton from "../../../components/CustomButton";
+import Addresses from "../../../components/Addresses";
 
 // ..................types.....................
 
@@ -25,45 +26,6 @@ interface ProfileProps {
 
 //............................main func....................
 const Profile = ({ navigation }: ProfileProps) => {
-  const Addresses = [
-    {
-      id: "1",
-      house: "359 American Scheme Block B9",
-      city: "Lahore",
-      country: "Pakistan",
-      code: 54009,
-      phone: +923456789012,
-      email: "email@example.com",
-    },
-    {
-      id: "2",
-      house: "359 American Scheme Block B9",
-      city: "Lahore",
-      country: "Pakistan",
-      code: 54009,
-      phone: +923456789012,
-      email: "email@example.com",
-    },
-    {
-      id: "3",
-      house: "359 American Scheme Block B9",
-      city: "Lahore",
-      country: "Pakistan",
-      code: 54009,
-      phone: +923456789012,
-      email: "email@example.com",
-    },
-    {
-      id: "4",
-      house: "359 American Scheme Block B9",
-      city: "Lahore",
-      country: "Pakistan",
-      code: 54009,
-      phone: +923456789012,
-      email: "email@example.com",
-    },
-  ];
-  const [adressSelected, setAdressSelected] = useState<number | null>(null);
   const cards = [
     {
       id: 1,
@@ -115,44 +77,18 @@ const Profile = ({ navigation }: ProfileProps) => {
             <CustomText text={"Edit Info"} color={Colors.blue} />
           </TouchableOpacity>
         </View>
-        {/* ....................Saved Addresses.................. */}
-        <View style={styles.newAddressVw}>
-          <CustomText text={"Saved Addresses"} size={18} fontWeight="bold" />
-          <ScrollView
-            horizontal={true}
-            showsHorizontalScrollIndicator={false}
-            contentContainerStyle={styles.addressScroll}
-          >
-            {Addresses.map((item, index) => (
-              <View key={item.id} style={styles.address}>
-                <View
-                  style={{
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                  }}
-                >
-                  <CustomText text={item.house} fontWeight="bold" />
-                  <TouchableOpacity
-                    style={styles.circle}
-                    onPress={() => setAdressSelected(index)}
-                  >
-                    {adressSelected === index && <View style={styles.select} />}
-                  </TouchableOpacity>
-                </View>
-                <View style={{ marginTop: vs(5) }}>
-                  <CustomText
-                    text={item.city && "," && item.country}
-                    size={12}
-                    color={Colors.gray}
-                  />
-                  <CustomText text={item.code} size={12} color={Colors.gray} />
-                  <CustomText text={item.phone} size={12} color={Colors.gray} />
-                  <CustomText text={item.email} size={12} color={Colors.gray} />
-                </View>
-              </View>
-            ))}
-          </ScrollView>
-        </View>
+      </View>
+      {/* ....................Saved Addresses.................. */}
+      <View style={{ marginTop: vs(20) }}>
+        <CustomText
+          text="Saved Addresses"
+          size={18}
+          fontWeight={"bold"}
+          style={{ marginHorizontal: s(20), marginBottom: vs(5) }}
+        />
+        <Addresses />
+      </View>
+      <View style={styles.content}>
         {/* .................Add New Address..................... */}
         <TouchableOpacity
           onPress={() => navigation.navigate("NewAddress")}
@@ -160,6 +96,7 @@ const Profile = ({ navigation }: ProfileProps) => {
             flexDirection: "row",
             alignItems: "center",
             marginTop: vs(10),
+            gap: s(5),
           }}
         >
           <CustomText
@@ -172,34 +109,41 @@ const Profile = ({ navigation }: ProfileProps) => {
         {/* //................Card Details............... */}
         <CustomText
           text={"Payment Methods"}
-          marginTop={15}
+          style={{ marginTop: vs(15) }}
           size={18}
           fontWeight="bold"
         />
-        <ScrollView
-          horizontal={true}
-          showsHorizontalScrollIndicator={false}
-          contentContainerStyle={styles.cards}
-        >
-          {cards.map((cards, index) => (
-            <View key={cards.id} style={styles.card}>
-              <View style={{ flexDirection: "row", alignItems: "center" }}>
-                <Image source={icons.visa2} style={styles.visa2} />
-                <CustomText text={cards.cardNumber} marginLeft={10} />
-              </View>
-              <TouchableOpacity>
-                <Image source={icons.Dots} style={styles.dots} />
-              </TouchableOpacity>
+      </View>
+
+      <ScrollView
+        horizontal={true}
+        showsHorizontalScrollIndicator={false}
+        contentContainerStyle={styles.cards}
+      >
+        {cards.map((cards, index) => (
+          <View key={cards.id} style={styles.card}>
+            <View style={{ flexDirection: "row", alignItems: "center" }}>
+              <Image source={icons.visa2} style={styles.visa2} />
+              <CustomText
+                text={cards.cardNumber}
+                style={{ marginLeft: s(10) }}
+              />
             </View>
-          ))}
-        </ScrollView>
-        {/* ..................Add New Method.................... */}
+            <TouchableOpacity>
+              <Image source={icons.Dots} style={styles.dots} />
+            </TouchableOpacity>
+          </View>
+        ))}
+      </ScrollView>
+      {/* ..................Add New Method.................... */}
+      <View style={styles.content}>
         <TouchableOpacity
           onPress={() => navigation.navigate("PaymentScreen2")}
           style={{
             flexDirection: "row",
             alignItems: "center",
             marginTop: vs(10),
+            gap: s(5),
           }}
         >
           <CustomText
@@ -209,64 +153,63 @@ const Profile = ({ navigation }: ProfileProps) => {
           />
           <Image source={icons.Plus} style={styles.plus} />
         </TouchableOpacity>
-        {/* ...............Modal..................... */}
-        <Modal
-          animationType="slide" // Options: 'none', 'slide', 'fade'
-          transparent={true} // Makes modal background transparent
-          visible={modalVisible}
-          onRequestClose={() => setModalVisible(false)} // Handles back button on Android
-        >
-          <View style={styles.modalOverlay}>
-            <View style={styles.modal}>
-              <View style={styles.modalContent}>
-                <Image
-                  source={imgs.delete}
-                  width={s(96)}
-                  height={vs(96)}
-                  style={styles.gift}
-                />
-                <CustomText
-                  text={"Delete Account?"}
-                  fontWeight="bold"
-                  size={20}
-                />
-                <CustomText
-                  text={
-                    "You are about to delete your account. All your saved information will be lost permanently."
-                  }
-                  textAlign="center"
-                  marginTop={10}
-                  color={Colors.gray}
-                />
-              </View>
-              <View
-                style={{
-                  flexDirection: "row",
-                  justifyContent: "space-between",
+      </View>
+      {/* ............Delete Account?...Modal..................... */}
+      <Modal
+        animationType="slide" // Options: 'none', 'slide', 'fade'
+        transparent={true} // Makes modal background transparent
+        visible={modalVisible}
+        onRequestClose={() => setModalVisible(false)} // Handles back button on Android
+      >
+        <View style={styles.modalOverlay}>
+          <View style={styles.modal}>
+            <View style={styles.modalContent}>
+              <Image
+                source={imgs.delete}
+                width={s(96)}
+                height={vs(96)}
+                style={styles.gift}
+              />
+              <CustomText
+                text={"Delete Account?"}
+                fontWeight="bold"
+                size={20}
+              />
+              <CustomText
+                text={
+                  "You are about to delete your account. All your saved information will be lost permanently."
+                }
+                style={{ textAlign: "center", marginTop: vs(10) }}
+                color={Colors.gray}
+              />
+            </View>
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+              }}
+            >
+              <CustomButton
+                title="Cancel"
+                width={110}
+                onPress={() => {
+                  setModalVisible(false);
                 }}
-              >
-                <CustomButton
-                  title="Cancel"
-                  width={110}
-                  onPress={() => {
-                    setModalVisible(false);
-                  }}
-                />
-                <CustomButton
-                  title="Delete"
-                  color={Colors.red}
-                  backgroundColor={Colors.primary}
-                  width={110}
-                  onPress={() => {
-                    setModalVisible(false);
-                    navigation.navigate("BottomTab");
-                  }}
-                />
-              </View>
+              />
+              <CustomButton
+                title="Delete"
+                color={Colors.red}
+                backgroundColor={Colors.primary}
+                width={110}
+                onPress={() => {
+                  setModalVisible(false);
+                  navigation.navigate("BottomTab");
+                }}
+              />
             </View>
           </View>
-        </Modal>
-      </View>
+        </View>
+      </Modal>
     </View>
   );
 };
@@ -275,13 +218,12 @@ export default Profile;
 
 const styles = StyleSheet.create({
   screenContainer: {
-    flex: 1,
+    // flex: 1,
     backgroundColor: Colors.primary,
-    marginHorizontal: s(20),
     marginVertical: vs(10),
   },
   content: {
-    justifyContent: "space-between",
+    marginHorizontal: s(20),
   },
   infoVw: {
     height: 118,
@@ -304,36 +246,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     borderRadius: ms(10),
   },
-  newAddressVw: {
-    marginTop: vs(20),
-  },
-  addressScroll: {
-    flexDirection: "row",
-    marginTop: vs(10),
-  },
-  address: {
-    height: vs(100),
-    width: s(250),
-    backgroundColor: Colors.white,
-    borderRadius: ms(10),
-    padding: ms(10),
-    marginRight: s(10),
-  },
-  circle: {
-    height: vs(16),
-    width: s(16),
-    borderRadius: ms(100),
-    borderWidth: s(2),
-    borderColor: Colors.orange,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  select: {
-    height: vs(8),
-    width: s(8),
-    borderRadius: ms(100),
-    backgroundColor: Colors.orange,
-  },
+
   plus: {
     height: vs(10),
     width: s(10),
@@ -342,6 +255,8 @@ const styles = StyleSheet.create({
   cards: {
     flexDirection: "row",
     marginTop: vs(10),
+    paddingHorizontal: s(20),
+    gap: s(10),
   },
   card: {
     flexDirection: "row",
@@ -350,7 +265,6 @@ const styles = StyleSheet.create({
     width: s(275),
     backgroundColor: Colors.white,
     borderRadius: vs(10),
-    marginRight: s(5),
     alignItems: "center",
     padding: ms(10),
     paddingRight: vs(15),

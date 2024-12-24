@@ -160,14 +160,14 @@ const styles = StyleSheet.create({
   },
   modal: {
     flex: 1,
-    paddingVertical: s(20),
+    paddingBottom: s(20),
     backgroundColor: Colors.primary,
-    justifyContent: "space-between",
+    // justifyContent: "space-between",
     alignItems: "center",
   },
   modalContent: {
     alignItems: "center",
-    marginVertical: vs(50),
+    marginVertical: vs(80),
     gap: vs(30),
   },
   closeIcon: {

@@ -402,3 +402,41 @@ export const HomeImgs = [
   { id: "2", img: imgs.homeImg1 },
   { id: "3", img: imgs.homeImg2 },
 ];
+export const AddressesData = [
+  {
+    id: "1",
+    house: "359 American Scheme Block B9",
+    city: "Lahore",
+    country: "Pakistan",
+    code: 54009,
+    phone: +923456789012,
+    email: "email@example.com",
+  },
+  {
+    id: "2",
+    house: "359 American Scheme Block B9",
+    city: "Lahore",
+    country: "Pakistan",
+    code: 54009,
+    phone: +923456789012,
+    email: "email@example.com",
+  },
+  {
+    id: "3",
+    house: "359 American Scheme Block B9",
+    city: "Lahore",
+    country: "Pakistan",
+    code: 54009,
+    phone: +923456789012,
+    email: "email@example.com",
+  },
+  {
+    id: "4",
+    house: "359 American Scheme Block B9",
+    city: "Lahore",
+    country: "Pakistan",
+    code: 54009,
+    phone: +923456789012,
+    email: "email@example.com",
+  },
+];

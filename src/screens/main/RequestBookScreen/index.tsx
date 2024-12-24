@@ -2,13 +2,7 @@ import { Image, Modal, StyleSheet, Text, TextInput, View } from "react-native";
 import React, { useState } from "react";
 import Header from "../../../components/Header";
 import CustomText from "../../../components/CustomText";
-import {
-  moderateScale,
-  s,
-  scale,
-  verticalScale,
-  vs,
-} from "react-native-size-matters";
+import { ms, s, vs } from "react-native-size-matters";
 import CustomTextInput from "../../../components/CustomTextInput";
 import CustomButton from "../../../components/CustomButton";
 import { Colors } from "../../../utils/Colors";
@@ -19,6 +13,7 @@ import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamsList } from "../../../routes/RootNavigator";
 import icons from "../../../assets/icons";
 import imgs from "../../../assets/imgs";
+import ModalScreen from "../../../components/ModalScreen";
 //.....................types.....................
 interface PersonalInfoScreen {
   navigation: StackNavigationProp<RootStackParamsList, "PersonalInfoScreen">;
@@ -26,44 +21,43 @@ interface PersonalInfoScreen {
 
 //............................main func....................
 const RequestBookScreen = ({ navigation }: PersonalInfoScreen) => {
-  const [country, setCountry] = useState<Country | null>(null);
+  //...for country selection...........
   const [isCountryPickerVisible, setIsCountryPickerVisible] = useState(false);
+  const [country, setCountry] = useState<Country | null>({
+    // default country
+    cca2: "PK", // Country code for Pakistan
+    callingCode: ["92"], // Default calling code for Pakistan
+    name: "Pakistan", // Country name
+    region: "Asia", // Region
+    subregion: "Southern Asia", // Subregion
+    currency: ["PKR"], // Currency
+    flag: "flag-pk", // Flag (usually used in react-native-country-picker-modal)
+  });
+
+  //..for send request modal
   const [modalVisible, setModalVisible] = useState(false);
 
   return (
     <View style={styles.screenContainer}>
       <View style={styles.content}>
+        <Header title="Request a Book" />
         <View style={styles.inputs}>
-          <Header title="Request a Book" />
           <CustomText
             text={
               "Enter the following details about the book you want to request."
             }
           />
-          <CustomTextInput
-            placeholder="Book Title"
-            marginVertical={verticalScale(5)}
-          />
-          <CustomTextInput
-            placeholder="Author Name"
-            marginVertical={verticalScale(5)}
-          />
-          <CustomTextInput
-            placeholder="Your Name"
-            marginVertical={verticalScale(5)}
-          />
-          <CustomTextInput
-            placeholder="Email"
-            marginVertical={verticalScale(5)}
-          />
+          <CustomTextInput placeholder="Book Title" />
+          <CustomTextInput placeholder="Author Name" />
+          <CustomTextInput placeholder="Your Name" />
+          <CustomTextInput placeholder="Email" />
           {/* Country Picker Modal */}
-
           <View style={styles.countryContainer}>
             <CountryPicker
               withFlag
               withCallingCode
               withFilter
-              countryCode={country?.cca2 || "PA"}
+              countryCode={country?.cca2 || "PK"}
               visible={isCountryPickerVisible}
               onSelect={(selectedCountry) => {
                 setCountry(selectedCountry);
@@ -84,11 +78,13 @@ const RequestBookScreen = ({ navigation }: PersonalInfoScreen) => {
               keyboardType="numeric"
             />
           </View>
+
           <CustomTextInput
             placeholder="Additional Info"
-            marginVertical={verticalScale(5)}
-            height={verticalScale(130)}
-            alignItems="flex-start"
+            inputContainerStyle={{
+              height: vs(130),
+              alignItems: "flex-start",
+            }}
           />
         </View>
       </View>
@@ -103,38 +99,16 @@ const RequestBookScreen = ({ navigation }: PersonalInfoScreen) => {
         visible={modalVisible}
         onRequestClose={() => setModalVisible(false)} // Handles back button on Android
       >
-        <View style={styles.modalOverlay}>
-          <View style={styles.modal}>
-            <View style={styles.modalContent}>
-              <Image
-                source={imgs.gift2}
-                width={scale(96)}
-                height={verticalScale(96)}
-                style={styles.gift}
-              />
-              <CustomText
-                text={"Request Received"}
-                fontWeight="bold"
-                size={20}
-              />
-              <CustomText
-                text={
-                  "We have received your request for the book. We will find it as soon as possible and notify you as it’s available"
-                }
-                textAlign="center"
-                marginTop={10}
-                color={Colors.gray}
-              />
-            </View>
-            <CustomButton
-              title="Back to Home"
-              onPress={() => {
-                setModalVisible(false);
-                navigation.navigate("BottomTab");
-              }}
-            />
-          </View>
-        </View>
+        <ModalScreen
+          img={imgs.gift2}
+          heading="Request Received"
+          status="We have received your request for the book. We will find it as soon as possible and notify you as it’s available"
+          btnTitle="Back to Home"
+          onPress={() => {
+            setModalVisible(false);
+            navigation.navigate("BottomTab");
+          }}
+        />
       </Modal>
     </View>
   );
@@ -146,79 +120,42 @@ const styles = StyleSheet.create({
   screenContainer: {
     flex: 1,
     backgroundColor: Colors.primary,
-    marginHorizontal: scale(20),
-    marginVertical: verticalScale(10),
+    marginHorizontal: s(20),
+    marginVertical: vs(10),
+    justifyContent: "space-between",
   },
   content: {
-    flex: 1,
-    gap: verticalScale(15),
-    justifyContent: "space-between",
+    gap: vs(15),
   },
   inputs: {
-    gap: verticalScale(10),
-    justifyContent: "space-between",
+    gap: vs(20),
   },
   countryContainer: {
     flexDirection: "row",
     alignItems: "center",
     width: "100%",
-    height: verticalScale(45),
-    padding: moderateScale(10),
-    borderRadius: moderateScale(15),
-    backgroundColor: "#FFFFFF",
-    marginVertical: verticalScale(10),
+    height: vs(45),
+    padding: ms(10),
+    borderRadius: ms(15),
+    backgroundColor: Colors.white,
   },
   flagArrowContainer: {
     flexDirection: "row",
     alignItems: "center",
-    marginRight: scale(10),
+    marginRight: s(10),
   },
   ArrowDown: {
-    width: scale(20),
-    height: verticalScale(20),
+    width: s(20),
+    height: vs(20),
   },
   phoneInput: {
-    width: scale(200),
-    height: verticalScale(45),
+    width: s(200),
+    height: vs(45),
     fontSize: 14,
     alignItems: "center",
     justifyContent: "center",
   },
-
   countryCode: {
-    marginRight: scale(10), // Space between code and phone input
-  },
-  modalOverlay: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "rgba(0, 0, 0, 0.5)", // Semi-transparent background
-  },
-  modal: {
-    // width: 300,
-    //height: 400,
-    width: s(250),
-    height: vs(350),
-    paddingHorizontal: s(20),
-    paddingVertical: s(30),
-    backgroundColor: Colors.white,
-    borderRadius: s(10),
-    justifyContent: "space-between",
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.3,
-    shadowRadius: 4,
-    elevation: 5, // For Android shadow
-  },
-  modalContent: {
-    alignItems: "center",
-  },
-  gift: {
-    // width: 96,
-    width: s(96),
-    // height: 96,
-    height: vs(80),
-    marginTop: vs(10),
-    marginBottom: vs(30),
+    marginRight: s(10), // Space between code and phone input
   },
 });

@@ -12,7 +12,7 @@ import { RootStackParamsList } from "../../../routes/RootNavigator";
 
 import Header from "../../../components/Header";
 import CustomText from "../../../components/CustomText";
-import { ms, s, scale, vs } from "react-native-size-matters";
+import { ms, s, vs } from "react-native-size-matters";
 import CustomTextInput from "../../../components/CustomTextInput";
 import icons from "../../../assets/icons";
 import { Colors } from "../../../utils/Colors";
@@ -35,27 +35,33 @@ const PaymentScreen2 = ({ navigation }: PaymentScreen2Props) => {
 
   return (
     <View style={styles.screenContainer}>
-      <ScrollView showsVerticalScrollIndicator={false}>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={styles.main}
+      >
         <View style={styles.content}>
           <Header title="Payment Info" onPress={() => navigation.goBack()} />
           <CustomText
             text={
               "Do you own a Credit or Debit Card from the banks listed below? "
             }
-            marginVertical={10}
           />
-          {/* .........map.................. */}
-          <ScrollView
-            horizontal={true}
-            showsHorizontalScrollIndicator={false}
-            contentContainerStyle={styles.bankcards}
-          >
-            {banks.map((item) => (
-              <TouchableOpacity key={item.id} style={styles.bankcard}>
-                <Image source={item.image} style={styles.bankImg} />
-              </TouchableOpacity>
-            ))}
-          </ScrollView>
+        </View>
+
+        {/* .........map.................. */}
+        <ScrollView
+          horizontal={true}
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={styles.bankcards}
+        >
+          {banks.map((item) => (
+            <TouchableOpacity key={item.id} style={styles.bankcard}>
+              <Image source={item.image} style={styles.bankImg} />
+            </TouchableOpacity>
+          ))}
+        </ScrollView>
+
+        <View style={styles.content}>
           <CustomTextInput
             placeholder="Card Nuumber"
             rightIcon={icons.visa}
@@ -102,9 +108,12 @@ const PaymentScreen2 = ({ navigation }: PaymentScreen2Props) => {
           />
           {/* <CountryDropDown /> */}
           <CustomTextInput placeholder="ZIP Code" />
+          <CustomButton
+            title="Continue"
+            onPress={() => navigation.goBack()}
+            buttonStyle={{ marginHorizontal: s(20) }}
+          />
         </View>
-
-        <CustomButton title="Continue" onPress={() => navigation.goBack()} />
       </ScrollView>
     </View>
   );
@@ -116,14 +125,21 @@ const styles = StyleSheet.create({
   screenContainer: {
     flex: 1,
     backgroundColor: Colors.primary,
-    marginHorizontal: scale(20),
-    marginVertical: vs(10),
     justifyContent: "space-between",
   },
+  main: {
+    // marginVertical: vs(10),
+  },
   content: {
-    gap: ms(20),
-    marginBottom: vs(25),
-    textAlign: "justify",
+    gap: vs(20),
+    marginHorizontal: s(20),
+    marginBottom: vs(20),
+  },
+  bankcards: {
+    flexDirection: "row",
+    gap: s(10),
+    paddingHorizontal: s(20),
+    marginBottom: vs(20),
   },
   bankcard: {
     height: vs(64),
@@ -136,9 +152,5 @@ const styles = StyleSheet.create({
   bankImg: {
     height: vs(32),
     width: s(32),
-  },
-  bankcards: {
-    flexDirection: "row",
-    gap: s(10),
   },
 });

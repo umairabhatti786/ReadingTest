@@ -8,6 +8,7 @@ type Props = TextProps & {
   size?: number;
   fontFam?: string;
   text?: string;
+  label?: any;
   style?: StyleProp<TextStyle>;
   fontWeight?: string | number;
   //  fontWeight?: "normal" | "bold" | "100" | "200" | "300" | "400" | "500" | "600" | "700" | "800" | "900" | number;
@@ -19,6 +20,7 @@ const CustomText = ({
   text,
   style,
   fontWeight,
+  label,
   ...rest // Capture all other props
 }: Props) => {
   return (
@@ -36,6 +38,7 @@ const CustomText = ({
       {...rest} // Spread additional props here
     >
       {text}
+      {label}
     </Text>
   );
 };
