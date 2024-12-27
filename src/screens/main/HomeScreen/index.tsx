@@ -17,7 +17,6 @@ import { RootStackParamsList } from "../../../routes/RootNavigator";
 import { CompositeNavigationProp } from "@react-navigation/native";
 import { BottomTabParams } from "../../../routes/BottomTab";
 import { Colors } from "../../../utils/Colors";
-import imgs from "../../../assets/imgs";
 import CustomTextInput from "../../../components/CustomTextInput";
 import icons from "../../../assets/icons";
 import CustomText from "../../../components/CustomText";
@@ -38,11 +37,9 @@ const HomeScreen = ({ navigation }: HomeScreenProps) => {
   //..main return
   return (
     <View style={styles.screenContainer}>
-      <HeaderBtmTabs
-        navigation={navigation}
-        marginHorizontal={20}
-        marginTop={10}
-      />
+      <View style={{ marginTop: vs(20), marginHorizontal: s(20) }}>
+        <HeaderBtmTabs navigation={navigation} />
+      </View>
       <ScrollView
         contentContainerStyle={{ flexGrow: 1 }}
         showsVerticalScrollIndicator={false}

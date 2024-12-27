@@ -1,6 +1,6 @@
 import { Image, TouchableOpacity, View } from "react-native";
 import React from "react";
-import { s, vs } from "react-native-size-matters";
+import { s } from "react-native-size-matters";
 import { Colors } from "../../utils/Colors";
 import Fonts from "../../utils/Fonts";
 import CustomText from "../CustomText";
@@ -17,7 +17,6 @@ const Header = ({ title, onPress }: Props) => {
         flexDirection: "row",
         gap: s(7),
         alignItems: "center",
-        marginTop: vs(10),
       }}
     >
       <TouchableOpacity onPress={onPress}>
@@ -33,9 +32,9 @@ const Header = ({ title, onPress }: Props) => {
       <CustomText
         text={title}
         color={Colors.black}
-        fontFam={Fonts.semiBold}
+        fontFam={Fonts.bold}
         size={20}
-        fontWeight="600"
+        fontWeight="bold"
       />
     </View>
   );

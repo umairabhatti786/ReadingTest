@@ -239,7 +239,6 @@ export const BookFormatData = [
   { label: "Hard Cover", value: "3", id: 3 },
   { label: "Paperback", value: "4", id: 4 },
 ];
-
 export const BookPriceData = [
   { label: "Less then Rs 100", value: "1", id: 1 },
   { label: "Rs. 100 To Rs. 200", value: "2", id: 2 },
@@ -251,18 +250,37 @@ export const Categories = [
   { value: "1", label: "Anthropology" },
   { value: "2", label: "Antiques & Collectibles" },
   { value: "3", label: "Archaeology" },
-  { value: "1", label: "Art & Crafts" },
-  { value: "2", label: "Stationery" },
-  { value: "3", label: "Architecture" },
-  { value: "4", label: "Art" },
-  { value: "5", label: "Bio & Autobiography" },
-  { value: "6", label: "Body, Mind & Spirit" },
-  { value: "7", label: "Business" },
-  { value: "8", label: "Children" },
-  { value: "9", label: "Computer" },
-  { value: "10", label: "Cooking" },
+  { value: "4", label: "Architecture" },
+  { value: "5", label: "Art" },
+  { value: "6", label: "Art & Crafts" },
+  { value: "7", label: "Bio & Autobiography" },
+  { value: "8", label: "Body, Mind & Spirit" },
+  { value: "9", label: "Business" },
+  { value: "10", label: "Children" },
+  { value: "11", label: "Computer" },
+  { value: "12", label: "Cooking" },
+  { value: "13", label: "Stationery" },
 ];
-
+export const SubCategories = [
+  { value: "1", label: " All " },
+  { value: "2", label: "Audit & Accounting" },
+  { value: "3", label: "Business General" },
+  { value: "4", label: "Business Communication" },
+  { value: "5", label: "Careers" },
+  { value: "6", label: "Business Education" },
+  { value: "7", label: "Business Self Help" },
+  { value: "8", label: "Current Affairs Business" },
+  { value: "9", label: "Distribution" },
+  { value: "10", label: "E Commerce" },
+  { value: "11", label: "Economics" },
+  { value: "12", label: "Exports & Imports" },
+  { value: "13", label: "Finance & Investing" },
+  { value: "14", label: "Industries" },
+  { value: "15", label: "Insurance" },
+  { value: "16", label: "Islamic Finance" },
+  { value: "17", label: "Management" },
+  { value: "18", label: "NGOs & Charities" },
+];
 export const RecommendedData = [
   {
     id: "1",
@@ -319,6 +337,15 @@ export const LikedData = [
     ListPrice: "£12.99 = Rs.4746",
     AppPrice: "Rs.2335",
     InStock: false,
+  },
+  {
+    id: "4",
+    bookCover: imgs.hobbit,
+    bookTitle: "Hobbit",
+    author: "J. R. R. Tolkien",
+    ListPrice: "£12.99 = Rs.4746",
+    AppPrice: "Rs.2335",
+    InStock: true,
   },
 ];
 export const CartItemsData = [

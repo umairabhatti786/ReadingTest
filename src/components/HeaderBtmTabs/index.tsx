@@ -14,26 +14,37 @@ import { Colors } from "../../utils/Colors";
 import imgs from "../../assets/imgs";
 import CustomButton from "../CustomButton";
 
-// Define navigation prop types properly
-type HeaderBtmTabsNavigationProps = CompositeNavigationProp<
-  BottomTabNavigationProp<BottomTabParams, "HomeScreen">, // Bottom Tab Navigation Prop
-  StackNavigationProp<RootStackParamsList> // Stack Navigation Prop
->;
+// // Define navigation prop types properly
+// type HeaderBtmTabsNavigationProps = CompositeNavigationProp<
+//   BottomTabNavigationProp<BottomTabParams, "HomeScreen", "CategoriesScreen">, // Bottom Tab Navigation Prop
+//   StackNavigationProp<RootStackParamsList> // Stack Navigation Prop
+// >;
 
-interface HeaderBtmTabsProps {
+// interface HeaderBtmTabsProps {
+//   onRightIconPress?: () => void;
+//   navigation: HeaderBtmTabsNavigationProps; // Make sure navigation is typed correctly
+// }
+type HeaderBtmTabsNavigationProps<T extends keyof BottomTabParams> =
+  CompositeNavigationProp<
+    BottomTabNavigationProp<BottomTabParams, T>, // Generic for the Bottom Tab screen
+    StackNavigationProp<RootStackParamsList> // Root-level Stack Navigation
+  >;
+
+interface HeaderBtmTabsProps<T extends keyof BottomTabParams> {
   onRightIconPress?: () => void;
-  marginHorizontal?: number;
-  marginTop?: number;
-  navigation: HeaderBtmTabsNavigationProps; // Make sure navigation is typed correctly
+  navigation: HeaderBtmTabsNavigationProps<T>;
 }
 
 // .......................main function..................
-const HeaderBtmTabs = ({
+// const HeaderBtmTabs = ({
+//   onRightIconPress,
+//   navigation,
+// }: HeaderBtmTabsProps) => {
+
+const HeaderBtmTabs = <T extends keyof BottomTabParams>({
   onRightIconPress,
-  marginTop,
-  marginHorizontal,
   navigation,
-}: HeaderBtmTabsProps) => {
+}: HeaderBtmTabsProps<T>) => {
   //off-screen
   const [logoutmodal, setLogoutModal] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
@@ -63,8 +74,6 @@ const HeaderBtmTabs = ({
         flexDirection: "row",
         justifyContent: "space-between",
         alignItems: "center",
-        marginHorizontal: s(marginHorizontal || 0),
-        marginTop: vs(marginTop || 0),
       }}
     >
       <View style={{ flexDirection: "row", alignItems: "center" }}>

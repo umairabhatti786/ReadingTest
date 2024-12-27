@@ -44,7 +44,7 @@ type inputProps = {
   padding?: number;
   borderRadius?: number;
   backgroundColor?: string;
-
+  textColor?: string;
   fontSize?: number;
   fontWeight?: string;
   fontFamily?: string;
@@ -63,7 +63,7 @@ const CustomTextInput = ({
   textInputStyle,
   inputContainerStyle,
   textInputProps,
-
+  textColor,
   placeholderTextColor,
   iconStyle,
   rightIconStyle,
@@ -119,6 +119,7 @@ const CustomTextInput = ({
             {
               flex: 1,
               padding: 5,
+              color: textColor || Colors.black,
               fontSize: fontSize || 14,
               fontWeight: fontWeight,
               fontFamily: fontFamily || Fonts.regular,

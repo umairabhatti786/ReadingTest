@@ -78,28 +78,21 @@ const BookCardLiked = ({
       </ImageBackground>
 
       <View style={styles.bookDetails}>
-        <CustomText text={bookTitle} fontWeight="bold" />
-        <CustomText
-          text={author}
-          size={12}
-          fontWeight={400}
-          color={Colors.gray}
-        />
+        <View>
+          <CustomText text={bookTitle} fontWeight="bold" />
+          <CustomText text={author} size={12} color={Colors.gray} />
+        </View>
+
         <View style={styles.priceVw}>
-          <CustomText
-            text={"List Price"}
-            size={12}
-            fontWeight={400}
-            color={Colors.gray}
-          />
+          <CustomText text={"List Price"} size={12} color={Colors.gray} />
           <CustomText
             text={ListPrice}
             size={12}
-            fontWeight={400}
             color={Colors.gray}
-            textDecorationLine="line-through"
+            style={{ textDecorationLine: "line-through" }}
           />
         </View>
+
         <View style={styles.appPriceVw}>
           <CustomText text={"App Price"} size={12} color={Colors.gray} />
           <CustomText
@@ -124,7 +117,7 @@ const BookCardLiked = ({
             >
               <Image source={icons.Minus} style={{ height: 10, width: 10 }} />
             </TouchableOpacity>
-            <CustomText text={itemQuantity} size={12} />
+            <CustomText text={itemQuantity.toString()} size={12} />
             <TouchableOpacity
               style={styles.quantityBtn}
               onPress={handleIncrease}
@@ -160,7 +153,8 @@ const styles = StyleSheet.create({
   bookCard: {
     //width: scale(190),
     // flex: 1,
-    height: vs(164),
+    //height: 164,
+    height: vs(142),
     backgroundColor: Colors.white,
     borderRadius: ms(15),
     overflow: "hidden",
@@ -184,7 +178,8 @@ const styles = StyleSheet.create({
     marginHorizontal: s(15),
     marginTop: vs(10),
     flex: 1,
-    justifyContent: "space-between",
+    gap: vs(4),
+    //justifyContent: "space-between",
   },
   priceVw: {
     flexDirection: "row",
@@ -194,12 +189,11 @@ const styles = StyleSheet.create({
   appPriceVw: {
     flexDirection: "row",
     justifyContent: "space-between",
-    marginTop: vs(2),
   },
   btnsVw: {
     flexDirection: "row",
     justifyContent: "space-between",
-    marginVertical: vs(10),
+    // marginVertical: vs(10),
   },
   btn: {
     height: vs(32),

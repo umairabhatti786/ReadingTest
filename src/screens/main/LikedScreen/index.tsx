@@ -6,12 +6,25 @@ import { Colors } from "../../../utils/Colors";
 import { LikedData } from "../../../utils/Data/data";
 import BookCardLiked from "../../../components/BookCardLiked";
 import Cart from "../../../components/Cart";
-const LikedScreen = () => {
+
+import { BottomTabNavigationProp } from "@react-navigation/bottom-tabs";
+import { StackNavigationProp } from "@react-navigation/stack";
+import { RootStackParamsList } from "../../../routes/RootNavigator";
+import { CompositeNavigationProp } from "@react-navigation/native";
+import { BottomTabParams } from "../../../routes/BottomTab";
+type LikedScreenProp = CompositeNavigationProp<
+  BottomTabNavigationProp<BottomTabParams, "LikedScreen">, // Tab-specific navigation
+  StackNavigationProp<RootStackParamsList> // Root-level navigation
+>;
+interface LikedScreenProps {
+  navigation: LikedScreenProp;
+}
+const LikedScreen = ({ navigation }: LikedScreenProps) => {
   const [modalVisible, setModalVisible] = useState(false);
 
   return (
     <View style={styles.screenContainer}>
-      <HeaderBtmTabs />
+      <HeaderBtmTabs navigation={navigation} />
       <View>
         <FlatList
           data={LikedData}
