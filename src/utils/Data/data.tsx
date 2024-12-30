@@ -246,7 +246,7 @@ export const BookPriceData = [
   { label: "Rs. 500 To Rs. 1000", value: "4", id: 4 },
   { label: "More then Rs 1000", value: "5", id: 4 },
 ];
-export const Categories = [
+export const CategoriesData = [
   { value: "1", label: "Anthropology" },
   { value: "2", label: "Antiques & Collectibles" },
   { value: "3", label: "Archaeology" },
@@ -357,7 +357,7 @@ export const CartItemsData = [
     ListPrice: "£12.99 = Rs.4746",
     AppPrice: {
       currency: "Rs.",
-      value: 2335, // Numeric value
+      value: 5, // Numeric value
     },
     // AppPrice: "Rs.2335",
     InStock: true,
@@ -371,7 +371,7 @@ export const CartItemsData = [
     ListPrice: "£12.99 = Rs.4746",
     AppPrice: {
       currency: "Rs.",
-      value: 2335, // Numeric value
+      value: 5, // Numeric value
     },
     //AppPrice: "Rs.2335",
     InStock: true,
@@ -465,5 +465,85 @@ export const AddressesData = [
     code: 54009,
     phone: +923456789012,
     email: "email@example.com",
+  },
+];
+export const CardDiscountData = [
+  {
+    id: 1,
+    BIN: 470556,
+    Category: "Credit",
+    Type: "Platinum",
+    Discount: "30%",
+    Cap: 2000,
+  },
+  {
+    id: 2,
+    BIN: 470556,
+    Category: "Credit",
+    Type: "Platinum",
+    Discount: "30%",
+    Cap: 2000,
+  },
+  {
+    id: 3,
+    BIN: 470556,
+    Category: "Credit",
+    Type: "Platinum",
+    Discount: "30%",
+    Cap: 2000,
+  },
+  {
+    id: 4,
+    BIN: 470556,
+    Category: "Credit",
+    Type: "Platinum",
+    Discount: "30%",
+    Cap: 2000,
+  },
+  {
+    id: 5,
+    BIN: 470556,
+    Category: "Credit",
+    Type: "Platinum",
+    Discount: "30%",
+    Cap: 2000,
+  },
+  {
+    id: 6,
+    BIN: 470556,
+    Category: "Credit",
+    Type: "Platinum",
+    Discount: "30%",
+    Cap: 2000,
+  },
+  {
+    id: 7,
+    BIN: 470556,
+    Category: "Credit",
+    Type: "Platinum",
+    Discount: "30%",
+    Cap: 2000,
+  },
+];
+export const CardDiscountMethodData = [
+  {
+    no: 1,
+    method:
+      "Lörem ipsum hexasm renera i teraryses. Bulig resora jest i dogt olon mudonat seminat. Tvillingshoppare fidong iskapet tehåling poköning i sus sure.",
+  },
+  {
+    no: 2,
+    method:
+      "Lörem ipsum hexasm renera i teraryses. Bulig resora jest i dogt olon mudonat seminat. Tvillingshoppare fidong iskapet tehåling poköning i sus sure.",
+  },
+  {
+    no: 3,
+    method:
+      "Lörem ipsum hexasm renera i teraryses. Bulig resora jest i dogt olon mudonat seminat. Tvillingshoppare fidong iskapet tehåling poköning i sus sure.",
+  },
+  {
+    no: 4,
+    method:
+      "Lörem ipsum hexasm renera i teraryses. Bulig resora jest i dogt olon mudonat seminat. Tvillingshoppare fidong iskapet tehåling poköning i sus sure.",
   },
 ];

@@ -52,12 +52,7 @@ const AllSubCategories = ({ navigation }: AllSubCategoriesProps) => {
             )}
           />
         </View>
-        <CustomButton
-          title="Apply"
-          fontSize={14}
-          fontWeight={"bold"}
-          onPress={() => navigation.goBack()}
-        />
+        <CustomButton title="Apply" onPress={() => navigation.goBack()} />
       </View>
     </View>
   );

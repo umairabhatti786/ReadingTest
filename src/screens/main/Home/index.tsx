@@ -23,15 +23,15 @@ import CustomText from "../../../components/CustomText";
 import BookCard from "../../../components/BookCard";
 import { HomeImgs, RecommendedData, tabs } from "../../../utils/Data/data";
 
-type HomeScreenNavigationProp = CompositeNavigationProp<
-  BottomTabNavigationProp<BottomTabParams, "HomeScreen">, // Tab-specific navigation
+type HomeNavigationProp = CompositeNavigationProp<
+  BottomTabNavigationProp<BottomTabParams, "Home">, // Tab-specific navigation
   StackNavigationProp<RootStackParamsList> // Root-level navigation
 >;
-interface HomeScreenProps {
-  navigation: HomeScreenNavigationProp;
+interface HomeProps {
+  navigation: HomeNavigationProp;
 }
 //..main fun..........
-const HomeScreen = ({ navigation }: HomeScreenProps) => {
+const Home = ({ navigation }: HomeProps) => {
   const { width } = Dimensions.get("window");
 
   //..main return
@@ -155,7 +155,7 @@ const HomeScreen = ({ navigation }: HomeScreenProps) => {
   );
 };
 
-export default HomeScreen;
+export default Home;
 
 const styles = StyleSheet.create({
   screenContainer: {

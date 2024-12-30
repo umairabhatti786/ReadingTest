@@ -4,15 +4,11 @@ import HeaderBtmTabs from "../../../components/HeaderBtmTabs";
 import { scale, verticalScale, moderateScale } from "react-native-size-matters";
 import { Colors } from "../../../utils/Colors";
 
-const OrdersScreen = () => {
-  return (
-    <View style={styles.screenContainer}>
-      <HeaderBtmTabs />
-    </View>
-  );
+const Orders = () => {
+  return <View style={styles.screenContainer}>{/* <HeaderBtmTabs /> */}</View>;
 };
 
-export default OrdersScreen;
+export default Orders;
 
 const styles = StyleSheet.create({
   screenContainer: {

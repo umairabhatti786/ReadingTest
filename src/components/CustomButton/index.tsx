@@ -54,9 +54,9 @@ const CustomButton = ({
       <CustomText
         text={title}
         color={color || Colors.white}
-        fontWeight={fontWeight || "bold"}
-        size={fontSize || 16}
-        fontFam={fontFamily || Fonts.bold}
+        fontWeight={fontWeight}
+        size={fontSize || 14}
+        fontFam={fontFamily || Fonts.regular}
       />
     </TouchableOpacity>
   );

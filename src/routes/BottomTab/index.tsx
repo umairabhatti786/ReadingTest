@@ -1,22 +1,26 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import HomeScreen from "../../screens/main/HomeScreen";
-import CategoriesScreen from "../../screens/main/CategoriesScreen";
-import OrdersScreen from "../../screens/main/OrdersScreen";
-import CartScreen from "../../screens/main/CartScreen";
-import LikedScreen from "../../screens/main/LikedScreen";
+import Home from "../../screens/main/Home";
+import CategoriesScreen from "../../screens/main/Categories";
+import OrdersScreen from "../../screens/main/Orders";
+import CartScreen from "../../screens/main/Cart";
+import LikedScreen from "../../screens/main/Liked";
 
 import { Image, StyleSheet, View } from "react-native";
 import React from "react";
 import { Colors } from "../../utils/Colors";
 import { s, vs } from "react-native-size-matters";
 import icons from "../../assets/icons";
+import Categories from "../../screens/main/Categories";
+import Orders from "../../screens/main/Orders";
+import Cart from "../../screens/main/Cart";
+import Liked from "../../screens/main/Liked";
 
 export type BottomTabParams = {
-  HomeScreen: any;
-  CategoriesScreen: any;
-  OrdersScreen: any;
-  CartScreen: any;
-  LikedScreen: any;
+  Home: any;
+  Categories: any;
+  Orders: any;
+  Cart: any;
+  Liked: any;
 };
 const Tab = createBottomTabNavigator<BottomTabParams>();
 
@@ -93,8 +97,8 @@ const BottomTab = () => {
       // })}
     >
       <Tab.Screen
-        name="HomeScreen"
-        component={HomeScreen}
+        name="Home"
+        component={Home}
         options={{
           tabBarIcon: ({ focused }) => (
             <View style={styles.iconContainer}>
@@ -110,8 +114,8 @@ const BottomTab = () => {
         }}
       />
       <Tab.Screen
-        name="CategoriesScreen"
-        component={CategoriesScreen}
+        name="Categories"
+        component={Categories}
         options={{
           tabBarIcon: ({ focused }) => (
             <View style={styles.iconContainer}>
@@ -128,8 +132,8 @@ const BottomTab = () => {
       />
 
       <Tab.Screen
-        name="OrdersScreen"
-        component={OrdersScreen}
+        name="Orders"
+        component={Orders}
         options={{
           tabBarIcon: ({ focused }) => (
             <View style={styles.iconContainer}>
@@ -145,8 +149,8 @@ const BottomTab = () => {
         }}
       />
       <Tab.Screen
-        name="CartScreen"
-        component={CartScreen}
+        name="Cart"
+        component={Cart}
         options={{
           tabBarIcon: ({ focused }) => (
             <View style={styles.iconContainer}>
@@ -162,8 +166,8 @@ const BottomTab = () => {
         }}
       />
       <Tab.Screen
-        name="LikedScreen"
-        component={LikedScreen}
+        name="Liked"
+        component={Liked}
         options={{
           tabBarIcon: ({ focused }) => (
             <View style={styles.iconContainer}>

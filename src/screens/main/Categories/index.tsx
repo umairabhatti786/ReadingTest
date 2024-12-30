@@ -10,7 +10,7 @@ import HeaderBtmTabs from "../../../components/HeaderBtmTabs";
 import { vs, s, ms } from "react-native-size-matters";
 import { Colors } from "../../../utils/Colors";
 import CustomTextInput from "../../../components/CustomTextInput";
-import { Categories } from "../../../utils/Data/data";
+import { CategoriesData } from "../../../utils/Data/data";
 import { BottomTabNavigationProp } from "@react-navigation/bottom-tabs";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamsList } from "../../../routes/RootNavigator";
@@ -19,28 +19,28 @@ import { BottomTabParams } from "../../../routes/BottomTab";
 import CustomText from "../../../components/CustomText";
 import icons from "../../../assets/icons";
 
-type CategoriesScreenProp = CompositeNavigationProp<
-  BottomTabNavigationProp<BottomTabParams, "CategoriesScreen">, // Tab-specific navigation
+type CategoriesProp = CompositeNavigationProp<
+  BottomTabNavigationProp<BottomTabParams, "Categories">, // Tab-specific navigation
   StackNavigationProp<RootStackParamsList> // Root-level navigation
 >;
-interface CategoriesScreenProps {
-  navigation: CategoriesScreenProp;
+interface CategoriesProps {
+  navigation: CategoriesProp;
 }
 //..main fun..........
-const CategoriesScreen = ({ navigation }: CategoriesScreenProps) => {
+const Categories = ({ navigation }: CategoriesProps) => {
   //....states.................
   const [searched, setSearched] = useState<string>("");
-  const [filteredCategories, setFilteredCategories] = useState(Categories);
+  const [filteredCategories, setFilteredCategories] = useState(CategoriesData);
 
   const handleFilter = (text: string) => {
     setSearched(text);
     if (text) {
-      const filteredData = Categories.filter((item) =>
+      const filteredData = CategoriesData.filter((item) =>
         item.label.toLowerCase().trim().includes(text.toLowerCase())
       );
       setFilteredCategories(filteredData);
     } else {
-      setFilteredCategories(Categories);
+      setFilteredCategories(CategoriesData);
     }
   };
 
@@ -71,7 +71,7 @@ const CategoriesScreen = ({ navigation }: CategoriesScreenProps) => {
   );
 };
 
-export default CategoriesScreen;
+export default Categories;
 
 const styles = StyleSheet.create({
   screenContainer: {
@@ -79,8 +79,9 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.primary,
   },
   content: {
+    flex: 1,
     marginHorizontal: s(20),
-    marginVertical: vs(20),
+    marginTop: vs(20),
     gap: vs(10),
   },
   Category: {
