@@ -34,5 +34,7 @@ export default {
   Minus: require("./minus.png"),
   PlusWhite: require("./plusWhite.png"),
   star: require("./star.png"),
+  selected: require("./selected.png"),
+  notSelect: require("./notSelect.png"),
   starColored: require("./starColored.png"),
 };

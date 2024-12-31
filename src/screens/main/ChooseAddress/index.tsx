@@ -79,7 +79,7 @@ const ChooseAddress = ({ navigation }: ChooseAddressProps) => {
         />
       </TouchableOpacity>
       <View style={[styles.layout, { flex: 1, justifyContent: "flex-end" }]}>
-        <CustomButton title="Select" />
+        <CustomButton title="Select" onPress={() => navigation.goBack()} />
       </View>
     </View>
   );

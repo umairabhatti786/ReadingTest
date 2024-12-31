@@ -543,3 +543,13 @@ export const CardDiscountMethodData = [
       "Lörem ipsum hexasm renera i teraryses. Bulig resora jest i dogt olon mudonat seminat. Tvillingshoppare fidong iskapet tehåling poköning i sus sure.",
   },
 ];
+export const bankCards = [
+  {
+    id: 1,
+    cardNumber: "----  ----  ----  1234",
+  },
+  {
+    id: 2,
+    cardNumber: "----  ----  ----  1234",
+  },
+];

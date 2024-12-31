@@ -22,6 +22,8 @@ import CountryDropDown from "../../../components/CountryDropDown";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamsList } from "../../../routes/RootNavigator";
 import ModalScreen from "../../../components/ModalScreen";
+import { bankCards } from "../../../utils/Data/data";
+import BankCards from "../../../components/BankCards";
 
 // ..................types.....................
 
@@ -31,16 +33,6 @@ interface SendGiftCardScreenProps {
 
 //............................main func....................
 const SendGiftCardScreen = ({ navigation }: SendGiftCardScreenProps) => {
-  const cards = [
-    {
-      id: 1,
-      cardNumber: "----  ----  ----  1234",
-    },
-    {
-      id: 2,
-      cardNumber: "----  ----  ----  1234",
-    },
-  ];
   const [cardSelected, setCardSelected] = useState<number | null>(null);
   //...for country selection...........
   const [RecipientCountry, setRecipientCountry] = useState<Country | null>({
@@ -199,31 +191,7 @@ const SendGiftCardScreen = ({ navigation }: SendGiftCardScreenProps) => {
             fontWeight={"bold"}
             style={{ marginHorizontal: s(20) }}
           />
-          <ScrollView
-            horizontal={true}
-            showsHorizontalScrollIndicator={false}
-            contentContainerStyle={styles.cards}
-          >
-            {cards.map((card, index) => (
-              <View key={card.id} style={styles.card}>
-                <CustomTextInput
-                  placeholder={card.cardNumber}
-                  icon={icons.visa2}
-                  iconHeight={35}
-                  iconWidth={35}
-                  width={250}
-                  iconStyle={{ marginRight: s(10) }}
-                />
-                <TouchableOpacity
-                  style={styles.circle}
-                  onPress={() => setCardSelected(index)}
-                >
-                  {cardSelected === index && <View style={styles.select} />}
-                </TouchableOpacity>
-              </View>
-            ))}
-          </ScrollView>
-
+          <BankCards />
           <TouchableOpacity
             onPress={() => setAddNewCard(true)}
             style={styles.newCardBtn}

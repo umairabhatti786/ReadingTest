@@ -1,14 +1,14 @@
 import { FlatList, StyleSheet, TouchableOpacity, View } from "react-native";
 import React, { useState } from "react";
-
-import { StackNavigationProp } from "@react-navigation/stack";
-import { RootStackParamsList } from "../../../routes/RootNavigator";
 import Header from "../../../components/Header";
 import { Colors } from "../../../utils/Colors";
 import { ms, s, vs } from "react-native-size-matters";
 import { SubCategories } from "../../../utils/Data/data";
 import CustomText from "../../../components/CustomText";
 import CustomButton from "../../../components/CustomButton";
+
+import { StackNavigationProp } from "@react-navigation/stack";
+import { RootStackParamsList } from "../../../routes/RootNavigator";
 // ..................types.....................
 interface AllSubCategoriesProps {
   navigation: StackNavigationProp<RootStackParamsList, "AllSubCategories">;
