@@ -2,14 +2,12 @@ import { ScrollView, StyleSheet, TouchableOpacity, View } from "react-native";
 import React, { useState } from "react";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamsList } from "../../../routes/RootNavigator";
-import { moderateScale, scale, verticalScale } from "react-native-size-matters";
+import { ms, s, vs } from "react-native-size-matters";
 import { Colors } from "../../../utils/Colors";
 import Header from "../../../components/Header";
 import CustomText from "../../../components/CustomText";
 import CustomButton from "../../../components/CustomButton";
-import CustomTextInput from "../../../components/CustomTextInput";
-import icons from "../../../assets/icons";
-import HeaderBtmTabs from "../../../components/HeaderBtmTabs";
+import { AddressesData } from "../../../utils/Data/data";
 
 interface ChooseAddressProps {
   navigation: StackNavigationProp<RootStackParamsList, "ChooseAddress">;
@@ -17,65 +15,72 @@ interface ChooseAddressProps {
 
 const ChooseAddress = ({ navigation }: ChooseAddressProps) => {
   const [selected, setSelected] = useState<number | null>(null);
-  const addresses = [
-    {
-      id: 1,
-      title: "359 American Scheme Block B9",
-      details: "Lahore, Pakistan,54009,+92 345 678 9012,email@example.com",
-    },
-    {
-      id: 2,
-      title: "123 Another Street Block A",
-      details: "Karachi, Pakistan,54001,+92 123 456 7890,another@example.com",
-    },
-  ];
 
   return (
     <View style={styles.screenContainer}>
-      <View>
+      <View style={styles.layout}>
         <Header title="Choose Address" />
-        <CustomText
-          text={"Saved Addresses"}
-          fontWeight="bold"
-          size={18}
-          marginVertical={verticalScale(15)}
-        />
-        <ScrollView
-          horizontal={true}
-          showsHorizontalScrollIndicator={false}
-          contentContainerStyle={{
-            marginBottom: verticalScale(10),
-          }}
-        >
-          {addresses.map((addresses, index) => (
-            <View key={addresses.id} style={styles.addressVw}>
-              <View
-                style={{
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                }}
-              >
-                <CustomText text={addresses.title} fontWeight="bold" />
-                <TouchableOpacity
-                  style={styles.circle}
-                  onPress={() => setSelected(index)}
-                >
-                  {selected === index && <View style={styles.select} />}
-                </TouchableOpacity>
-              </View>
-              <CustomText text={addresses.details} size={12} />
-            </View>
-          ))}
-        </ScrollView>
-        <TouchableOpacity onPress={() => navigation.navigate("NewAddress")}>
-          <CustomText
-            text={"Add New Address +"}
-            color={Colors.blue}
-            fontWeight="bold"
-          />
-        </TouchableOpacity>
+        <CustomText text={"Saved Addresses"} fontWeight="bold" size={18} />
       </View>
-      <CustomButton title="Select" />
+      {/* ..........adresses.................. */}
+      <ScrollView
+        horizontal={true}
+        showsHorizontalScrollIndicator={false}
+        contentContainerStyle={{
+          //marginVertical: vs(15),
+          paddingHorizontal: s(20),
+          gap: s(7),
+          flexGrow: 0,
+        }}
+        style={{ marginVertical: vs(15), flexGrow: 0 }}
+      >
+        {AddressesData.map((addresses, index) => (
+          <View key={addresses.id} style={styles.addressVw}>
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+              }}
+            >
+              <CustomText text={addresses.house} fontWeight="bold" />
+              <TouchableOpacity
+                style={styles.circle}
+                onPress={() => setSelected(index)}
+              >
+                {selected === index && <View style={styles.select} />}
+              </TouchableOpacity>
+            </View>
+            <View>
+              <CustomText text={addresses.city} size={12} color={Colors.gray} />
+              <CustomText text={addresses.code} size={12} color={Colors.gray} />
+              <CustomText
+                text={addresses.phone}
+                size={12}
+                color={Colors.gray}
+              />
+              <CustomText
+                text={addresses.email}
+                size={12}
+                color={Colors.gray}
+              />
+            </View>
+          </View>
+        ))}
+      </ScrollView>
+      {/* ......................Add New Address +.................. */}
+      <TouchableOpacity
+        onPress={() => navigation.navigate("NewAddress")}
+        style={styles.addbtn}
+      >
+        <CustomText
+          text={"Add New Address +"}
+          color={Colors.blue}
+          fontWeight="bold"
+        />
+      </TouchableOpacity>
+      <View style={[styles.layout, { flex: 1, justifyContent: "flex-end" }]}>
+        <CustomButton title="Select" />
+      </View>
     </View>
   );
 };
@@ -86,33 +91,37 @@ const styles = StyleSheet.create({
   screenContainer: {
     flex: 1,
     backgroundColor: Colors.primary,
-    marginHorizontal: scale(20),
-    marginVertical: verticalScale(10),
-    marginTop: moderateScale(10),
-    marginBottom: moderateScale(20),
+    marginTop: vs(20),
     justifyContent: "space-between",
+  },
+  layout: {
+    marginHorizontal: s(20),
+    gap: vs(15),
+  },
+  addbtn: {
+    marginHorizontal: s(20),
   },
   addressVw: {
     backgroundColor: Colors.white,
-    width: scale(292),
-    height: verticalScale(120),
-    padding: moderateScale(10),
-    borderRadius: moderateScale(10),
-    marginRight: verticalScale(5),
+    width: s(292),
+    height: vs(120),
+    padding: ms(15),
+    borderRadius: ms(10),
+    gap: vs(15),
   },
   circle: {
-    height: verticalScale(16),
-    width: scale(16),
-    borderRadius: moderateScale(100),
-    borderWidth: scale(2),
+    height: vs(16),
+    width: s(16),
+    borderRadius: ms(100),
+    borderWidth: s(2),
     borderColor: Colors.orange,
     alignItems: "center",
     justifyContent: "center",
   },
   select: {
-    height: verticalScale(8),
-    width: scale(8),
-    borderRadius: moderateScale(100),
+    height: vs(8),
+    width: s(8),
+    borderRadius: ms(100),
     backgroundColor: Colors.orange,
   },
 });

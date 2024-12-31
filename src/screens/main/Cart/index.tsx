@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import React, { useState } from "react";
 import HeaderBtmTabs from "../../../components/HeaderBtmTabs";
 import { Colors } from "../../../utils/Colors";
@@ -72,7 +72,10 @@ const Cart = ({ navigation }: CartProps) => {
                 }`}
               />
             </View>
-            <CustomButton title="Checkout" />
+            <CustomButton
+              title="Checkout"
+              onPress={() => navigation.navigate("Checkout")}
+            />
           </View>
         </View>
       </View>
