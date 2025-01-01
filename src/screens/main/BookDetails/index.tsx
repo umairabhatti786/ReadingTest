@@ -438,10 +438,10 @@ const BookDetails = ({ navigation }: BookDetailsProps) => {
               />
               {/* //..order details in buy now bottom sheet */}
               <View style={styles.buyerInfo}>
-                <CustomText text={"Dispatch"} size={12} color={Colors.gray} />
                 <TouchableOpacity
                   onPress={() => navigation.navigate("ChooseAddress")}
                 >
+                  <CustomText text={"Dispatch"} size={12} color={Colors.gray} />
                   <CustomText
                     text={"359 American Scheme Block B9"}
                     size={12}
@@ -450,12 +450,16 @@ const BookDetails = ({ navigation }: BookDetailsProps) => {
                 </TouchableOpacity>
               </View>
               <View style={styles.buyerInfo}>
-                <CustomText text={"Pay With"} size={12} color={Colors.gray} />
-                <CustomText
-                  text={"VISA ---- 1234"}
-                  size={12}
-                  color={Colors.black}
-                />
+                <TouchableOpacity
+                  onPress={() => navigation.navigate("ChoosePaymentMethod")}
+                >
+                  <CustomText text={"Pay With"} size={12} color={Colors.gray} />
+                  <CustomText
+                    text={"VISA ---- 1234"}
+                    size={12}
+                    color={Colors.black}
+                  />
+                </TouchableOpacity>
               </View>
               <View style={styles.buyerInfo}>
                 <CustomText text={"Total"} size={12} color={Colors.gray} />

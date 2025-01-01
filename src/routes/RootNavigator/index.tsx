@@ -27,6 +27,7 @@ import CardDiscounts from "../../screens/main/CardDiscounts";
 import SubCategories from "../../screens/main/SubCategories";
 import AllSubCategories from "../../screens/main/AllSubCategories";
 import Checkout from "../../screens/main/Checkout";
+import ChoosePaymentMethod from "../../screens/main/ChoosePaymentMethod";
 
 export type RootStackParamsList = {
   SignUpScreen: any;
@@ -53,6 +54,7 @@ export type RootStackParamsList = {
   SubCategories: any;
   AllSubCategories: any;
   Checkout: any;
+  ChoosePaymentMethod: any;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamsList>();
@@ -68,6 +70,10 @@ const RootNavigator = () => {
         <Stack.Screen name="HelpNSupport" component={HelpNSupport} />
         <Stack.Screen name="About" component={About} />
         <Stack.Screen name="Terms" component={Terms} />
+        <Stack.Screen
+          name="ChoosePaymentMethod"
+          component={ChoosePaymentMethod}
+        />
         <Stack.Screen name="AllSubCategories" component={AllSubCategories} />
         <Stack.Screen name="SubCategories" component={SubCategories} />
         <Stack.Screen name="PrivacyPolicy" component={PrivacyPolicy} />

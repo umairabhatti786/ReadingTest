@@ -11,11 +11,7 @@ import Header from "../../../components/Header";
 import { Colors } from "../../../utils/Colors";
 import { ms, s, vs } from "react-native-size-matters";
 import CustomText from "../../../components/CustomText";
-import {
-  AddressesData,
-  bankCards,
-  CartItemsData,
-} from "../../../utils/Data/data";
+import { AddressesData, CartItemsData } from "../../../utils/Data/data";
 import icons from "../../../assets/icons";
 
 import { StackNavigationProp } from "@react-navigation/stack";
@@ -36,7 +32,6 @@ const Checkout = ({ navigation }: CheckoutProps) => {
   const [onlinePaymentMethod, setOnlinePaymentMethod] = useState<string | null>(
     null
   );
-  const [bankCardSelected, setBankCardSelected] = useState<number | null>(null);
 
   return (
     <View style={styles.screenContainer}>
@@ -493,7 +488,6 @@ const styles = StyleSheet.create({
     borderRadius: ms(10),
     flexDirection: "row",
     justifyContent: "space-between",
-    // flex: 1,
   },
   applyBtn: {
     backgroundColor: Colors.blue,
@@ -510,20 +504,6 @@ const styles = StyleSheet.create({
     padding: ms(15),
     gap: vs(10),
     borderRadius: ms(10),
-  },
-  //....bank cards
-  cards: {
-    marginTop: vs(10),
-    paddingHorizontal: s(20),
-    gap: s(10),
-  },
-  card: {
-    flexDirection: "row",
-    height: vs(50),
-    width: s(240),
-    backgroundColor: Colors.white,
-    borderRadius: ms(10),
-    alignItems: "center",
   },
   bankTransfer: {
     backgroundColor: Colors.white,

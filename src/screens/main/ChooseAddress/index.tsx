@@ -1,7 +1,5 @@
 import { ScrollView, StyleSheet, TouchableOpacity, View } from "react-native";
 import React, { useState } from "react";
-import { StackNavigationProp } from "@react-navigation/stack";
-import { RootStackParamsList } from "../../../routes/RootNavigator";
 import { ms, s, vs } from "react-native-size-matters";
 import { Colors } from "../../../utils/Colors";
 import Header from "../../../components/Header";
@@ -9,6 +7,8 @@ import CustomText from "../../../components/CustomText";
 import CustomButton from "../../../components/CustomButton";
 import { AddressesData } from "../../../utils/Data/data";
 
+import { StackNavigationProp } from "@react-navigation/stack";
+import { RootStackParamsList } from "../../../routes/RootNavigator";
 interface ChooseAddressProps {
   navigation: StackNavigationProp<RootStackParamsList, "ChooseAddress">;
 }
@@ -19,7 +19,7 @@ const ChooseAddress = ({ navigation }: ChooseAddressProps) => {
   return (
     <View style={styles.screenContainer}>
       <View style={styles.layout}>
-        <Header title="Choose Address" />
+        <Header title="Choose Address" onPress={() => navigation.goBack()} />
         <CustomText text={"Saved Addresses"} fontWeight="bold" size={18} />
       </View>
       {/* ..........adresses.................. */}

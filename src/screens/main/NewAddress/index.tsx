@@ -121,7 +121,7 @@ const styles = StyleSheet.create({
   content: {
     gap: vs(20),
     marginHorizontal: s(20),
-    marginBottom: vs(20),
+    marginTop: vs(20),
   },
   countryContainer: {
     flexDirection: "row",
