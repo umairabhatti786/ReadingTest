@@ -75,7 +75,11 @@ const Orders = ({ navigation }: OrdersProps) => {
                 />
               </View>
               <TouchableOpacity style={styles.detailsBtn}>
-                <CustomText text="Details" color={Colors.blue} />
+                <CustomText
+                  text="Details"
+                  color={Colors.blue}
+                  onPress={() => navigation.navigate("OrderDetails")}
+                />
               </TouchableOpacity>
             </View>
             <View style={styles.line} />
@@ -100,7 +104,11 @@ const Orders = ({ navigation }: OrdersProps) => {
                     />
                   </View>
                   <TouchableOpacity style={styles.detailsBtn}>
-                    <CustomText text="Details" color={Colors.blue} />
+                    <CustomText
+                      text="Details"
+                      color={Colors.blue}
+                      onPress={() => navigation.navigate("OrderDetails")}
+                    />
                   </TouchableOpacity>
                 </View>
                 <View style={styles.line} />
