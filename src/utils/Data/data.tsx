@@ -553,3 +553,44 @@ export const bankCards = [
     cardNumber: "----  ----  ----  1234",
   },
 ];
+export const ordersData = [
+  {
+    orderNo: "ORDER123456",
+    Amount: {
+      id: 1,
+      currency: "Rs.",
+      value: 4000, // Numeric value
+    },
+    status: "Out for Delivery",
+  },
+  {
+    id: 2,
+    orderNo: "ORDER123456",
+    Title: "Love, Poverty and War",
+    Amount: {
+      currency: "Rs.",
+      value: 4000, // Numeric value
+    },
+    status: "Out for Delivery",
+  },
+];
+export const odersHistoryData = [
+  {
+    id: 1,
+    orderNo: "ORDER123456",
+    Amount: "Amount: Rs. 4000",
+    status: "Order Received",
+  },
+  {
+    id: 2,
+    orderNo: "ORDER123456",
+    Amount: "Amount: Rs. 4000",
+    status: "Order Received",
+  },
+  {
+    id: 3,
+    orderNo: "ORDER123456",
+    Amount: "Amount: Rs. 4000",
+    status: "Order Received",
+  },
+];
