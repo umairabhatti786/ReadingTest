@@ -32,15 +32,12 @@ import ModalScreen from "../../../components/ModalScreen";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamsList } from "../../../routes/RootNavigator";
 // ..................types.....................
-
 interface BookDetailsProps {
   navigation: StackNavigationProp<RootStackParamsList, "BookDetails">;
 }
-
 //............................main func....................
 const BookDetails = ({ navigation }: BookDetailsProps) => {
-  //...for buy Now Bottom Sheet
-  const buyNowbottomSheetModalRef = useRef<BottomSheetModal>(null);
+  const buyNowbottomSheetModalRef = useRef<BottomSheetModal>(null); //...for buy Now Bottom Sheet
   const snapPoints = useMemo(() => ["70%", "60%", "50%"], []);
   const openBottomSheet = () => {
     buyNowbottomSheetModalRef.current?.present(); // Open the BottomSheet
@@ -48,9 +45,7 @@ const BookDetails = ({ navigation }: BookDetailsProps) => {
   const handleDismiss = () => {
     buyNowbottomSheetModalRef.current?.dismiss(); // close bottom sheet
   };
-  //...for write review Bottom Sheet
-  const writwReviewSheetRef = useRef<BottomSheetModal>(null);
-  // const snapPoints2 = useMemo(() => ["90%", "80%", "70%"], []);
+  const writwReviewSheetRef = useRef<BottomSheetModal>(null); //...for write review Bottom Sheet
   const openBottomSheet2 = () => {
     writwReviewSheetRef.current?.present(); // Open the BottomSheet
   };
@@ -62,14 +57,10 @@ const BookDetails = ({ navigation }: BookDetailsProps) => {
     setBookQuantity(itemQuantity);
   };
   const [bookQuantity, setBookQuantity] = useState(0);
+  const firstItem = CartItemsData[0]; // Access the first object in the data array
+  const [ratingIndex, setRatingIndex] = useState(0); //..for  stars rating.......
+  const [showQuantity, setShowQuantity] = useState(false); //.. on add to cart pressed....
 
-  // Access the first object in the data array
-  const firstItem = CartItemsData[0];
-  //...............for  stars rating..................
-  const [ratingIndex, setRatingIndex] = useState(0);
-
-  //.......... on add to cart pressed...........
-  const [showQuantity, setShowQuantity] = useState(false);
   const [itemQuantity, setItemQuantity] = useState(1);
   const handleIncrease = () => {
     // Increment the quantity first, then notify the parent
@@ -88,10 +79,8 @@ const BookDetails = ({ navigation }: BookDetailsProps) => {
       });
     }
   };
-  //...for review added modal
-  const [reviewAddedModal, setReviewAddedModal] = useState(false);
-  //..for order receive modal
-  const [orderReceiveModal, setOrderReceiveModal] = useState(false);
+  const [reviewAddedModal, setReviewAddedModal] = useState(false); //...for review added modal
+  const [orderReceiveModal, setOrderReceiveModal] = useState(false); //..for order receive modal
   //..handle revie submit button
   const handleReviewSubmit = () => {
     writwReviewSheetRef.current?.dismiss(); // close bottom sheet
@@ -106,6 +95,20 @@ const BookDetails = ({ navigation }: BookDetailsProps) => {
         <ScrollView showsVerticalScrollIndicator={false}>
           <ImageBackground source={imgs.hobbit} style={styles.imgBG}>
             <View style={styles.overlay} />
+            <View style={styles.header}>
+              <Image source={icons.ArrowLeft} style={styles.backArrow} />
+              <TouchableOpacity>
+                <Image source={icons.CartBlack} style={styles.backArrow} />
+                {/* Cart Count View */}
+                <View style={styles.cartItems}>
+                  <CustomText
+                    text={CartItemsData.length.toString()}
+                    color={Colors.white}
+                    size={10}
+                  />
+                </View>
+              </TouchableOpacity>
+            </View>
             <Image source={imgs.hobbit} style={styles.img} />
           </ImageBackground>
 
@@ -526,21 +529,41 @@ const styles = StyleSheet.create({
   main: {
     flex: 1,
     backgroundColor: Colors.primary,
-    // textDecorationLine: "underline",
   },
   imgBG: {
     height: vs(320),
     // height: 376,
     justifyContent: "center",
-    alignItems: "center",
+    paddingHorizontal: s(20),
   },
   overlay: {
     backgroundColor: "rgba(255, 255, 255, 0.7)",
     ...StyleSheet.absoluteFillObject, // This makes the overlay fill the entire ImageBackground
   },
+  header: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  backArrow: {
+    height: s(15),
+    width: s(15),
+    resizeMode: "contain",
+  },
+  cartItems: {
+    height: s(15),
+    width: s(15),
+    backgroundColor: Colors.orange,
+    borderRadius: 50,
+    alignItems: "center",
+    justifyContent: "center",
+    position: "absolute",
+    top: -10,
+    right: -10,
+  },
   img: {
     height: vs(190),
     width: s(120),
+    alignSelf: "center",
     // height: 220,
     // width: 143,
   },
@@ -549,22 +572,18 @@ const styles = StyleSheet.create({
     marginVertical: vs(10),
   },
   AvailabilityVw: {
-    //flexDirection: "row",
-    // justifyContent: "space-between",
     marginTop: vs(15),
     gap: s(5),
   },
   Avail: {
     flexDirection: "row",
     justifyContent: "space-between",
-    // borderWidth: 0.5,
     alignItems: "center",
   },
   detailsVw: {
     gap: ms(12),
     flexDirection: "row",
     flexWrap: "wrap",
-    // justifyContent: "space-between",
     marginTop: vs(10),
   },
   detail: {
@@ -580,7 +599,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     width: s(100),
-    // padding: ms(15),
     height: vs(45),
     backgroundColor: Colors.white,
     borderRadius: ms(10),
@@ -589,7 +607,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     width: s(45),
-    //padding: ms(15),
     height: vs(45),
     backgroundColor: Colors.white,
     borderRadius: ms(10),

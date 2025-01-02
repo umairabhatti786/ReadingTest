@@ -6,7 +6,7 @@ import Header from "../../../components/Header";
 import CustomTextInput from "../../../components/CustomTextInput";
 import CustomButton from "../../../components/CustomButton";
 import {
-  Categories,
+  CategoriesData,
   BookLanguageData,
   BookFormatData,
   BookPriceData,
@@ -42,51 +42,57 @@ const Filters = ({ navigation }: FiltersProps) => {
 
   return (
     <View style={styles.screenContainer}>
-      <View style={styles.content}>
-        <Header title="Filters" onPress={() => navigation.goBack()} />
-        <CustomTextInput placeholder="keyword" />
-        <CustomTextInput placeholder="Title" />
-        <CustomTextInput placeholder="Author" />
-        <CustomTextInput placeholder="ISBN" />
-        {/* ........................DropDown for catagories................ */}
-        <DropDown
-          value={category}
-          data={Categories}
-          placeholder="Category"
-          onChange={(selectedItem) => setCategory(selectedItem)}
-        />
-        <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
-          <CustomTextInput placeholder="Publisher" width={s(150)} />
-          <CustomTextInput placeholder="Publication Year" width={s(150)} />
-        </View>
-        {/* ........................DropDown for language................ */}
-        <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+      <View style={styles.layout}>
+        <View style={styles.content}>
+          <Header title="Filters" onPress={() => navigation.goBack()} />
+          <CustomTextInput placeholder="keyword" />
+          <CustomTextInput placeholder="Title" />
+          <CustomTextInput placeholder="Author" />
+          <CustomTextInput placeholder="ISBN" />
+          {/* ........................DropDown for catagories................ */}
           <DropDown
-            value={language}
-            data={BookLanguageData}
-            placeholder="language"
-            onChange={(selectedItem) => setLanguage(selectedItem)}
-            width={s(150)}
+            value={category}
+            data={CategoriesData}
+            placeholder="Category"
+            onChange={(selectedItem) => setCategory(selectedItem)}
           />
-          {/* ........................DropDown for Formats................ */}
+          <View
+            style={{ flexDirection: "row", justifyContent: "space-between" }}
+          >
+            <CustomTextInput placeholder="Publisher" width={s(150)} />
+            <CustomTextInput placeholder="Publication Year" width={s(150)} />
+          </View>
+          {/* ........................DropDown for language................ */}
+          <View
+            style={{ flexDirection: "row", justifyContent: "space-between" }}
+          >
+            <DropDown
+              value={language}
+              data={BookLanguageData}
+              placeholder="language"
+              onChange={(selectedItem) => setLanguage(selectedItem)}
+              width={s(150)}
+            />
+            {/* ........................DropDown for Formats................ */}
 
+            <DropDown
+              value={format}
+              data={BookFormatData}
+              placeholder="Formats"
+              onChange={(selectedItem) => setFormat(selectedItem)}
+              width={s(150)}
+            />
+          </View>
+          {/* ........................DropDown for priceRange................ */}
           <DropDown
-            value={format}
-            data={BookFormatData}
-            placeholder="Formats"
-            onChange={(selectedItem) => setFormat(selectedItem)}
-            width={s(150)}
+            value={priceRange}
+            data={BookPriceData}
+            placeholder="Price range"
+            onChange={(selectedItem) => setPriceRange(selectedItem)}
           />
         </View>
-        {/* ........................DropDown for priceRange................ */}
-        <DropDown
-          value={priceRange}
-          data={BookPriceData}
-          placeholder="Price range"
-          onChange={(selectedItem) => setPriceRange(selectedItem)}
-        />
+        <CustomButton title="Apply" />
       </View>
-      <CustomButton title="Apply" />
     </View>
   );
 };
@@ -97,13 +103,14 @@ const styles = StyleSheet.create({
   screenContainer: {
     flex: 1,
     backgroundColor: Colors.primary,
-    marginHorizontal: s(20),
-    marginTop: ms(10),
-    marginBottom: ms(20),
+  },
+  layout: {
+    flex: 1,
     justifyContent: "space-between",
+    marginHorizontal: s(20),
+    marginTop: vs(20),
   },
   content: {
     gap: vs(15),
-    marginBottom: vs(20),
   },
 });
