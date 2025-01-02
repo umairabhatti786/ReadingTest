@@ -23,52 +23,53 @@ const ForgotPasswordScreen = ({ navigation }: ForgotPasswordScreenProps) => {
 
   return (
     <View style={styles.screenContainer}>
-      <View>
-        <Header title="Forgot Password" />
-        <CustomText
-          text={"Enter your email address so we send you a reset password link"}
-          marginTop={10}
+      <View style={styles.layout}>
+        <View style={styles.content}>
+          <Header title="Forgot Password" onPress={() => navigation.goBack()} />
+          <CustomText
+            text={
+              "Enter your email address so we send you a reset password link"
+            }
+          />
+          <CustomTextInput
+            placeholder="Email Address"
+            inputContainerStyle={{ marginTop: vs(10) }}
+          />
+        </View>
+        <CustomButton
+          title="Reset Password"
+          onPress={() => setModalVisible(true)}
         />
-        <CustomTextInput placeholder="Email Address" marginVertical={10} />
-      </View>
-      <CustomButton
-        title="Reset Password"
-        onPress={() => setModalVisible(true)}
-      />
-      {/* ...............Modal..................... */}
-      <Modal
-        animationType="slide" // Options: 'none', 'slide', 'fade'
-        transparent={true} // Makes modal background transparent
-        visible={modalVisible}
-        onRequestClose={() => setModalVisible(false)} // Handles back button on Android
-      >
-        <View style={styles.modalOverlay}>
-          <View style={styles.modal}>
-            <View style={styles.modalContent}>
-              <Image source={imgs.ok} style={styles.ok} />
-              <CustomText
-                text={"Email Sent"}
-                fontWeight="bold"
-                marginTop={20}
-              />
-              <CustomText
-                text={
-                  "A reset password link has been sent to your email. Please follow the link to reset your password."
-                }
-                marginTop={15}
-                textAlign="center"
+        {/* ...............Modal..................... */}
+        <Modal
+          animationType="slide" // Options: 'none', 'slide', 'fade'
+          transparent={true} // Makes modal background transparent
+          visible={modalVisible}
+          onRequestClose={() => setModalVisible(false)} // Handles back button on Android
+        >
+          <View style={styles.modalOverlay}>
+            <View style={styles.modal}>
+              <View style={styles.modalContent}>
+                <Image source={imgs.ok} style={styles.ok} />
+                <CustomText text={"Email Sent"} fontWeight="bold" />
+                <CustomText
+                  text={
+                    "A reset password link has been sent to your email. Please follow the link to reset your password."
+                  }
+                  style={{ textAlign: "center" }}
+                />
+              </View>
+              <CustomButton
+                title="Great!"
+                onPress={() => {
+                  setModalVisible(false);
+                  navigation.navigate("LoginScreen");
+                }}
               />
             </View>
-            <CustomButton
-              title="Great!"
-              onPress={() => {
-                setModalVisible(false);
-                navigation.navigate("LoginScreen");
-              }}
-            />
           </View>
-        </View>
-      </Modal>
+        </Modal>
+      </View>
     </View>
   );
 };
@@ -79,11 +80,15 @@ const styles = StyleSheet.create({
   screenContainer: {
     flex: 1,
     backgroundColor: Colors.primary,
+  },
+  layout: {
+    flex: 1,
     marginHorizontal: s(20),
-    marginVertical: vs(10),
-    marginTop: ms(10),
-    marginBottom: ms(20),
+    marginVertical: vs(20),
     justifyContent: "space-between",
+  },
+  content: {
+    gap: vs(15),
   },
   modalOverlay: {
     flex: 1,
@@ -109,6 +114,7 @@ const styles = StyleSheet.create({
   },
   modalContent: {
     alignItems: "center",
+    gap: vs(15),
   },
   ok: {
     height: vs(80),

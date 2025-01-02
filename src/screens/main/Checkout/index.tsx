@@ -40,7 +40,7 @@ const Checkout = ({ navigation }: CheckoutProps) => {
           contentContainerStyle={styles.scroll}
           showsVerticalScrollIndicator={false}
         >
-          <Header title="Checkout" />
+          <Header title="Checkout" onPress={() => navigation.goBack()} />
           <CustomText text="Add your optional payment method to save for future purchases." />
           {/* ..............select Address.......... */}
           <View style={styles.addressVw}>
@@ -59,7 +59,11 @@ const Checkout = ({ navigation }: CheckoutProps) => {
               </TouchableOpacity>
             </View>
             <View>
-              <CustomText text={myAdress.city} size={12} color={Colors.gray} />
+              <CustomText
+                text={`${myAdress.city}, ${myAdress.country}`}
+                size={12}
+                color={Colors.gray}
+              />
               <CustomText text={myAdress.code} size={12} color={Colors.gray} />
               <CustomText text={myAdress.phone} size={12} color={Colors.gray} />
               <CustomText text={myAdress.email} size={12} color={Colors.gray} />
@@ -95,7 +99,7 @@ const Checkout = ({ navigation }: CheckoutProps) => {
                 style={{ marginTop: vs(10) }}
               >
                 <CustomText
-                  text={"Add New Address +"}
+                  text={"Add Biling Address +"}
                   color={Colors.blue}
                   fontWeight="bold"
                 />
@@ -170,7 +174,21 @@ const Checkout = ({ navigation }: CheckoutProps) => {
                   <CustomText text="Jazzcash / Easypaisa" size={12} />
                 </TouchableOpacity>
 
-                {onlinePaymentMethod == "Card" && <BankCards />}
+                {onlinePaymentMethod == "Card" && (
+                  <View>
+                    <BankCards />
+                    <TouchableOpacity
+                      onPress={() => navigation.navigate("PaymentScreen2")}
+                      style={{ marginTop: vs(10) }}
+                    >
+                      <CustomText
+                        text={"Add New Card +"}
+                        color={Colors.blue}
+                        fontWeight="bold"
+                      />
+                    </TouchableOpacity>
+                  </View>
+                )}
                 {onlinePaymentMethod == "Bank Transfer" && (
                   <View style={{ gap: vs(10) }}>
                     <CustomText
@@ -411,6 +429,7 @@ const styles = StyleSheet.create({
   content: {
     flex: 1,
     marginHorizontal: s(20),
+    marginTop: vs(20),
   },
   scroll: {
     marginTop: vs(20),
@@ -419,10 +438,11 @@ const styles = StyleSheet.create({
   },
   addressVw: {
     backgroundColor: Colors.white,
-    height: vs(120),
+    height: vs(100),
+    //height: 120,
     padding: ms(15),
     borderRadius: ms(10),
-    gap: vs(15),
+    gap: vs(5),
   },
   circle: {
     height: vs(16),

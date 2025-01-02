@@ -14,13 +14,7 @@ import CustomButton from "../../../components/CustomButton";
 import { emailReges } from "../../../utils/Reges";
 import icons from "../../../assets/icons";
 import Fonts from "../../../utils/Fonts";
-import {
-  scale,
-  verticalScale,
-  moderateScale,
-  vs,
-  s,
-} from "react-native-size-matters";
+import { vs, s, ms } from "react-native-size-matters";
 
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamsList } from "../../../routes/RootNavigator";
@@ -195,15 +189,13 @@ const LoginScreen = ({ navigation }: LoginScreenProps) => {
           <Header title="Login" onPress={() => navigation.goBack()} />
           <CustomText
             text={"Enter your email address and password to login."}
-            color={Colors.black}
-            fontFam={Fonts.regular}
             style={{
               marginTop: vs(10),
               marginLeft: s(5),
               marginBottom: vs(20),
             }}
           />
-          {/* ...................Email............................................ */}
+          {/* ...................Email....................... */}
           <CustomTextInput
             placeholder="Email Address"
             secureTextEntry={false}
@@ -287,11 +279,8 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.primary,
   },
   scrollContainer: {
-    marginHorizontal: scale(20),
-    marginVertical: verticalScale(10),
-    marginTop: moderateScale(10),
-    marginBottom: moderateScale(20),
-    // justifyContent: "space-between",
+    marginHorizontal: s(20),
+    marginVertical: vs(20),
     flexGrow: 1,
   },
   line: {

@@ -433,7 +433,9 @@ export const AddressesData = [
   {
     id: "1",
     house: "359 American Scheme Block B9",
-    city: "Lahore,Pakistan",
+    // text={`${item.city}, ${item.country}`}
+    city: "Lahore",
+    country: "Pakistan",
     code: "54009",
     phone: "+923456789012",
     email: "email@example.com",
@@ -441,7 +443,8 @@ export const AddressesData = [
   {
     id: "2",
     house: "359 American Scheme Block B9",
-    city: "Lahore,Pakistan",
+    city: "Lahore",
+    country: "Pakistan",
     code: "54009",
     phone: "+923456789012",
     email: "email@example.com",
@@ -449,7 +452,8 @@ export const AddressesData = [
   {
     id: "3",
     house: "359 American Scheme Block B9",
-    city: "Lahore,Pakistan",
+    city: "Lahore",
+    country: "Pakistan",
     code: "54009",
     phone: "+923456789012",
     email: "email@example.com",
@@ -457,7 +461,8 @@ export const AddressesData = [
   {
     id: "4",
     house: "359 American Scheme Block B9",
-    city: "Lahore,Pakistan",
+    city: "Lahore",
+    country: "Pakistan",
     code: "54009",
     phone: "+923456789012",
     email: "email@example.com",

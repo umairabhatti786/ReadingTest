@@ -6,10 +6,6 @@ import {
   View,
 } from "react-native";
 import React, { useState } from "react";
-
-import { StackNavigationProp } from "@react-navigation/stack";
-import { RootStackParamsList } from "../../../routes/RootNavigator";
-
 import Header from "../../../components/Header";
 import CustomText from "../../../components/CustomText";
 import { ms, s, vs } from "react-native-size-matters";
@@ -20,13 +16,13 @@ import CustomButton from "../../../components/CustomButton";
 import DropDown from "../../../components/DropDown";
 import { countries, banks } from "../../../utils/Data/data";
 
+import { StackNavigationProp } from "@react-navigation/stack";
+import { RootStackParamsList } from "../../../routes/RootNavigator";
 //.....................types.....................
 interface PaymentScreen2Props {
   navigation: StackNavigationProp<RootStackParamsList, "PaymentScreen2">;
 }
-
 //............................main func....................
-
 const PaymentScreen2 = ({ navigation }: PaymentScreen2Props) => {
   const [country, setCountry] = useState<{
     label: string;
@@ -128,7 +124,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   main: {
-    // marginVertical: vs(10),
+    marginVertical: vs(20),
   },
   content: {
     gap: vs(20),

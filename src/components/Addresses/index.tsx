@@ -31,7 +31,7 @@ const Addresses = () => {
           </View>
           <View style={{ marginTop: vs(5) }}>
             <CustomText
-              text={item.city && "," && item.country}
+              text={`${item.city}, ${item.country}`}
               size={12}
               color={Colors.gray}
             />

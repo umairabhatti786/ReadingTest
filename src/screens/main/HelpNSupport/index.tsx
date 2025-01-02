@@ -47,73 +47,75 @@ const HelpNSupport = ({ navigation }: HelpNSupportProps) => {
     }
   };
   return (
-    <ScrollView
-      contentContainerStyle={styles.screenContainer}
-      showsVerticalScrollIndicator={false}
-    >
-      <Header title="Help & Support" onPress={() => navigation.goBack()} />
-      <CustomText
-        text={
-          "Here are some commonly asked questions by our customers. If you can’t find your answers, reach out to our customer support."
-        }
-        style={{ marginTop: vs(10) }}
-      />
-      {/* ...............questions  Map............................... */}
-
-      <View style={styles.mapScroll}>
-        {questions.map((item, index) => (
-          <View key={item.id} style={styles.questionVw}>
-            <TouchableOpacity onPress={() => toggleAnswer(index)}>
-              <CustomText text={item.Q} fontWeight="bold" />
-            </TouchableOpacity>
-            {showAns === index && (
-              <View>
-                <CustomText text={item.Ans} size={12} />
-                <TouchableOpacity>
-                  <CustomText
-                    text={"Action"}
-                    fontWeight="bold"
-                    color={Colors.blue}
-                    style={{ marginTop: vs(10) }}
-                  />
-                </TouchableOpacity>
-              </View>
-            )}
-          </View>
-        ))}
-      </View>
-
-      {/* ........................................ */}
-      <CustomText
-        text={
-          "Please make sure to report any issues promptly and adhere to the guidelines for a smooth returns or refund process. For further assistance, feel free to reach out to us.\n"
-        }
-      />
-      <CustomText
-        text={`Can’t find what you’re looking for? We're Here for You!`}
-        color={Colors.gray}
-      />
-      {/* ........................................ */}
-      <View style={styles.note}>
+    <View style={styles.screenContainer}>
+      <ScrollView
+        contentContainerStyle={styles.layout}
+        showsVerticalScrollIndicator={false}
+      >
+        <Header title="Help & Support" onPress={() => navigation.goBack()} />
         <CustomText
           text={
-            "Our offices are open Monday to Saturday from 9:00 AM to 5:00 PM."
+            "Here are some commonly asked questions by our customers. If you can’t find your answers, reach out to our customer support."
           }
-          size={12}
-          color={Colors.orange}
+          style={{ marginTop: vs(10) }}
+        />
+        {/* ...............questions  Map............................... */}
+
+        <View style={styles.mapScroll}>
+          {questions.map((item, index) => (
+            <View key={item.id} style={styles.questionVw}>
+              <TouchableOpacity onPress={() => toggleAnswer(index)}>
+                <CustomText text={item.Q} fontWeight="bold" />
+              </TouchableOpacity>
+              {showAns === index && (
+                <View>
+                  <CustomText text={item.Ans} size={12} />
+                  <TouchableOpacity>
+                    <CustomText
+                      text={"Action"}
+                      fontWeight="bold"
+                      color={Colors.blue}
+                      style={{ marginTop: vs(10) }}
+                    />
+                  </TouchableOpacity>
+                </View>
+              )}
+            </View>
+          ))}
+        </View>
+
+        {/* ........................................ */}
+        <CustomText
+          text={
+            "Please make sure to report any issues promptly and adhere to the guidelines for a smooth returns or refund process. For further assistance, feel free to reach out to us.\n"
+          }
         />
         <CustomText
-          text={`Contact Us:
+          text={`Can’t find what you’re looking for? We're Here for You!`}
+          color={Colors.gray}
+        />
+        {/* ........................................ */}
+        <View style={styles.note}>
+          <CustomText
+            text={
+              "Our offices are open Monday to Saturday from 9:00 AM to 5:00 PM."
+            }
+            size={12}
+            color={Colors.orange}
+          />
+          <CustomText
+            text={`Contact Us:
 * Phone: 042-35292627 (Available during office hours)
 * WhatsApp: 0300-0450227 (Available during office hours)
 * Email: orders@readings.com.pk\n
 Feel free to reach out to us during working hours. We're happy to assist you!`}
-          size={12}
-        />
-      </View>
+            size={12}
+          />
+        </View>
 
-      {/* ........................................ */}
-    </ScrollView>
+        {/* ........................................ */}
+      </ScrollView>
+    </View>
   );
 };
 
@@ -121,9 +123,13 @@ export default HelpNSupport;
 
 const styles = StyleSheet.create({
   screenContainer: {
+    flex: 1,
     backgroundColor: Colors.primary,
+  },
+  layout: {
     marginHorizontal: s(20),
-    marginBottom: ms(20),
+    marginTop: vs(20),
+    paddingBottom: vs(30),
   },
   questionVw: {
     backgroundColor: Colors.white,

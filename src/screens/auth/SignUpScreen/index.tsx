@@ -178,108 +178,116 @@ const SignUpScreen = ({ navigation }: SignUpScreenProps) => {
       showsVerticalScrollIndicator={false}
       contentContainerStyle={styles.screenContainer}
     >
-      <View>
-        <Header title="Sign Up" onPress={() => navigation.goBack()} />
-        <CustomText
-          text={"Enter the following details to create an account"}
-          color={Colors.black}
-          fontFam={Fonts.regular}
-          style={{ marginTop: vs(15), marginBottom: vs(10), marginLeft: s(5) }}
-        />
-        {/* ...................inputs............................................ */}
-        <View style={{ gap: vs(20) }}>
-          <CustomTextInput
-            placeholder="Email Address"
-            secureTextEntry={false}
-            textInputProps={{ keyboardType: "email-address" }}
-            onChangeText={(text) => handleOnChange(text, "email")}
-            errorMessage={errors.email}
-            onFocus={() => handleError(null, "email")}
-            placeholderTextColor={Colors.gray}
+      <View style={styles.layout}>
+        <View>
+          <Header title="Sign Up" onPress={() => navigation.goBack()} />
+          <CustomText
+            text={"Enter the following details to create an account"}
+            color={Colors.black}
+            fontFam={Fonts.regular}
+            style={{
+              marginTop: vs(15),
+              marginBottom: vs(10),
+              marginLeft: s(5),
+            }}
           />
-          {/* ...................Password....................... */}
-          <CustomTextInput
-            placeholder={"Password"}
-            secureTextEntry={true}
-            onChangeText={(text) => handleOnChange(text, "password")}
-            rightIcon={icons.Eye}
-            errorMessage={errors.password}
-            onFocus={() => handleError(null, "password")}
-            placeholderTextColor={Colors.gray}
-          />
-          {/* ...................Confirm Password..................... */}
-          <CustomTextInput
-            placeholder={"Confirm Password"}
-            onChangeText={(text) => handleOnChange(text, "confirm")}
-            rightIcon={icons.Eye}
-            errorMessage={errors.confirm}
-            onFocus={() => handleError(null, "confirm")}
-            placeholderTextColor={Colors.gray}
-          />
-        </View>
-        {/* ..................policy.......................... */}
-        <View style={styles.policyVw}>
-          <TouchableOpacity style={styles.checkboxVw} onPress={checkHandler}>
-            <Image source={icons.box} style={styles.box} />
-            {check && <Image source={icons.check} style={styles.check} />}
-          </TouchableOpacity>
-          <View style={{ marginLeft: s(5) }}>
-            <CustomText text={"By selecting this, you agree to the Readings"} />
-            <View style={styles.policyvw2}>
+          {/* ...................inputs............................................ */}
+          <View style={{ gap: vs(20) }}>
+            <CustomTextInput
+              placeholder="Email Address"
+              secureTextEntry={false}
+              textInputProps={{ keyboardType: "email-address" }}
+              onChangeText={(text) => handleOnChange(text, "email")}
+              errorMessage={errors.email}
+              onFocus={() => handleError(null, "email")}
+              placeholderTextColor={Colors.gray}
+            />
+            {/* ...................Password....................... */}
+            <CustomTextInput
+              placeholder={"Password"}
+              secureTextEntry={true}
+              onChangeText={(text) => handleOnChange(text, "password")}
+              rightIcon={icons.Eye}
+              errorMessage={errors.password}
+              onFocus={() => handleError(null, "password")}
+              placeholderTextColor={Colors.gray}
+            />
+            {/* ...................Confirm Password..................... */}
+            <CustomTextInput
+              placeholder={"Confirm Password"}
+              onChangeText={(text) => handleOnChange(text, "confirm")}
+              rightIcon={icons.Eye}
+              errorMessage={errors.confirm}
+              onFocus={() => handleError(null, "confirm")}
+              placeholderTextColor={Colors.gray}
+            />
+          </View>
+          {/* ..................policy.......................... */}
+          <View style={styles.policyVw}>
+            <TouchableOpacity style={styles.checkboxVw} onPress={checkHandler}>
+              <Image source={icons.box} style={styles.box} />
+              {check && <Image source={icons.check} style={styles.check} />}
+            </TouchableOpacity>
+            <View style={{ marginLeft: s(5) }}>
               <CustomText
-                text={"Terms of service"}
-                color={Colors.blue}
-                style={{ textDecorationLine: "underline" }}
+                text={"By selecting this, you agree to the Readings"}
               />
-              <CustomText text={" and "} />
-              <CustomText
-                text={"privacy policy"}
-                color={Colors.blue}
-                style={{ textDecorationLine: "underline" }}
-              />
+              <View style={styles.policyvw2}>
+                <CustomText
+                  text={"Terms of service"}
+                  color={Colors.blue}
+                  style={{ textDecorationLine: "underline" }}
+                />
+                <CustomText text={" and "} />
+                <CustomText
+                  text={"privacy policy"}
+                  color={Colors.blue}
+                  style={{ textDecorationLine: "underline" }}
+                />
+              </View>
             </View>
           </View>
-        </View>
 
-        {/* ........................Sign Up Button.................. */}
-        <CustomButton
-          title="Sign Up"
-          backgroundColor={Colors.blue}
-          onPress={validater}
-          buttonStyle={{ marginVertical: s(20) }}
-        />
-      </View>
-      {/* .............Already have an account?.................. */}
-      <View style={styles.loginOptions}>
-        <TouchableOpacity onPress={() => navigation.navigate("LoginScreen")}>
-          <CustomText
-            text={" Already have an account?  "}
-            label={
-              <CustomText
-                text={"Login"}
-                color={Colors.blue}
-                style={{ textDecorationLine: "underline" }}
-              />
-            }
+          {/* ........................Sign Up Button.................. */}
+          <CustomButton
+            title="Sign Up"
+            backgroundColor={Colors.blue}
+            onPress={validater}
+            buttonStyle={{ marginVertical: s(20) }}
           />
-        </TouchableOpacity>
-        {/* ................OR......................... */}
-        <View style={styles.lineVw}>
-          <View style={styles.line} />
-          <CustomText text={" OR  "} />
-          <View style={styles.line} />
         </View>
-        {/* ..................SocialLogin................... */}
-        <View>
-          <SocialLogin
-            title="Continue with Google"
-            icon={icons.google}
-            onPress={onGoogleButtonPress}
-          />
-          <SocialLogin title="Continue with facebook" icon={icons.fb} />
-          {Platform.OS === "ios" && (
-            <SocialLogin title="Continue with Apple ID" icon={icons.apple} />
-          )}
+        {/* .............Already have an account?.................. */}
+        <View style={styles.loginOptions}>
+          <TouchableOpacity onPress={() => navigation.navigate("LoginScreen")}>
+            <CustomText
+              text={" Already have an account?  "}
+              label={
+                <CustomText
+                  text={"Login"}
+                  color={Colors.blue}
+                  style={{ textDecorationLine: "underline" }}
+                />
+              }
+            />
+          </TouchableOpacity>
+          {/* ................OR......................... */}
+          <View style={styles.lineVw}>
+            <View style={styles.line} />
+            <CustomText text={" OR  "} />
+            <View style={styles.line} />
+          </View>
+          {/* ..................SocialLogin................... */}
+          <View>
+            <SocialLogin
+              title="Continue with Google"
+              icon={icons.google}
+              onPress={onGoogleButtonPress}
+            />
+            <SocialLogin title="Continue with facebook" icon={icons.fb} />
+            {Platform.OS === "ios" && (
+              <SocialLogin title="Continue with Apple ID" icon={icons.apple} />
+            )}
+          </View>
         </View>
       </View>
     </ScrollView>
@@ -292,10 +300,11 @@ const styles = StyleSheet.create({
   screenContainer: {
     flex: 1,
     backgroundColor: Colors.primary,
-    marginHorizontal: 20,
-    marginVertical: 10,
-    marginTop: moderateScale(10),
-    marginBottom: moderateScale(20),
+  },
+  layout: {
+    marginHorizontal: vs(20),
+    marginVertical: vs(20),
+    flex: 1,
   },
   policyVw: {
     flexDirection: "row",

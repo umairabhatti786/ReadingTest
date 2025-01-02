@@ -17,6 +17,7 @@ import { RootStackParamsList } from "../../../routes/RootNavigator";
 import imgs from "../../../assets/imgs";
 import CustomButton from "../../../components/CustomButton";
 import Addresses from "../../../components/Addresses";
+import BankCards from "../../../components/BankCards";
 
 // ..................types.....................
 
@@ -40,176 +41,179 @@ const Profile = ({ navigation }: ProfileProps) => {
 
   return (
     <View style={styles.screenContainer}>
-      <View style={styles.content}>
-        <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
-          <Header title="Profile" onPress={() => navigation.goBack()} />
-          <TouchableOpacity onPress={() => setModalVisible(true)}>
-            <CustomText text={"Delete Account"} color={Colors.red} />
-          </TouchableOpacity>
-        </View>
-        {/* ..................info.................. */}
-        <View style={styles.infoVw}>
-          <View style={styles.info}>
-            <CustomText text={"Name"} color={Colors.gray} />
-            <CustomText text={"Jack Doe"} />
-          </View>
-          <View style={styles.info}>
-            <CustomText text={"Email"} color={Colors.gray} />
-            <CustomText text={"email@example.com"} />
-          </View>
-          <View style={styles.info}>
-            <CustomText text={"Phone number"} color={Colors.gray} />
-            <CustomText text={"+92 300 1234567"} />
-          </View>
-        </View>
-        {/* ................btns.............. */}
-        <View style={styles.info}>
-          <TouchableOpacity
-            style={styles.btn}
-            onPress={() => navigation.navigate("ChangePasswordScreen")}
-          >
-            <CustomText text={"Change Password"} color={Colors.blue} />
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.btn}
-            onPress={() => navigation.navigate("EditPersonalInfo")}
-          >
-            <CustomText text={"Edit Info"} color={Colors.blue} />
-          </TouchableOpacity>
-        </View>
-      </View>
-      {/* ....................Saved Addresses.................. */}
-      <View style={{ marginTop: vs(20) }}>
-        <CustomText
-          text="Saved Addresses"
-          size={18}
-          fontWeight={"bold"}
-          style={{ marginHorizontal: s(20), marginBottom: vs(5) }}
-        />
-        <Addresses />
-      </View>
-      <View style={styles.content}>
-        {/* .................Add New Address..................... */}
-        <TouchableOpacity
-          onPress={() => navigation.navigate("NewAddress")}
-          style={{
-            flexDirection: "row",
-            alignItems: "center",
-            marginTop: vs(10),
-            gap: s(5),
-          }}
-        >
-          <CustomText
-            text={"Add New Address "}
-            fontWeight="bold"
-            color={Colors.blue}
-          />
-          <Image source={icons.Plus} style={styles.plus} />
-        </TouchableOpacity>
-        {/* //................Card Details............... */}
-        <CustomText
-          text={"Payment Methods"}
-          style={{ marginTop: vs(15) }}
-          size={18}
-          fontWeight="bold"
-        />
-      </View>
-
-      <ScrollView
-        horizontal={true}
-        showsHorizontalScrollIndicator={false}
-        contentContainerStyle={styles.cards}
-      >
-        {cards.map((cards, index) => (
-          <View key={cards.id} style={styles.card}>
-            <View style={{ flexDirection: "row", alignItems: "center" }}>
-              <Image source={icons.visa2} style={styles.visa2} />
-              <CustomText
-                text={cards.cardNumber}
-                style={{ marginLeft: s(10) }}
-              />
-            </View>
-            <TouchableOpacity>
-              <Image source={icons.Dots} style={styles.dots} />
+      <ScrollView>
+        {/*scroll added to rosolve flex issue,without it last component gone at end of yhe screen */}
+        <View style={styles.content}>
+          {/* ..........header............. */}
+          <View style={styles.header}>
+            <Header title="Profile" onPress={() => navigation.goBack()} />
+            <TouchableOpacity onPress={() => setModalVisible(true)}>
+              <CustomText text={"Delete Account"} color={Colors.red} />
             </TouchableOpacity>
           </View>
-        ))}
-      </ScrollView>
-      {/* ..................Add New Method.................... */}
-      <View style={styles.content}>
-        <TouchableOpacity
-          onPress={() => navigation.navigate("PaymentScreen2")}
-          style={{
-            flexDirection: "row",
-            alignItems: "center",
-            marginTop: vs(10),
-            gap: s(5),
-          }}
-        >
-          <CustomText
-            text={"Add New Method "}
-            fontWeight="bold"
-            color={Colors.blue}
-          />
-          <Image source={icons.Plus} style={styles.plus} />
-        </TouchableOpacity>
-      </View>
-      {/* ............Delete Account?...Modal..................... */}
-      <Modal
-        animationType="slide" // Options: 'none', 'slide', 'fade'
-        transparent={true} // Makes modal background transparent
-        visible={modalVisible}
-        onRequestClose={() => setModalVisible(false)} // Handles back button on Android
-      >
-        <View style={styles.modalOverlay}>
-          <View style={styles.modal}>
-            <View style={styles.modalContent}>
-              <Image
-                source={imgs.delete}
-                width={s(96)}
-                height={vs(96)}
-                style={styles.gift}
-              />
-              <CustomText
-                text={"Delete Account?"}
-                fontWeight="bold"
-                size={20}
-              />
-              <CustomText
-                text={
-                  "You are about to delete your account. All your saved information will be lost permanently."
-                }
-                style={{ textAlign: "center", marginTop: vs(10) }}
-                color={Colors.gray}
-              />
+          {/* ..................info.................. */}
+          <View style={styles.infoVw}>
+            <View style={styles.info}>
+              <CustomText text={"Name"} color={Colors.gray} />
+              <CustomText text={"Jack Doe"} />
             </View>
-            <View
-              style={{
-                flexDirection: "row",
-                justifyContent: "space-between",
-              }}
-            >
-              <CustomButton
-                title="Cancel"
-                width={110}
-                onPress={() => {
-                  setModalVisible(false);
-                }}
-              />
-              <CustomButton
-                title="Delete"
-                color={Colors.red}
-                backgroundColor={Colors.primary}
-                width={110}
-                onPress={() => {
-                  setModalVisible(false);
-                  navigation.navigate("BottomTab");
-                }}
-              />
+            <View style={styles.info}>
+              <CustomText text={"Email"} color={Colors.gray} />
+              <CustomText text={"email@example.com"} />
+            </View>
+            <View style={styles.info}>
+              <CustomText text={"Phone number"} color={Colors.gray} />
+              <CustomText text={"+92 300 1234567"} />
             </View>
           </View>
+          {/* ................btns.............. */}
+          <View style={styles.info}>
+            <TouchableOpacity
+              style={styles.btn}
+              onPress={() => navigation.navigate("ChangePasswordScreen")}
+            >
+              <CustomText text={"Change Password"} color={Colors.blue} />
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.btn}
+              onPress={() => navigation.navigate("EditPersonalInfo")}
+            >
+              <CustomText text={"Edit Info"} color={Colors.blue} />
+            </TouchableOpacity>
+          </View>
         </View>
-      </Modal>
+        {/* ....................Saved Addresses.................. */}
+        <View style={{ marginTop: vs(20) }}>
+          <CustomText
+            text="Saved Addresses"
+            size={18}
+            fontWeight={"bold"}
+            style={{ marginHorizontal: s(20), marginBottom: vs(5) }}
+          />
+          <Addresses />
+        </View>
+        <View style={styles.content}>
+          {/* .................Add New Address..................... */}
+          <TouchableOpacity
+            onPress={() => navigation.navigate("NewAddress")}
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              marginTop: vs(10),
+              gap: s(5),
+            }}
+          >
+            <CustomText
+              text={"Add New Address "}
+              fontWeight="bold"
+              color={Colors.blue}
+            />
+            <Image source={icons.Plus} style={styles.plus} />
+          </TouchableOpacity>
+          {/* //................Card Details............... */}
+          <CustomText
+            text={"Payment Methods"}
+            style={{ marginTop: vs(15) }}
+            size={18}
+            fontWeight="bold"
+          />
+        </View>
+
+        <ScrollView
+          horizontal={true}
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={styles.cards}
+        >
+          {cards.map((cards, index) => (
+            <View key={cards.id} style={styles.card}>
+              <View style={{ flexDirection: "row", alignItems: "center" }}>
+                <Image source={icons.visa2} style={styles.visa2} />
+                <CustomText
+                  text={cards.cardNumber}
+                  style={{ marginLeft: s(10) }}
+                />
+              </View>
+              <TouchableOpacity>
+                <Image source={icons.Dots} style={styles.dots} />
+              </TouchableOpacity>
+            </View>
+          ))}
+        </ScrollView>
+        {/* ..................Add New Method.................... */}
+        <View style={{ marginHorizontal: s(20), marginTop: vs(10) }}>
+          <TouchableOpacity
+            onPress={() => navigation.navigate("PaymentScreen2")}
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              gap: s(5),
+            }}
+          >
+            <CustomText
+              text={"Add New Method "}
+              fontWeight="bold"
+              color={Colors.blue}
+            />
+            <Image source={icons.Plus} style={styles.plus} />
+          </TouchableOpacity>
+        </View>
+        {/* ............Delete Account?...Modal..................... */}
+        <Modal
+          animationType="slide" // Options: 'none', 'slide', 'fade'
+          transparent={true} // Makes modal background transparent
+          visible={modalVisible}
+          onRequestClose={() => setModalVisible(false)} // Handles back button on Android
+        >
+          <View style={styles.modalOverlay}>
+            <View style={styles.modal}>
+              <View style={styles.modalContent}>
+                <Image
+                  source={imgs.delete}
+                  width={s(96)}
+                  height={vs(96)}
+                  style={styles.gift}
+                />
+                <CustomText
+                  text={"Delete Account?"}
+                  fontWeight="bold"
+                  size={20}
+                />
+                <CustomText
+                  text={
+                    "You are about to delete your account. All your saved information will be lost permanently."
+                  }
+                  style={{ textAlign: "center", marginTop: vs(10) }}
+                  color={Colors.gray}
+                />
+              </View>
+              <View
+                style={{
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                }}
+              >
+                <CustomButton
+                  title="Cancel"
+                  width={110}
+                  onPress={() => {
+                    setModalVisible(false);
+                  }}
+                />
+                <CustomButton
+                  title="Delete"
+                  color={Colors.red}
+                  backgroundColor={Colors.primary}
+                  width={110}
+                  onPress={() => {
+                    setModalVisible(false);
+                    navigation.navigate("BottomTab");
+                  }}
+                />
+              </View>
+            </View>
+          </View>
+        </Modal>
+      </ScrollView>
     </View>
   );
 };
@@ -218,15 +222,21 @@ export default Profile;
 
 const styles = StyleSheet.create({
   screenContainer: {
-    // flex: 1,
+    flex: 1,
     backgroundColor: Colors.primary,
-    marginVertical: vs(10),
   },
   content: {
+    //flex: 1,
     marginHorizontal: s(20),
   },
+  header: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginTop: vs(20),
+  },
   infoVw: {
-    height: 118,
+    //height: 118,
+    height: vs(100),
     backgroundColor: Colors.white,
     borderRadius: ms(10),
     padding: ms(15),

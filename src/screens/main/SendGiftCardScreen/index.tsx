@@ -62,176 +62,178 @@ const SendGiftCardScreen = ({ navigation }: SendGiftCardScreenProps) => {
   const [modalVisible, setModalVisible] = useState(false);
 
   return (
-    <ScrollView
-      showsVerticalScrollIndicator={false}
-      style={styles.screenContainer}
-    >
-      <View style={styles.content}>
-        <Header title="Send Gift Card" onPress={() => navigation.goBack()} />
+    <View style={styles.screenContainer}>
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <View style={styles.content}>
+          <Header title="Send Gift Card" onPress={() => navigation.goBack()} />
 
-        {/* //..recipient details.............................. */}
-        <CustomText
-          text={"Add your gift recipient details below."}
-          style={{ marginTop: vs(10) }}
-        />
-        <View style={{ gap: vs(20), marginVertical: vs(40) }}>
-          <CustomTextInput placeholder="Recipient Name" />
-          <CustomTextInput placeholder="Recipient Email" />
-          {/* ..........Country Picker Modal for recipient.......... */}
-          <View style={styles.countryContainer}>
-            <CountryPicker
-              withFlag
-              withCallingCode
-              withFilter
-              countryCode={RecipientCountry?.cca2 || "PK"}
-              visible={isRecipientCountryPickerVisible}
-              onSelect={(selectedCountry) => {
-                setRecipientCountry(selectedCountry);
-                setIsCountryPickerVisible(false);
-              }}
-              onClose={() => setIsRecipientCountryPickerVisible(false)}
-            />
-            <Image source={icons.ArrowDown} style={styles.ArrowDown} />
-            {RecipientCountry && (
-              <CustomText
-                text={` +${
-                  RecipientCountry.callingCode
-                    ? RecipientCountry.callingCode[0]
-                    : "+92"
-                }`}
-                style={styles.countryCode}
-              />
-            )}
-            <TextInput
-              placeholder="345 123 456 7"
-              style={styles.phoneInput}
-              keyboardType="numeric"
-            />
-          </View>
-        </View>
-
-        {/* //..update your details................................. */}
-        <CustomText
-          text={"Add/update your details below"}
-          style={{ marginBottom: vs(10) }}
-        />
-        <View style={{ gap: vs(20) }}>
-          <CustomTextInput placeholder="John Doe" />
-          <CustomTextInput placeholder="johndoe121@gmail.com" />
-          {/* ..................Country Picker Modal.......... */}
-          <View style={styles.countryContainer}>
-            <CountryPicker
-              withFlag
-              withCallingCode
-              withFilter
-              countryCode={country?.cca2 || "PK"}
-              visible={isCountryPickerVisible}
-              onSelect={(selectedCountry) => {
-                setCountry(selectedCountry);
-                setIsCountryPickerVisible(false);
-              }}
-              onClose={() => setIsCountryPickerVisible(false)}
-            />
-            <Image source={icons.ArrowDown} style={styles.ArrowDown} />
-            {country && (
-              <CustomText
-                text={` +${country.callingCode[0]}`}
-                style={styles.countryCode}
-              />
-            )}
-            <TextInput
-              placeholder="345 123 456 7"
-              style={styles.phoneInput}
-              keyboardType="numeric"
-            />
-          </View>
-        </View>
-
-        {/* .......Gift Card Amount............................ */}
-        <View style={{ marginVertical: vs(40), gap: vs(15) }}>
+          {/* //..recipient details.............................. */}
           <CustomText
-            text={"Gift Card Amount ( Online Payment Only )"}
-            fontWeight="bold"
+            text={"Add your gift recipient details below."}
+            style={{ marginTop: vs(10) }}
           />
-          <CustomTextInput placeholder="Amount(PKR 500 - 10,000)" />
-        </View>
-      </View>
-      {/* ....................New Card details +........................... */}
-      {addNewCard ? (
-        <View style={styles.newCard}>
-          <CustomText text={"Card Details"} fontWeight={"bold"} />
-          <CustomTextInput
-            placeholder="Card Number"
-            rightIcon={icons.visa}
-            rightIconWidth={40}
-          />
-          <CustomTextInput placeholder="Card Holder Name" />
-          <View
-            style={{ flexDirection: "row", justifyContent: "space-between" }}
-          >
-            <CustomTextInput placeholder="06 / 27" width={s(150)} />
-            <CustomTextInput placeholder="CVC" width={s(150)} />
+          <View style={{ gap: vs(20), marginVertical: vs(40) }}>
+            <CustomTextInput placeholder="Recipient Name" />
+            <CustomTextInput placeholder="Recipient Email" />
+            {/* ..........Country Picker Modal for recipient.......... */}
+            <View style={styles.countryContainer}>
+              <CountryPicker
+                withFlag
+                withCallingCode
+                withFilter
+                countryCode={RecipientCountry?.cca2 || "PK"}
+                visible={isRecipientCountryPickerVisible}
+                onSelect={(selectedCountry) => {
+                  setRecipientCountry(selectedCountry);
+                  setIsCountryPickerVisible(false);
+                }}
+                onClose={() => setIsRecipientCountryPickerVisible(false)}
+              />
+              <Image source={icons.ArrowDown} style={styles.ArrowDown} />
+              {RecipientCountry && (
+                <CustomText
+                  text={` +${
+                    RecipientCountry.callingCode
+                      ? RecipientCountry.callingCode[0]
+                      : "+92"
+                  }`}
+                  style={styles.countryCode}
+                />
+              )}
+              <TextInput
+                placeholder="345 123 456 7"
+                style={styles.phoneInput}
+                keyboardType="numeric"
+              />
+            </View>
           </View>
-          <CustomTextInput placeholder="Address" />
-          <View
-            style={{ flexDirection: "row", justifyContent: "space-between" }}
-          >
-            <CustomTextInput placeholder="City" width={s(150)} />
-            <CustomTextInput placeholder="State/Province" width={s(150)} />
-          </View>
-          <CountryDropDown />
-          <CustomTextInput placeholder="ZIP Code" />
-        </View>
-      ) : (
-        //...select card...................
-        <View>
-          {/* //................Card select............... */}
+
+          {/* //..update your details................................. */}
           <CustomText
-            text={"Card Details"}
-            fontWeight={"bold"}
-            style={{ marginHorizontal: s(20) }}
+            text={"Add/update your details below"}
+            style={{ marginBottom: vs(10) }}
           />
-          <BankCards />
-          <TouchableOpacity
-            onPress={() => setAddNewCard(true)}
-            style={styles.newCardBtn}
-          >
+          <View style={{ gap: vs(20) }}>
+            <CustomTextInput placeholder="John Doe" />
+            <CustomTextInput placeholder="johndoe121@gmail.com" />
+            {/* ..................Country Picker Modal.......... */}
+            <View style={styles.countryContainer}>
+              <CountryPicker
+                withFlag
+                withCallingCode
+                withFilter
+                countryCode={country?.cca2 || "PK"}
+                visible={isCountryPickerVisible}
+                onSelect={(selectedCountry) => {
+                  setCountry(selectedCountry);
+                  setIsCountryPickerVisible(false);
+                }}
+                onClose={() => setIsCountryPickerVisible(false)}
+              />
+              <Image source={icons.ArrowDown} style={styles.ArrowDown} />
+              {country && (
+                <CustomText
+                  text={` +${country.callingCode[0]}`}
+                  style={styles.countryCode}
+                />
+              )}
+              <TextInput
+                placeholder="345 123 456 7"
+                style={styles.phoneInput}
+                keyboardType="numeric"
+              />
+            </View>
+          </View>
+
+          {/* .......Gift Card Amount............................ */}
+          <View style={{ marginVertical: vs(40), gap: vs(15) }}>
             <CustomText
-              text={"Add New Card "}
-              color={Colors.blue}
-              fontWeight={"bold"}
+              text={"Gift Card Amount ( Online Payment Only )"}
+              fontWeight="bold"
             />
-            <Image source={icons.Plus} style={styles.plus} />
-          </TouchableOpacity>
+            <CustomTextInput placeholder="Amount(PKR 500 - 10,000)" />
+          </View>
         </View>
-      )}
+        {/* ....................New Card details +........................... */}
+        {addNewCard ? (
+          <View style={styles.newCard}>
+            <CustomText text={"Card Details"} fontWeight={"bold"} />
+            <CustomTextInput
+              placeholder="Card Number"
+              rightIcon={icons.visa}
+              rightIconWidth={40}
+            />
+            <CustomTextInput placeholder="Card Holder Name" />
+            <View
+              style={{ flexDirection: "row", justifyContent: "space-between" }}
+            >
+              <CustomTextInput placeholder="06 / 27" width={s(150)} />
+              <CustomTextInput placeholder="CVC" width={s(150)} />
+            </View>
+            <CustomTextInput placeholder="Address" />
+            <View
+              style={{ flexDirection: "row", justifyContent: "space-between" }}
+            >
+              <CustomTextInput placeholder="City" width={s(150)} />
+              <CustomTextInput placeholder="State/Province" width={s(150)} />
+            </View>
+            <CountryDropDown />
+            <CustomTextInput placeholder="ZIP Code" />
+          </View>
+        ) : (
+          //...select card...................
+          <View>
+            {/* //................Card select............... */}
+            <CustomText
+              text={"Card Details"}
+              fontWeight={"bold"}
+              style={{ marginHorizontal: s(20), marginBottom: vs(10) }}
+            />
+            <View style={{ paddingHorizontal: s(20) }}>
+              <BankCards />
+            </View>
+            {/* ..Add New Card */}
+            <TouchableOpacity
+              onPress={() => setAddNewCard(true)}
+              style={styles.newCardBtn}
+            >
+              <CustomText
+                text={"Add New Card "}
+                color={Colors.blue}
+                fontWeight={"bold"}
+              />
+              <Image source={icons.Plus} style={styles.plus} />
+            </TouchableOpacity>
+          </View>
+        )}
 
-      <CustomButton
-        title="Send Request"
-        onPress={() => setModalVisible(true)}
-        // width="calc(100% - 40px)"
-        width={"90%"}
-        // buttonStyle={{ marginHorizontal: vs(20) }}
-      />
-      {/* ............Send Request...Modal..................... */}
-      <Modal
-        animationType="slide" // Options: 'none', 'slide', 'fade'
-        transparent={true} // Makes modal background transparent
-        visible={modalVisible}
-        onRequestClose={() => setModalVisible(false)} // Handles back button on Android
-      >
-        <ModalScreen
-          img={imgs.gift}
-          heading="Gift Sent"
-          status="Your Gift Card is on its way to Rebecca and you both will be notify as she received. Usually takes 3 hours to arrive."
-          btnTitle="center"
-          onPress={() => {
-            // setModalVisible(false);
-            navigation.navigate("BottomTab");
-          }}
+        <CustomButton
+          title="Send Request"
+          onPress={() => setModalVisible(true)}
+          // width="calc(100% - 40px)"
+          width={"90%"}
+          // buttonStyle={{ marginHorizontal: vs(20) }}
         />
-      </Modal>
-    </ScrollView>
+        {/* ............Send Request...Modal..................... */}
+        <Modal
+          animationType="slide" // Options: 'none', 'slide', 'fade'
+          transparent={true} // Makes modal background transparent
+          visible={modalVisible}
+          onRequestClose={() => setModalVisible(false)} // Handles back button on Android
+        >
+          <ModalScreen
+            img={imgs.gift}
+            heading="Gift Sent"
+            status="Your Gift Card is on its way to Rebecca and you both will be notify as she received. Usually takes 3 hours to arrive."
+            btnTitle="center"
+            onPress={() => {
+              // setModalVisible(false);
+              navigation.navigate("BottomTab");
+            }}
+          />
+        </Modal>
+      </ScrollView>
+    </View>
   );
 };
 
@@ -241,10 +243,10 @@ const styles = StyleSheet.create({
   screenContainer: {
     flex: 1,
     backgroundColor: Colors.primary,
-    marginBottom: vs(20),
   },
   content: {
     marginHorizontal: s(20),
+    marginTop: vs(20),
   },
   circle: {
     height: vs(16),

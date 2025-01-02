@@ -39,77 +39,79 @@ const RequestBookScreen = ({ navigation }: PersonalInfoScreen) => {
 
   return (
     <View style={styles.screenContainer}>
-      <View style={styles.content}>
-        <Header title="Request a Book" />
-        <View style={styles.inputs}>
-          <CustomText
-            text={
-              "Enter the following details about the book you want to request."
-            }
-          />
-          <CustomTextInput placeholder="Book Title" />
-          <CustomTextInput placeholder="Author Name" />
-          <CustomTextInput placeholder="Your Name" />
-          <CustomTextInput placeholder="Email" />
-          {/* Country Picker Modal */}
-          <View style={styles.countryContainer}>
-            <CountryPicker
-              withFlag
-              withCallingCode
-              withFilter
-              countryCode={country?.cca2 || "PK"}
-              visible={isCountryPickerVisible}
-              onSelect={(selectedCountry) => {
-                setCountry(selectedCountry);
-                setIsCountryPickerVisible(false);
-              }}
-              onClose={() => setIsCountryPickerVisible(false)}
+      <View style={styles.layout}>
+        <View style={styles.content}>
+          <Header title="Request a Book" onPress={() => navigation.goBack()} />
+          <View style={styles.inputs}>
+            <CustomText
+              text={
+                "Enter the following details about the book you want to request."
+              }
             />
-            <Image source={icons.ArrowDown} style={styles.ArrowDown} />
-            {country && (
-              <CustomText
-                text={` +${country.callingCode[0]}`}
-                style={styles.countryCode}
+            <CustomTextInput placeholder="Book Title" />
+            <CustomTextInput placeholder="Author Name" />
+            <CustomTextInput placeholder="Your Name" />
+            <CustomTextInput placeholder="Email" />
+            {/* Country Picker Modal */}
+            <View style={styles.countryContainer}>
+              <CountryPicker
+                withFlag
+                withCallingCode
+                withFilter
+                countryCode={country?.cca2 || "PK"}
+                visible={isCountryPickerVisible}
+                onSelect={(selectedCountry) => {
+                  setCountry(selectedCountry);
+                  setIsCountryPickerVisible(false);
+                }}
+                onClose={() => setIsCountryPickerVisible(false)}
               />
-            )}
-            <TextInput
-              placeholder="345 123 456 7"
-              style={styles.phoneInput}
-              keyboardType="numeric"
+              <Image source={icons.ArrowDown} style={styles.ArrowDown} />
+              {country && (
+                <CustomText
+                  text={` +${country.callingCode[0]}`}
+                  style={styles.countryCode}
+                />
+              )}
+              <TextInput
+                placeholder="345 123 456 7"
+                style={styles.phoneInput}
+                keyboardType="numeric"
+              />
+            </View>
+
+            <CustomTextInput
+              placeholder="Additional Info"
+              inputContainerStyle={{
+                height: vs(130),
+                alignItems: "flex-start",
+              }}
             />
           </View>
-
-          <CustomTextInput
-            placeholder="Additional Info"
-            inputContainerStyle={{
-              height: vs(130),
-              alignItems: "flex-start",
+        </View>
+        <CustomButton
+          title="Send Request"
+          onPress={() => setModalVisible(true)}
+        />
+        {/* ...............Modal..................... */}
+        <Modal
+          animationType="slide" // Options: 'none', 'slide', 'fade'
+          transparent={true} // Makes modal background transparent
+          visible={modalVisible}
+          onRequestClose={() => setModalVisible(false)} // Handles back button on Android
+        >
+          <ModalScreen
+            img={imgs.gift2}
+            heading="Request Received"
+            status="We have received your request for the book. We will find it as soon as possible and notify you as it’s available"
+            btnTitle="Back to Home"
+            onPress={() => {
+              setModalVisible(false);
+              navigation.navigate("BottomTab");
             }}
           />
-        </View>
+        </Modal>
       </View>
-      <CustomButton
-        title="Send Request"
-        onPress={() => setModalVisible(true)}
-      />
-      {/* ...............Modal..................... */}
-      <Modal
-        animationType="slide" // Options: 'none', 'slide', 'fade'
-        transparent={true} // Makes modal background transparent
-        visible={modalVisible}
-        onRequestClose={() => setModalVisible(false)} // Handles back button on Android
-      >
-        <ModalScreen
-          img={imgs.gift2}
-          heading="Request Received"
-          status="We have received your request for the book. We will find it as soon as possible and notify you as it’s available"
-          btnTitle="Back to Home"
-          onPress={() => {
-            setModalVisible(false);
-            navigation.navigate("BottomTab");
-          }}
-        />
-      </Modal>
     </View>
   );
 };
@@ -120,9 +122,12 @@ const styles = StyleSheet.create({
   screenContainer: {
     flex: 1,
     backgroundColor: Colors.primary,
-    marginHorizontal: s(20),
-    marginBottom: vs(20),
+  },
+  layout: {
+    flex: 1,
     justifyContent: "space-between",
+    marginHorizontal: s(20),
+    marginTop: vs(20),
   },
   content: {
     gap: vs(15),

@@ -70,7 +70,7 @@ const CardDiscounts = ({ navigation }: CardDiscountsProps) => {
             <CustomText text="Cap" size={10} color={Colors.gray} />
           </View>
           {CardDiscountData.map((item) => (
-            <View style={{ gap: vs(15) }}>
+            <View style={{ gap: vs(15) }} key={item.id}>
               <View
                 key={item.id}
                 style={{

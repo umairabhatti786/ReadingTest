@@ -96,7 +96,9 @@ const BookDetails = ({ navigation }: BookDetailsProps) => {
           <ImageBackground source={imgs.hobbit} style={styles.imgBG}>
             <View style={styles.overlay} />
             <View style={styles.header}>
-              <Image source={icons.ArrowLeft} style={styles.backArrow} />
+              <TouchableOpacity onPress={() => navigation.goBack()}>
+                <Image source={icons.ArrowLeft} style={styles.backArrow} />
+              </TouchableOpacity>
               <TouchableOpacity>
                 <Image source={icons.CartBlack} style={styles.backArrow} />
                 {/* Cart Count View */}
@@ -440,30 +442,30 @@ const BookDetails = ({ navigation }: BookDetailsProps) => {
                 }
               />
               {/* //..order details in buy now bottom sheet */}
-              <View style={styles.buyerInfo}>
-                <TouchableOpacity
-                  onPress={() => navigation.navigate("ChooseAddress")}
-                >
-                  <CustomText text={"Dispatch"} size={12} color={Colors.gray} />
-                  <CustomText
-                    text={"359 American Scheme Block B9"}
-                    size={12}
-                    color={Colors.black}
-                  />
-                </TouchableOpacity>
-              </View>
-              <View style={styles.buyerInfo}>
-                <TouchableOpacity
-                  onPress={() => navigation.navigate("ChoosePaymentMethod")}
-                >
-                  <CustomText text={"Pay With"} size={12} color={Colors.gray} />
-                  <CustomText
-                    text={"VISA ---- 1234"}
-                    size={12}
-                    color={Colors.black}
-                  />
-                </TouchableOpacity>
-              </View>
+              <TouchableOpacity
+                style={styles.buyerInfo}
+                onPress={() => navigation.navigate("ChooseAddress")}
+              >
+                <CustomText text={"Dispatch"} size={12} color={Colors.gray} />
+                <CustomText
+                  text={"359 American Scheme Block B9"}
+                  size={12}
+                  color={Colors.black}
+                />
+              </TouchableOpacity>
+
+              <TouchableOpacity
+                style={styles.buyerInfo}
+                onPress={() => navigation.navigate("ChoosePaymentMethod")}
+              >
+                <CustomText text={"Pay With"} size={12} color={Colors.gray} />
+                <CustomText
+                  text={"VISA ---- 1234"}
+                  size={12}
+                  color={Colors.black}
+                />
+              </TouchableOpacity>
+
               <View style={styles.buyerInfo}>
                 <CustomText text={"Total"} size={12} color={Colors.gray} />
                 <CustomText
